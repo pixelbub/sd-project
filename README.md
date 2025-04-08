@@ -1,6 +1,6 @@
 # Community Sports Facility Management Web-App
 
-##Overview
+## Overview
 A web app used to manage shared community sports facillities. The app supports time-slot booking and maintenance reporting which allows residents, staff and admin to interact with facility resources efficiently
 
 ## Features (will update soon)
