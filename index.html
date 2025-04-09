@@ -11,6 +11,7 @@
     import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js';
     import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js';
 
+
     // Firebase configuration
     const firebaseConfig = {
       apiKey: "AIzaSyB_x1uvBqjrZXXz63K2JzwjuRilFpKAAys",
@@ -70,6 +71,10 @@
       const provider = new GoogleAuthProvider();
       signInWithPopup(auth, provider)
         .then(result => {
+          const credential = GoogleAuthProvider.credentialFromResult(result);
+          const token = credential.accessToken;
+          // The signed-in user info.
+          const user = result.user;
           alert("Signed in with Google!");
         })
         .catch(error => {
