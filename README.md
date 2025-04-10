@@ -11,6 +11,10 @@ A web app used to manage shared community sports facillities. The app supports t
 
 ## Tech Stack (to be finalised)
 - Frontend:
+- Home Screen before sign up/log in
+- Home Screen after each user logs in
+- Log in page
+- Sign Up page 
 - Backend:
 - Authentication
 - Database
