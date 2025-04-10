@@ -16,6 +16,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
+
 // Sign in with Google
 function signInWithGoogle() {
   const provider = new GoogleAuthProvider();
@@ -23,10 +24,41 @@ function signInWithGoogle() {
     .then(result => {
       const credential = GoogleAuthProvider.credentialFromResult(result);
       const token = credential.accessToken;
-      // The signed-in user info.
+
+      //signed-in user info.
       const user = result.user;
-      const uid = user.uid
+      const uid = user.uid;
+
+      //Get the selected role from the dropdown
+      const role = document.getElementById("role").value;
+      if (!role) {
+        alert("Please select a role before continuing.");
+        return;
+      }
+
       alert("Signed in with Google!");
+
+      // Send to backend
+      fetch('http://localhost:3000/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ uid, role })
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (data.success) {
+            alert("User added to the database successfully!");
+          } else {
+            alert("Error saving user: " + (data.error || "Unknown error"));
+          }
+        })
+        .catch(err => {
+          console.error("Fetch error:", err);
+          alert("Network error: " + err.message);
+        });
+
     })
     .catch(error => {
       alert(error.message);
