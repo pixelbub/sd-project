@@ -11,9 +11,18 @@
 <body>
   <h1>Login</h1>
 
+  <!-- Role dropdown -->
+  <label for="role">Select your role:</label>
+  <select id="role">
+    <option value="">--Please choose a role--</option>
+    <option value="admin">Admin</option>
+    <option value="facility-staff">Facility Staff</option>
+    <option value="resident">Resident</option>
+  </select>
 
-  <button onclick="signInWithGoogle()">Sign In with Google</button>
+  <br><br>
 
+  <button onclick="signInWithGoogle()">Continue with Google</button>
   <p id="message"></p> <!-- For messages -->
 
 </body>
