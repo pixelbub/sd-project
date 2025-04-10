@@ -10,14 +10,10 @@ A web app used to manage shared community sports facillities. The app supports t
 - Event scheduling and notifications
 
 ## Tech Stack (to be finalised)
-- Frontend:
-- Home Screen before sign up/log in
-- Home Screen after each user logs in
-- Log in page
-- Sign Up page 
+- Frontend: HTML, CSS
 - Backend:
 - Authentication
-- Database
+- Database: Azure
 - CI/CD: Github Actions
 
 ## Roles
