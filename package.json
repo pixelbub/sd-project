@@ -1,0 +1,18 @@
+{
+  "name": "sd-project",
+  "version": "1.0.0",
+  "main": "signup.js",
+"scripts": {
+  "test": "jest",
+  "test:coverage": "jest --coverage"
+}
+,
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+
+}
