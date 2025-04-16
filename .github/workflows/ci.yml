@@ -2,28 +2,28 @@ name: CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]  # Only run on pushes to the main branch
   pull_request:
-    branches: [ main ]
+    branches: [main]  # Run on PRs targeting main
 
 jobs:
   build-and-test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # Runs on an Ubuntu VM
 
     steps:
-    - name: Checkout Code
-      uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '20'
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'  # Use the Node.js version you need
 
-    - name: Install dependencies
-      run: npm install
+      - name: Install dependencies
+        run: npm ci  # 'npm ci' for a clean install of dependencies
 
-    - name: Run Tests
-      run: npm test
+      - name: Run tests
+        run: npm test  # Run your Jest tests
 
-    - name: Run Code Coverage
-      run: npm run coverage || echo "Coverage script not defined"
+      - name: Run coverage
+        run: npm run coverage  # Run code coverage if you have it set up
