@@ -11,9 +11,9 @@ A web app used to manage shared community sports facillities. The app supports t
 
 ## Tech Stack (to be finalised)
 - Frontend: HTML, CSS
-- Backend:
-- Authentication
-- Database: Azure
+- Backend: Node.js with Express
+- Authentication: Firebase
+- Database: Firebase Firestore
 - CI/CD: Github Actions
 
 ## Roles
