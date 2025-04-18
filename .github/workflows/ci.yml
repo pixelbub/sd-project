@@ -3,16 +3,16 @@ name: CI
 on:
   push:
     branches:
-    - main         # Run on pushes to the main branch
-    - test-ci-branch  # Also run on pushes to test-ci-branch
+      - main
+      - test-ci-branch
   pull_request:
-    branches: 
-    - main         # Run on PRs targeting main
-    - test-ci-branch  # Run on PRs targeting test-ci-branch
+    branches:
+      - main
+      - test-ci-branch
 
 jobs:
   build-and-test:
-    runs-on: ubuntu-latest  # Runs on an Ubuntu VM
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
@@ -21,13 +21,10 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20'  # Use the Node.js version you need
+          node-version: '20'
 
       - name: Install dependencies
-        run: npm ci  # 'npm ci' for a clean install of dependencies
+        run: npm ci
 
       - name: Run tests
-        run: npm test  # Run your Jest tests
-
-      - name: Run coverage
-        run: npm run coverage  # Run code coverage if you have it set up
+        run: npm test
