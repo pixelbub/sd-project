@@ -2,9 +2,13 @@ name: CI
 
 on:
   push:
-    branches: [main]  # Only run on pushes to the main branch
+    branches:
+    - main         # Run on pushes to the main branch
+    - test-ci-branch  # Also run on pushes to test-ci-branch
   pull_request:
-    branches: [main]  # Run on PRs targeting main
+    branches: 
+    - main         # Run on PRs targeting main
+    - test-ci-branch  # Run on PRs targeting test-ci-branch
 
 jobs:
   build-and-test:
