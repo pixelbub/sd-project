@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8 " />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+
+    <header>
+        <h1>View Users</h1>
+    </header>
+    
+    <main>
+
+        <section>
+
+            <h2>User Table</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Role</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <!--fetch info from databas-->
+                        <td><!--firstname--></td>
+                        <td><!--lastname--></td>
+                        <td><!--role--></td>
+                    </tr>
+                    <!--more rows follow-->
+                </tbody>
+            </table>
+
+        </section>
+
+        <aside>
+            <section aria aria-label="Search">
+                <label for="search">Search</label>
+                <input type="text" id="search" placeholder="Enter name"/>
+            </section>
+
+            <section aria-label="Details">
+                <h2>User Details</h2>
+
+                <label for="user_name">
+                    <strong>Name:</strong>
+                </label>
+                <p>John Smith <!--dynamically added from database--> </p>
+
+                <label for="user_role"><strong>Role:</strong></label>
+                <select id="user_role">
+                    <option value="admin">Admin</option>
+                    <option value="staff">Facility Staff</option>
+                    <option value="resident">Resident</option>
+                </select>
+
+                <label for="user_status"><strong>Status:</strong></label>
+                <select id="user_status">
+                    <option value="pending">Pending</option>
+                    <option value="active">Active</option>
+                    <option value="blocked">Blocked</option>
+                </select>
+
+                <button type="button">Update</button>
+                <button type="button">Delete</button>
+
+            </section>
+        </aside>
+    </main>
+</body>
+
+
+</html>
