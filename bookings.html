@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8 " />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bookings</title>
+    <link rel="stylesheet" href="bookings_style.css">
+</head>
+
+<body>
+    <header>
+        <a href="a_sHome.html" class="home_button"> < </a>
+        <h1>Bookings</h1>
+    </header>
+
+    <main>
+        <section>
+            <h2>Make a Booking</h2>
+
+            <label for="facility"><strong>Facility:</strong></label>
+                <select id="facility" required>
+                    <option value="">Select a facility</option>
+                </select>
+
+            <label for="booking_date"><strong>Date:</strong></label>
+            <input type="date" id="booking_date" name="booking_date" required />
+                
+            <label for="party_size"><strong>Number of people:</strong></label>
+            <input type="number" id="party_size" name="party_size" min="1" required />
+
+            <button id="confirm_booking" type="button">Confirm Booking</button>
+
+        </section>
+
+        <aside>
+            <section>
+                <h2>Available Time Slots</h2>
+
+                <ul class="time_grid">
+                    
+                    <!--assuming javascript will add articles here-->
+                    <li>
+                        <article role="button" tabindex="0">
+                            <p>
+                                <time datetime="05:00">05:00-06:00</time>
+                            </p>
+                                
+                            
+                            <p>15 slots available</p>
+                        </article>
+                    </li>
+
+                </ul>
+            </section>
+        </aside>
+    </main>
+</body>
+
+</html>
