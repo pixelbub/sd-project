@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8 " />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>View Users</title>
+    <link rel="stylesheet" href="view_users_style.css">
+</head>
+
+<body>
+
+    <header>
+        <a href="a_sHome.html" class="home_button"> < </a>
+        <h1>Bookings</h1>
+    </header>
+    
+    <main>
+
+        <section>
+
+            <h2>Booking Table</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Role</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <!--fetch info from databas-->
+                        <td><!--firstname--></td>
+                        <td><!--lastname--></td>
+                        <td><!--role--></td>
+                    </tr>
+                    <!--more rows follow-->
+                </tbody>
+            </table>
+
+        </section>
+
+        <aside>
+            <section aria aria-label="Search">
+                <label for="search">Search</label>
+                <input type="text" id="search" placeholder="Enter Booking Reference"/>
+            </section>
+
+            <section aria-label="Details">
+                <h2>Booking Details</h2>
+
+                <label for="user_name">
+                    <strong>Name:</strong>
+                </label>
+                <p>John Smith <!--dynamically added from database--> </p>
+
+                <label for="no_ppl"><strong>No. People:</strong></label>
+                <p>4<!--dynamically added from database--> </p>
+                <label for="facility"><strong>Facility:</strong></label>
+                <p>swimming pool <!--dynamically added from database--> </p>
+                <label for="start_time"><strong>Start Time:</strong></label>
+                <p>10:00 am <!--dynamically added from database--> </p>
+                <label for="end_ppl"><strong>End Time:</strong></label>
+                <p>12:00 pm <!--dynamically added from database--> </p>
+
+                <label for="booking_status"><strong>Status:</strong></label>
+                <select id="user_status">
+                    <option value="pending">Pending</option>
+                    <option value="approved">Approved</option>
+                    <option value="rejected">Rejected</option>
+                </select>
+
+                <button type="button">Update</button>
+
+            </section>
+        </aside>
+    </main>
+</body>
+
+
+</html>
