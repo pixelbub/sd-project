@@ -8,6 +8,7 @@
   },
   "scripts": {
     "test": "jest"
+    "test:coverage": "jest --coverage"
   },
   "dependencies": {
     "ansi-escapes": "^4.3.2",
