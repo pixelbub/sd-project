@@ -1,5 +1,7 @@
 # Community Sports Facility Management Web-App
 
+[![codecov](https://codecov.io/github/pixelbub/sd-project/graph/badge.svg?token=7PNF4KTZZB)](https://codecov.io/github/pixelbub/sd-project)
+
 ## Overview
 A web app used to manage shared community sports facillities. The app supports time-slot booking and maintenance reporting which allows residents, staff and admin to interact with facility resources efficiently
 
@@ -20,3 +22,4 @@ A web app used to manage shared community sports facillities. The app supports t
 - Resident: book facilities, report issues
 - Staff: Update maintenance status
 - Admin: Manage users and bookings
+
