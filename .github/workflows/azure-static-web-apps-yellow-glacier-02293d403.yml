@@ -38,14 +38,12 @@ jobs:
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_YELLOW_GLACIER_02293D403 }}
           action: "upload"
-          ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
-          # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
           app_location: "/" # App source code path
-          api_location: "" # Api source code path - optional
-          output_location: "/" # Tell Azure to deploy from the root
-          app_build_command: "" # Skip the build step since you're using plain HTML/CSS/JS
+          api_location: "" # No backend for now
+          output_location: "/" # Deploy from root
+          app_build_command: "" # Skip build
+          skip_app_build: true # 🚫 Actually skip the build process
           github_id_token: ${{ steps.idtoken.outputs.result }}
-          ###### End of Repository/Build Configurations ######
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
