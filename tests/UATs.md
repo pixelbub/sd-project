@@ -1,4 +1,4 @@
-*1 - Login, Registration, and Authentication*
+**1 - Login, Registration, and Authentication**
 
 Test 1.1 – Login via 3rd Party
 Given the user is not logged in
@@ -13,7 +13,7 @@ They should be assigned their chosen role in the DB
 And set as pending if they selected Admin or Facility Staff or Accepted is the selected Resident
 
 
-*2 - User Management*
+**2 - User Management**
 
 Test 2.1 – View Unverified Users
 Given the admin is logged in
@@ -37,7 +37,7 @@ Given a user exists
 When the admin revokes access
 Then the user should no longer be able to log in or use the system
 
-*Booking System*
+**Booking System**
 
 Test 3.1 – Make a Booking
 Given a resident is logged in
