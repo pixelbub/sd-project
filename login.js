@@ -1,3 +1,4 @@
+
 // login.js
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js';
 import { getAuth, GoogleAuthProvider, signInWithPopup } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js';
@@ -30,6 +31,11 @@ function signInWithGoogleLogin() {
       })
       .then(async res => {
         if (res.ok) {
+          if (user) {
+            localStorage.setItem('user_uid', user.uid);
+            localStorage.setItem('first_name', user.displayName.split(" ")[0]);
+        
+          }
           const data = await res.json();
           alert(`Welcome back, ${data.first_name}!`);
           if (data.role == "admin"){
@@ -38,9 +44,15 @@ function signInWithGoogleLogin() {
             return;
           }
           else if (data.role =="facility-staff"){
-            //alert("Welcome facility staff, you can manage the patients now.");
-            window.location.href = `staffHome.html?first_name=${encodeURIComponent(data.first_name)}`;
-            return;
+              if (data.status == "pending"){
+                alert("Your account is still pending approval. .")
+                  window.location.href = `dashboard.html?first_name=${encodeURIComponent(data.first_name)}`;
+                  return; 
+                }
+              else if (data.status == "approved"){ //alert("Welcome facility staff, you can manage the patients now.");
+                window.location.href = `staffHome.html?first_name=${encodeURIComponent(data.first_name)}`;
+                return;}
+           
           }else if(data.role =="resident") {
             // Pass the first name to the dashboard. You can use session storage,
           // query parameters, or any client-side method to display the user's name.
