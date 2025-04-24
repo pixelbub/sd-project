@@ -1,4 +1,6 @@
 // dashboard.js
+export function selectTimeSlot(btn, slot, selectedRef) { … }
+export function updateSlotSelection({ groupSize, bookBtn, slots, currentCapacity, selectedRef }) { … }
 
 document.addEventListener('DOMContentLoaded', () => {
   let currentFacilityCapacity = 0;
