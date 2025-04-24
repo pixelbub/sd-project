@@ -49,7 +49,7 @@ function signInWithGoogleLogin() {
                   window.location.href = `dashboard.html?first_name=${encodeURIComponent(data.first_name)}`;
                   return; 
                 }
-              else if (data.status == "approved"){ //alert("Welcome facility staff, you can manage the patients now.");
+              else if (data.status == "active"){ //alert("Welcome facility staff, you can manage the patients now.");
                 window.location.href = `staffHome.html?first_name=${encodeURIComponent(data.first_name)}`;
                 return;}
            
