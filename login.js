@@ -38,10 +38,20 @@ function signInWithGoogleLogin() {
           }
           const data = await res.json();
           alert(`Welcome back, ${data.first_name}!`);
+          if(data.status == "blocked"){
+            alert("Your account has been blocked. Please contact support.");}
           if (data.role == "admin"){
-            //alert("Welcome admin, you can manage the users now.");
-            window.location.href = `a_sHome.html?first_name=${encodeURIComponent(data.first_name)}`;
-            return;
+            if (data.status == "pending"){
+              alert("Your account is still pending approval. .")
+                window.location.href = `dashboard.html?first_name=${encodeURIComponent(data.first_name)}`;
+                return; 
+            } else if (data.status == "active"){
+              //alert("Welcome admin, you can manage the users now.");
+              window.location.href = `a_sHome.html?first_name=${encodeURIComponent(data.first_name)}`;
+              return;
+
+            }
+            
           }
           else if (data.role =="facility-staff"){
               if (data.status == "pending"){
