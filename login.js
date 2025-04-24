@@ -38,9 +38,7 @@ function signInWithGoogleLogin() {
           }
           const data = await res.json();
           alert(`Welcome back, ${data.first_name}!`);
-          if(data.status == "blocked"){
-            alert("Your account has been blocked. Please contact support.");}
-          if (data.role == "admin"){
+           if (data.role == "admin"){
             if (data.status == "pending"){
               alert("Your account is still pending approval. .")
                 window.location.href = `dashboard.html?first_name=${encodeURIComponent(data.first_name)}`;
@@ -49,8 +47,9 @@ function signInWithGoogleLogin() {
               //alert("Welcome admin, you can manage the users now.");
               window.location.href = `a_sHome.html?first_name=${encodeURIComponent(data.first_name)}`;
               return;
-
-            }
+            }else if(data.status == "blocked"){
+              alert("Your account has been blocked. Please contact support.");
+              return;}
             
           }
           else if (data.role =="facility-staff"){
@@ -58,16 +57,21 @@ function signInWithGoogleLogin() {
                 alert("Your account is still pending approval. .")
                   window.location.href = `dashboard.html?first_name=${encodeURIComponent(data.first_name)}`;
                   return; 
-                }
+                }else if(data.status == "blocked"){
+                  alert("Your account has been blocked. Please contact support.");
+                  return;}
               else if (data.status == "active"){ //alert("Welcome facility staff, you can manage the patients now.");
                 window.location.href = `staffHome.html?first_name=${encodeURIComponent(data.first_name)}`;
                 return;}
            
           }else if(data.role =="resident") {
+            if(data.status == "blocked"){
+              alert("Your account has been blocked. Please contact support.");
+              return;}else{window.location.href = `dashboard.html?first_name=${encodeURIComponent(data.first_name)}`;
+              return;}
             // Pass the first name to the dashboard. You can use session storage,
           // query parameters, or any client-side method to display the user's name.
-            window.location.href = `dashboard.html?first_name=${encodeURIComponent(data.first_name)}`;
-            return;
+            
            }
           
           
