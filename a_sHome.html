@@ -1,45 +1,243 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Meta tag for character encoding -->
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Added for mobile responsiveness -->
-  <title>GameOn</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GameOn - Admin Panel</title>
+  <link rel="stylesheet" href="view_users_style.css" />
+  <link rel="stylesheet" href="resHome.css" />
 
-  <!-- Link to external stylesheet -->
-  <link rel="stylesheet" href="resHome.css">
+  <!-- Admin-specific overrides: inline styles for layout -->
   <style>
-    /* If you plan to add inline styles later, you can write them here. */
+    /* Admin-specific styles */
+    header aside {
+      flex: 0 0 auto;      /* prevent it from growing */
+      padding: 0 !important;
+      margin: 0 !important;
+      background: none !important;
+    }
+    header aside a {
+      display: inline-block;
+      width: auto !important;
+      padding: 4px 8px;
+      background-color: #2196F3;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 4px;
+      font-size: 0.9rem;
+    }
+    .table-container {
+      margin: 20px 0;
+      overflow-x: auto;
+    }
+   
+    button {
+      padding: 8px 12px;
+      margin: 5px;
+      cursor: pointer;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+    }
+    button:hover {
+      opacity: 0.8;
+    }
+    #load-bookings, #load-users {
+      background-color: #2196F3;
+      padding: 10px 15px;
+      font-size: 16px;
+    }
+    main {
+      padding: 20px;
+    }
+    section {
+      margin-bottom: 40px;
+    }
+    article h3 {
+      margin-top: 0;
+    }
+    aside {
+      background-color: #f4f4f4;
+      padding: 15px;
+      border-radius: 4px;
+      margin-top: 20px;
+    }
+    .search {
+      margin-bottom: 20px;
+    }
+    .search label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    .details h3 {
+      margin-top: 0;
+    }
+    .details p, .details label {
+      margin: 10px 0 5px;
+      display: block;
+    }
+
+    /* Grid layout for User and Booking Management sections */
+    section#view-users,
+    section#bookings-management {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      grid-template-rows: auto auto;
+      grid-template-areas:
+        "header header"
+        "table sidebar";
+      gap: 1.5rem;
+    }
+
+    /* Make the section heading and button span both columns */
+    section#view-users > h2,
+    section#view-users > button,
+    section#bookings-management > h2,
+    section#bookings-management > button {
+      grid-column: 1 / -1;
+    }
+
+    /* Place the table on the left */
+    section#view-users > article.table-container {
+      grid-area: table;
+    }
+    section#bookings-management > article.table-container {
+      grid-area: table;
+    }
+
+    /* Stack search and details on the right */
+    section#view-users > aside,
+    section#view-users > section.details {
+      grid-area: sidebar;
+    }
+    section#bookings-management > aside,
+    section#bookings-management > section.details {
+      grid-area: sidebar;
+    }
   </style>
 </head>
-
 <body>
-
-  <!-- Header Section for the Website -->
   <header>
-    <!-- Main heading for the page -->
-    <h1>GameOn</h1>
-    <!-- Aside section with links for Profile -->
+    <h1>GameOn - Admin Panel</h1>
     <aside>
-        <!-- Profile button with icon and text -->
-        <a href="profile.html">👤 Profile</a>
+      <a href="profile.html" class="profile-link">👤 Profile</a>
     </aside>
   </header>
 
-  <!-- Navigation bar to provide quick links to sections -->
   <nav>
-    <a href="#About">About</a>
-    <a href="#Bookings">Bookings</a>
-    <a href="#Leaderboard">Leaderboard</a>
-    <a href="#Dashboard">Dashboard</a>
-    <a href="View_Users">View Users</a>
+    <a href="#view-users">User Management</a>
+    <a href="#bookings-management">Booking Management</a>
   </nav>
 
-  <!-- About Section with a brief description -->
-  <section id="About">
-    <h2>About Us</h2>
-    <p>Welcome to our community sports centre!</p>
-  </section>
+  <main>
+    <!-- User Management Section -->
+    <section id="view-users" aria-labelledby="view-users-heading">
+      <h2 id="view-users-heading">User Management</h2>
+      
 
+      <article class="table-container" aria-label="Users Table">
+        <h3>Users Table
+          <button id="load-users">Load Users</button>
+        </h3>
+        
+        <table id="users-table">
+          <thead>
+            <tr>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Role</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          
+          <tbody></tbody>
+        </table>
+      </article>
+
+      <aside aria-label="User Search">
+        <form role="search" class="search">
+          <label for="search-users">Search Users</label>
+          <input type="text" id="search-users" placeholder="Enter name" />
+        </form>
+      </aside>
+
+      <section class="details" aria-label="User Details">
+        <h3>User Details</h3>
+        <label for="user-name"><strong>Name:</strong></label>
+        <input type="text" id="user-name" placeholder="Enter name" />
+
+        <label for="user-role"><strong>Role:</strong></label>
+        <select id="user-role">
+          <option value="admin">Admin</option>
+          <option value="staff">Facility Staff</option>
+          <option value="resident">Resident</option>
+        </select>
+
+        <label for="user-status"><strong>Status:</strong></label>
+        <select id="user-status">
+          <option value="pending">Pending</option>
+          <option value="active">Active</option>
+          <option value="blocked">Blocked</option>
+        </select>
+
+        <button type="button">Update</button>
+        <button type="button">Delete</button>
+      </section>
+    </section>
+
+    <!-- Booking Management Section -->
+    <section id="bookings-management" aria-labelledby="bookings-management-heading">
+      <h2 id="bookings-management-heading">Booking Management</h2>
+      
+
+      <article class="table-container" aria-label="Bookings Table">
+        <h3>Bookings Table
+          <button id="load-bookings">Load Pending Bookings</button>
+        </h3>
+        
+        <table id="bookings-table">
+          <thead>
+            <tr>
+              <th>Facility</th>
+              <th>Start Time</th>
+              <th>End Time</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </article>
+
+      <aside aria-label="Booking Search">
+        <form role="search" class="search">
+          <label for="search-bookings">Search Bookings</label>
+          <input type="text" id="search-bookings" placeholder="Enter Booking Reference" />
+        </form>
+      </aside>
+
+      <section class="details" aria-label="Booking Details">
+        <h3>Booking Details</h3>
+        <p><strong>Name:</strong> John Smith</p>
+        <p><strong>No. People:</strong> 4</p>
+        <p><strong>Facility:</strong> Swimming Pool</p>
+        <p><strong>Start Time:</strong> 10:00 am</p>
+        <p><strong>End Time:</strong> 12:00 pm</p>
+
+        <label for="booking-status"><strong>Status:</strong></label>
+        <select id="booking-status">
+          <option value="pending">Pending</option>
+          <option value="approved">Approved</option>
+          <option value="rejected">Rejected</option>
+        </select>
+
+        <button type="button">Update</button>
+      </section>
+    </section>
+  </main>
+
+  <script src="admin.js"></script>
 </body>
 </html>
