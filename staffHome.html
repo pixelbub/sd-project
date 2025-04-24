@@ -8,6 +8,8 @@
 
   <!-- Link to external stylesheet -->
   <link rel="stylesheet" href="resHome.css">
+  <link rel="stylesheet" href="view_users_style.css"> <!-- Link to the specific stylesheet for this page -->
+  <script src="staff.js"></script>
   <style>
     /* If you plan to add inline styles later, you can write them here. */
   </style>
@@ -31,7 +33,7 @@
     <a href="#inventory">Inventory</a>
     <a href="#Bookings">Bookings</a>
     <a href="#Reviews">Reviews</a>
-    <a href="#Dashboard">Dashboard</a>
+    <a href="#view-users">View Users</a>
     <a href="Maintainace">Maintanace Updates</a>
   </nav>
 
@@ -39,6 +41,29 @@
   <section id="About">
     <h2>About Us</h2>
     <p>Welcome to our community sports centre!</p>
+  </section>
+
+  <section id="view-users">
+    <h2>View Users</h2>
+    <!-- Button to trigger loading -->
+    <button id="load-users">Load Users</button>
+    <!-- Container for the users table -->
+    <div class="table-container">
+      <table id="users-table">
+        <caption>All Registered Users</caption>
+        <thead>
+          <tr>
+            
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Rows will be injected here by JavaScript -->
+        </tbody>
+      </table>
+    </div>
   </section>
 
 </body>
