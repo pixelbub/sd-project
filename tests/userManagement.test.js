@@ -70,4 +70,4 @@ describe('Admin panel - Load Users', () => {
     expect(select).toBeInTheDocument();  // Ensure the select element exists
     expect(select.value).toBe('active'); // Ensure the selected value is "active"
   });
-});
+}); 
