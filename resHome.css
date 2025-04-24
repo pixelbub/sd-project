@@ -55,7 +55,7 @@ body {
   aside a {
     display: inline-block;
     padding: 10px 16px;
-    border-radius: 20px; /* pill shape for text; use 50% for icon-only */
+    border-radius: 50%; /* pill shape for text; use 50% for icon-only */
     text-decoration: none;
     font-weight: bold;
     color: #2e8b57;
