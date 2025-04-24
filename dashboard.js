@@ -168,7 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   
   
-    // Enable/disable slots based on group size
+   /* // Enable/disable slots based on group size
     function updateSlotSelection() {
       const size = parseInt(groupSize.value, 10);
       bookBtn.disabled = isNaN(size) || size < 1 || size > currentFacilityCapacity;
@@ -186,6 +186,6 @@ document.addEventListener('DOMContentLoaded', () => {
           bookBtn.disabled = true;
         }
       }
-    }
+    }*/
   });
   
