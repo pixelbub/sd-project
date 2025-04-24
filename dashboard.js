@@ -1,6 +1,5 @@
 // dashboard.js
 
-
 document.addEventListener('DOMContentLoaded', () => {
   let currentFacilityCapacity = 0;
   let selectedSlot = null;
