@@ -3,47 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dashboard</title>
+  <title>GameOn - Book Facilities</title>
+  <link rel="stylesheet" href="resHome.css" />
   <link rel="stylesheet" href="dashboard.css" />
+  <script type="module" src="dashboard.js"></script>
 </head>
 <body>
   <header>
-    <h1 id="welcomeMessage">Welcome!</h1>
-  </header>
-  <main>
-    <!-- Dashboard content -->
-  </main>
-
-  
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <!-- Meta tag for character encoding -->
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Added for mobile responsiveness -->
-  <title>GameOn</title>
-
-  <!-- Link to external stylesheet -->
-  <link rel="stylesheet" href="resHome.css">
-  <style>
-    /* If you plan to add inline styles later, you can write them here. */
-  </style>
-</head>
-
-<body>
-
-  <!-- Header Section for the Website -->
-  <header>
-    <!-- Main heading for the page -->
     <h1>GameOn</h1>
-    <!-- Aside section with links for Profile -->
     <aside>
-        <!-- Profile button with icon and text -->
-        <a href="profile.html">👤 Profile</a>
+      <a href="profile.html">👤 Profile</a>
     </aside>
   </header>
 
-  <!-- Navigation bar to provide quick links to sections -->
   <nav>
     <a href="#About">About</a>
     <a href="#Bookings">Bookings</a>
@@ -51,22 +23,35 @@
     <a href="#Dashboard">Dashboard</a>
   </nav>
 
-  <!-- About Section with a brief description -->
-  <section id="About">
-    <h2>About Us</h2>
-    <p>Welcome to our community sports centre!</p>
-    <script>
-        // Get first name from query parameters.
-        const params = new URLSearchParams(window.location.search);
-        const firstname = params.get("firstname");
-        if (firstname) {
-          document.getElementById("welcomeMessage").textContent = "Welcome, " + firstname + "!";
-        }
-      </script>
-  </section>
+  <main>
+    <section class="booking-controls" aria-labelledby="booking-heading">
+      <section class="booking-details" aria-labelledby="booking-heading">
+        <h2 id="booking-heading">Make a Booking</h2>
+        <fieldset>
+          <legend>Booking Details</legend>
 
-</body>
-</html>
+          <label for="facilitySelect">Facility:</label>
+          <select id="facilitySelect" required>
+            <option value="">Select a facility</option>
+          </select>
 
+          <label for="datePick">Date:</label>
+          <input type="date" id="datePick" required />
+
+          <label for="groupSize">Number of People:</label>
+          <input type="number" id="groupSize" min="1" value="1" required />
+
+          <button type="button" id="bookBtn" disabled>Confirm Booking</button>
+          <p id="errorMessage" class="error-message" aria-live="polite"></p>
+        </fieldset>
+      </section>
+
+      <section class="slot-container" aria-labelledby="slots-heading">
+        <h3 id="slots-heading">Available Time Slots</h3>
+        <output id="loading">Loading available slots…</output>
+        <section id="timeSlots" class="slot-grid" aria-live="polite"></section>
+      </section>
+    </section>
+  </main>
 </body>
 </html>
