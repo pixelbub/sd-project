@@ -1,0 +1,196 @@
+/* Basic Reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    font-family: system-ui, sans-serif;
+    background-color: #f5f5f5;
+    
+  }
+.profile-link{
+    display: inline-block;
+    padding: 10px 16px;
+    border-radius: 20px; /* pill shape for text; use 50% for icon-only */
+    text-decoration: none;
+    font-weight: bold;
+    color: #2e8b57;
+    background-color: white;
+    border: 2px solid #2e8b57;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    margin: 4px 2px;
+}
+  
+  /* Header Layout */
+
+  
+  .home_button {
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: bold;
+    background-color: #0b3954;
+    color: #f85e00;
+    padding: 0.4rem 0.8rem;
+    border-radius: 1rem;
+  }
+  
+  .home_button:hover {
+    background-color: #0b3953;
+  }
+  
+  /* Main split layout */
+ 
+  
+  /* Table Section */
+  section {
+    flex: 2;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  }
+  
+  th, td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+  }
+  
+  thead {
+    background-color: #0b3954;
+    color: #f85e00;
+  }
+  
+  /* Aside Section */
+  aside {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+  }
+  
+  /* Search Field */
+  main aside section[aria-label="Search"] {
+    background-color: #ffffff;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  }
+  
+  #search {
+    width: 100%;
+    padding: 0.6rem;
+    border: 1px solid #ccc;
+    border-radius: 0.4rem;
+    margin-top: 0.5rem;
+  }
+  
+  /* User Details Card */
+  main aside section[aria-label="Details"] {
+    background-color: #ffffff;
+    padding: 1.2rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  main aside section[aria-label="Details"] select {
+    padding: 0.5rem;
+    border-radius: 0.4rem;
+    border: 1px solid #ccc;
+  }
+  
+  /* Buttons */
+  main aside section[aria-label="Details"] button {
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    color: white;
+    margin-top: 0.5rem;
+  }
+  
+  main aside section[aria-label="Details"] button:first-of-type {
+    background-color: #0077cc;
+    
+  }
+  
+  main aside section[aria-label="Details"] button:last-of-type {
+    background-color: #d62828;
+  }
+  
+  main aside section[aria-label="Details"] button:hover {
+    opacity: 0.9;
+  }
+/* General sidebar layout */
+main aside {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  /* Form and details spacing */
+  .search,
+  .details {
+    background-color: #ffffff;
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Consistent spacing inside forms */
+  .search label,
+  .details label {
+    margin-top: 1rem;
+    display: block;
+    font-weight: bold;
+  }
+  
+  .search input,
+  .details select,
+  .details input {
+    width: 100%;
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 0.4rem;
+    font-size: 1rem;
+  }
+  
+  /* Name styling to prevent overlap */
+  .details p {
+    margin: 0.5rem 0 0.25rem;
+  }
+  
+  /* Button group styling */
+  .details button {
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    color: white;
+    margin-top: 1rem;
+    margin-right: 0.5rem;
+  }
+  
+  .details button:first-of-type {
+    background-color: #0077cc;
+  }
+  
+  .details button:last-of-type {
+    background-color: #28a745;
+  }
+  
