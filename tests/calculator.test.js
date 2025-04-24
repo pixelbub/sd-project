@@ -1,4 +1,3 @@
-// tests/calculator.test.js
 const { add } = require('../src/calculator');
 
 test('adds two numbers', () => {
