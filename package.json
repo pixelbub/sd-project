@@ -106,7 +106,7 @@
     "jest-matcher-utils": "^29.7.0",
     "jest-message-util": "^29.7.0",
     "jest-mock": "^29.7.0",
-    "jest-fetch-mock": "^4.0.2",
+    "jest-fetch-mock": "^3.0.3",
     "jest-pnp-resolver": "^1.2.3",
     "jest-regex-util": "^29.6.3",
     "jest-resolve": "^29.7.0",
