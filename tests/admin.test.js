@@ -2,7 +2,6 @@
  * @jest-environment jsdom
  */
 
-import '../src/admin';
 import { fireEvent } from '@testing-library/dom';
 
 // Mock global fetch
@@ -20,6 +19,8 @@ beforeEach(() => {
 
   jest.clearAllMocks();
 });
+
+import '../src/admin';
 
 describe('Admin Panel', () => {
   it('loads users and populates the table', async () => {
