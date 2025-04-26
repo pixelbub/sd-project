@@ -2,10 +2,14 @@
  * @jest-environment jsdom
  */
 
+import '../src/admin';
 import { fireEvent } from '@testing-library/dom';
 
 // Mock global fetch
 global.fetch = jest.fn();
+
+// This import is needed for the `.not.toBeInTheDocument()` matcher
+import '@testing-library/jest-dom';
 
 beforeEach(() => {
   document.body.innerHTML = `
@@ -16,11 +20,8 @@ beforeEach(() => {
     <table id="users-table"><tbody></tbody></table>
     <table id="bookings-table"><tbody></tbody></table>
   `;
-
   jest.clearAllMocks();
 });
-
-import '../src/admin';
 
 describe('Admin Panel', () => {
   it('loads users and populates the table', async () => {
