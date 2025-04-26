@@ -3,6 +3,8 @@
  * @jest-environment jsdom
  */
 //import '@testing-library/jest-dom';
+import '../src/admin';
+
 require('@testing-library/jest-dom');
 import { fireEvent } from '@testing-library/dom';
 
