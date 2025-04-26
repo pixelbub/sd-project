@@ -3,7 +3,6 @@
  * @jest-environment jsdom
  */
 //import '@testing-library/jest-dom';
-import '../src/admin';
 
 require('@testing-library/jest-dom');
 import { fireEvent } from '@testing-library/dom';
@@ -17,6 +16,8 @@ describe('Admin panel - Load Users', () => {
         <tbody></tbody>
       </table>
     `;
+
+    require('../src/admin');
 
     // Mocking the fetch functionality globally
     global.fetch = jest.fn().mockResolvedValueOnce({
