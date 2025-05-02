@@ -41,11 +41,11 @@ function signInWithGoogleLogin() {
            if (data.role == "admin"){
             if (data.status == "pending"){
               alert("Your account is still pending approval. .")
-                window.location.href = `dashboard.html?first_name=${encodeURIComponent(data.first_name)}`;
+                window.location.href = `r_dashboard.html?first_name=${encodeURIComponent(data.first_name)}`;
                 return; 
             } else if (data.status == "active"){
               //alert("Welcome admin, you can manage the users now.");
-              window.location.href = `a_sHome.html?first_name=${encodeURIComponent(data.first_name)}`;
+              window.location.href = `a_home.html?first_name=${encodeURIComponent(data.first_name)}`;
               return;
             }else if(data.status == "blocked"){
               alert("Your account has been blocked. Please contact support.");
@@ -55,19 +55,19 @@ function signInWithGoogleLogin() {
           else if (data.role =="facility-staff"){
               if (data.status == "pending"){
                 alert("Your account is still pending approval. .")
-                  window.location.href = `dashboard.html?first_name=${encodeURIComponent(data.first_name)}`;
+                  window.location.href = `r_dashboard.html?first_name=${encodeURIComponent(data.first_name)}`;
                   return; 
                 }else if(data.status == "blocked"){
                   alert("Your account has been blocked. Please contact support.");
                   return;}
               else if (data.status == "active"){ //alert("Welcome facility staff, you can manage the patients now.");
-                window.location.href = `staffHome.html?first_name=${encodeURIComponent(data.first_name)}`;
+                window.location.href = `fs_home.html?first_name=${encodeURIComponent(data.first_name)}`;
                 return;}
            
           }else if(data.role =="resident") {
             if(data.status == "blocked"){
               alert("Your account has been blocked. Please contact support.");
-              return;}else{window.location.href = `dashboard.html?first_name=${encodeURIComponent(data.first_name)}`;
+              return;}else{window.location.href = `r_dashboard.html?first_name=${encodeURIComponent(data.first_name)}`;
               return;}
             // Pass the first name to the dashboard. You can use session storage,
           // query parameters, or any client-side method to display the user's name.
@@ -79,7 +79,7 @@ function signInWithGoogleLogin() {
           // If the user is not found, advise sign up.
           const errorData = await res.json();
           alert(errorData.error || "User not found, please sign up.");
-          window.location.href = "testsignup.html";
+          window.location.href = "signup.html";
         }
       })
       .catch(err => {

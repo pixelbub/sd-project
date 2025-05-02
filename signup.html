@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Firebase Auth Demo</title>
+
+  <!-- Firebase 9+ Modular SDK -->
+  <script type="module" src="signup.js"> </script>
+  <link rel="stylesheet" href="signup.css">
+</head>
+<body>
+
+  <header>
+    
+  </header>
+
+  <main>
+    <section>
+
+      <h1>Sign Up</h1>
+
+      <fieldset class="name-fields">
+        <legend class="visually-hidden">Name</legend>
+        <input type="text" id="first-name" placeholder="First Name" required />
+        <input type="text" id="last-name" placeholder="Last Name" required />
+      </fieldset>
+
+      <!-- Role dropdown -->
+    <label for="role">Select your role:</label>
+
+    <select id="role">
+      <option value="">Please choose a role</option>
+      <option value="admin">Admin</option>
+      <option value="facility-staff">Facility Staff</option>
+      <option value="resident">Resident</option>
+
+    </select>
+
+  <br><br>
+
+  <button onclick="signInWithGoogle()">Continue with Google</button>
+  <p id="message"></p> <!-- For messages -->
+
+  <p>Already have an account? <a href="general_home.html">Log in here</a>.</p>
+  
+  </section>
+  </main>
+  
+
+  
+
+</body>
+</html>

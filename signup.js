@@ -71,12 +71,12 @@ function signInWithGoogle() {
     
               // Redirect based on role
               if (role == "admin") {
-                window.location.href = `a_sHome.html?firstname=${encodeURIComponent(first_name)}`;
+                window.location.href = `a_home.html?firstname=${encodeURIComponent(first_name)}`;
               } else if (role == "facility-staff") {
                 console.log("Redirecting to staff home page.");
-                window.location.href = `staffHome.html?firstname=${encodeURIComponent(first_name)}`;
+                window.location.href = `fs_home.html?firstname=${encodeURIComponent(first_name)}`;
               } else if (role == "resident") {
-                window.location.href = `dashboard.html?firstname=${encodeURIComponent(first_name)}`;
+                window.location.href = `r_dashboard.html?firstname=${encodeURIComponent(first_name)}`;
               } else {
                 alert("Unknown role! Cannot redirect.");
               }
@@ -84,7 +84,7 @@ function signInWithGoogle() {
               // Handle specific error messages
               if (data.error && data.error.includes("User already exists")) {
                 alert("User already exists. Please log in instead.");
-                window.location.href = "index.html";
+                window.location.href = "general_home.html";
                 
                 
               } else {

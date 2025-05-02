@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MatchDay - Book Facilities</title>
+  <link rel="stylesheet" href="a_home_style.css" />
+  <link rel="stylesheet" href="r_dashboard_style.css" />
+  <script type="module" src="r_dashboard.js"></script>
+</head>
+<body>
+  <header>
+    <h1>MatchDay</h1>
+    <aside>
+      <a href="profile.html">👤 Profile</a>
+    </aside>
+  </header>
+
+  <nav>
+    <a href="#About">About</a>
+    <a href="#Bookings">Bookings</a>
+    <a href="#Leaderboard">Leaderboard</a>
+    <a href="#Dashboard">Dashboard</a>
+  </nav>
+
+  <main>
+    <section class="booking-controls" aria-labelledby="booking-heading">
+      <section class="booking-details" aria-labelledby="booking-heading">
+        <h2 id="booking-heading">Make a Booking</h2>
+        <fieldset>
+          <legend>Booking Details</legend>
+
+          <label for="facilitySelect">Facility:</label>
+          <select id="facilitySelect" required>
+            <option value="">Select a facility</option>
+          </select>
+
+          <label for="datePick">Date:</label>
+          <input type="date" id="datePick" required />
+
+          <label for="groupSize">Number of People:</label>
+          <input type="number" id="groupSize" min="1" value="1" required />
+
+          <button type="button" id="bookBtn" disabled>Confirm Booking</button>
+          <p id="errorMessage" class="error-message" aria-live="polite"></p>
+        </fieldset>
+      </section>
+
+      <section class="slot-container" aria-labelledby="slots-heading">
+        <h3 id="slots-heading">Available Time Slots</h3>
+        <output id="loading">Loading available slots…</output>
+        <section id="timeSlots" class="slot-grid" aria-live="polite"></section>
+      </section>
+    </section>
+  </main>
+</body>
+</html>

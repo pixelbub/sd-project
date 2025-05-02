@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Meta tag for character encoding -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Added for mobile responsiveness -->
+  <title>MatchDay</title>
+
+  <!-- Link to external stylesheet -->
+  <link rel="stylesheet" href="a_home_style.css">
+  <link rel="stylesheet" href="a_view_users_style.css"> <!-- Link to the specific stylesheet for this page -->
+  <script src="fs_home.js"></script>
+  <style>
+     aside a {
+    display: inline-block;
+    padding: 10px 16px;
+    border-radius: 50%; /* pill shape for text; use 50% for icon-only */
+    text-decoration: none;
+    font-weight: bold;
+    color: #2e8b57;
+    background-color: white;
+    border: 2px solid #2e8b57;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    margin: 4px 2px;
+  }
+    /* If you plan to add inline styles later, you can write them here. */
+  </style>
+</head>
+
+<body>
+
+  <!-- Header Section for the Website -->
+  <header>
+    <!-- Main heading for the page -->
+    <h1>MatchDay</h1>
+    <!-- Aside section with links for Profile -->
+   
+  </header>
+
+  <!-- Navigation bar to provide quick links to sections -->
+  <nav>
+    <a href="#inventory">Inventory</a>
+    <a href="#Bookings">Bookings</a>
+    <a href="#Reviews">Reviews</a>
+    <a href="#view-users">View Users</a>
+    <a href="Maintainace">Maintanace Updates</a>
+  </nav>
+
+  <!-- About Section with a brief description -->
+  <section id="About">
+    <h2>About Us</h2>
+    <p>Welcome to our community sports centre!</p>
+  </section>
+
+  <section id="view-users">
+    <h2>View Users</h2>
+    <!-- Button to trigger loading -->
+    <button id="load-users">Load Users</button>
+    <!-- Container for the users table -->
+    <div class="table-container">
+      <table id="users-table">
+        <caption>All Registered Users</caption>
+        <thead>
+          <tr>
+            
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Rows will be injected here by JavaScript -->
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</body>
+</html>
