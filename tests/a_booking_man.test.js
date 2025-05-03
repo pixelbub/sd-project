@@ -90,7 +90,7 @@ describe('Booking Management', () => {
     
     // Wait for data to load
     await waitFor(() => {
-      expect(fetchMock).toHaveBeenCalledWith('http://localhost:3000/bookings?status=pending');
+      expect(fetchMock).toHaveBeenCalledWith('https://backend-k52m.onrender.com/bookings?status=pending');
       expect(tableBody.querySelectorAll('tr').length).toBe(2);
     });
     
