@@ -108,7 +108,7 @@ describe('Admin User Panel', () => {
     await new Promise(process.nextTick);
     
     // Verify fetch was called with correct URL
-    expect(fetchMock).toHaveBeenCalledWith('http://localhost:3000/users');
+    expect(fetchMock).toHaveBeenCalledWith('https://backend-k52m.onrender.com/users');
     
     // Verify table rows were created
     const rows = tableBody.querySelectorAll('tr');
@@ -207,7 +207,7 @@ describe('Admin User Panel', () => {
     
     // Verify fetch called with correct parameters
     expect(fetchMock).toHaveBeenCalledWith(
-      'http://localhost:3000/users/1/status',
+      'https://backend-k52m.onrender.com/users/1/status',
       {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
@@ -311,7 +311,7 @@ describe('Admin User Panel', () => {
     
     // Verify fetch called with correct parameters
     expect(fetchMock).toHaveBeenCalledWith(
-      'http://localhost:3000/users/1',
+      'https://backend-k52m.onrender.com/users/1',
       { method: 'DELETE' }
     );
     
