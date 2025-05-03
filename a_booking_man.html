@@ -126,74 +126,61 @@
   </header>
 
   <nav>
-    <a href="#view-users">User Management</a>
-    <a href="a_booking_man.html">Booking Management</a>
+    <a href="a_sHome.html">User Management</a>
+    <a href="#bookings-management">Booking Management</a>
     <a href="a_report.html">Reports</a>
-    <a href="a_announce.html">Announcements </a>
-
-
-    
+    <a href="a_announce.html">Announcements</a>
   </nav>
-
   <main>
-    <!-- User Management Section -->
-    <section id="view-users" aria-labelledby="view-users-heading">
-      <h2 id="view-users-heading">User Management</h2>
+    <section id="bookings-management" aria-labelledby="bookings-management-heading">
+      <h2 id="bookings-management-heading">Booking Management</h2>
       
 
-      <article class="table-container" aria-label="Users Table">
-        <h3>Users Table
-          <button id="load-users">Load Users</button>
+      <article class="table-container" aria-label="Bookings Table">
+        <h3>Bookings Table
+          <button id="load-bookings">Load Pending Bookings</button>
         </h3>
         
-        <table id="users-table">
+        <table id="bookings-table">
           <thead>
             <tr>
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>Role</th>
-              <th>Status</th>
+              <th>Facility</th>
+              <th>Start Time</th>
+              <th>End Time</th>
               <th>Actions</th>
             </tr>
           </thead>
-          
           <tbody></tbody>
         </table>
       </article>
 
-      <!--<aside aria-label="User Search">
+      <!--<aside aria-label="Booking Search">
         <form role="search" class="search">
-          <label for="search-users">Search Users</label>
-          <input type="text" id="search-users" placeholder="Enter name" />
+          <label for="search-bookings">Search Bookings</label>
+          <input type="text" id="search-bookings" placeholder="Enter Booking Reference" />
         </form>
       </aside>
 
-      <section class="details" aria-label="User Details">
-        <h3>User Details</h3>
-        <label for="user-name"><strong>Name:</strong></label>
-        <input type="text" id="user-name" placeholder="Enter name" />
+      <section class="details" aria-label="Booking Details">
+        <h3>Booking Details</h3>
+        <p><strong>Name:</strong> John Smith</p>
+        <p><strong>No. People:</strong> 4</p>
+        <p><strong>Facility:</strong> Swimming Pool</p>
+        <p><strong>Start Time:</strong> 10:00 am</p>
+        <p><strong>End Time:</strong> 12:00 pm</p>
 
-        <label for="user-role"><strong>Role:</strong></label>
-        <select id="user-role">
-          <option value="admin">Admin</option>
-          <option value="staff">Facility Staff</option>
-          <option value="resident">Resident</option>
-        </select>
-
-        <label for="user-status"><strong>Status:</strong></label>
-        <select id="user-status">
+        <label for="booking-status"><strong>Status:</strong></label>
+        <select id="booking-status">
           <option value="pending">Pending</option>
-          <option value="active">Active</option>
-          <option value="blocked">Blocked</option>
+          <option value="approved">Approved</option>
+          <option value="rejected">Rejected</option>
         </select>
 
         <button type="button">Update</button>
-        <button type="button">Delete</button>
-      </section>-->
+      </section> -->
     </section>
-    
   </main>
 
-  <script src="admin.js"></script>
+  <script src="a_booking_man.js"></script>
 </body>
 </html>
