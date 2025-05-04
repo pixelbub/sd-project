@@ -52,14 +52,15 @@ aside {
 }
 
 aside a {
-  padding: 2% 4%;
-  border-radius: 20px;
+  display: inline-block;
+  padding: 0.5em 1em;
+  border-radius: 999px;
   text-decoration: none;
   font-weight: bold;
   color: #2e8b57;
   background-color: white;
   border: solid #2e8b57;
-  transition: all 0.3s ease;
+  transition: background-color 0.3s ease;
   white-space:nowrap;
 }
 
