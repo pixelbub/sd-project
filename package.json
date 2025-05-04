@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "## Overview A web app used to manage shared community sports facillities. The app supports time-slot booking and maintenance reporting which allows residents, staff and admin to interact with facility resources efficiently",
   "type": "module",
-  "main": "index.html",
   "directories": {
     "test": "tests"
   },
