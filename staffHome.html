@@ -4,28 +4,25 @@
   <!-- Meta tag for character encoding -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Added for mobile responsiveness -->
-  <title>MatchDay</title>
+  <title>GameOn</title>
 
   <!-- Link to external stylesheet -->
   <link rel="stylesheet" href="resHome.css">
   <link rel="stylesheet" href="view_users_style.css"> <!-- Link to the specific stylesheet for this page -->
+  <link rel="stylesheet" href="dashboard.css" />
   <script src="staff.js"></script>
   <style>
-     aside a {
-    display: inline-block;
-    padding: 10px 16px;
-    border-radius: 50%; /* pill shape for text; use 50% for icon-only */
-    text-decoration: none;
-    font-weight: bold;
-    color: #2e8b57;
-    background-color: white;
-    border: 2px solid #2e8b57;
-    transition: all 0.3s ease;
-    white-space: nowrap;
-    margin: 4px 2px;
-  }
-    /* If you plan to add inline styles later, you can write them here. */
-  </style>
+    #notifPopup button {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s;
+}
+</style>
 </head>
 
 <body>
@@ -33,19 +30,39 @@
   <!-- Header Section for the Website -->
   <header>
     <!-- Main heading for the page -->
-    <h1>MatchDay</h1>
+    <h1>GameOn</h1>
     <!-- Aside section with links for Profile -->
-   
+
   </header>
 
   <!-- Navigation bar to provide quick links to sections -->
   <nav>
-    <a href="#inventory">Inventory</a>
-    <a href="#Bookings">Bookings</a>
-    <a href="#Reviews">Reviews</a>
     <a href="#view-users">View Users</a>
-    <a href="Maintainace">Maintanace Updates</a>
+    <a href="fs_report.html">Maintanace Updates</a>
+    <button id="notifBtn" aria-label="Unread notifications" style="position: relative;">
+      🔔
+      <span id="notifCount" style="
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        background: red;
+        color: white;
+        font-size: 0.7em;
+        padding: 2px 5px;
+        border-radius: 50%;
+        display: none;
+      ">0</span>
+    </button>
   </nav>
+
+  <aside id="notifPopup"  style="display: none;" aria-label="Unread notifications">
+    <section>
+      <ul id="notifList"></ul>
+    </section>
+    <footer >
+      <a href="fs_notifications.html">View All Notifications</a>
+    </footer>
+  </aside>
 
   <!-- About Section with a brief description -->
   <section id="About">
