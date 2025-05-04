@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GameOn </title>
+  <link rel="stylesheet" href="view_users_style.css" />
+  <link rel="stylesheet" href="resHome.css" />
+  <style>
+    .notif {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin: 10px;
+      border-radius: 4px;
+    }
+    .unread {
+      background-color: #e8f4ff;
+    }
+  </style>
+</head>
+<header>
+  <h1>GameOn </h1>
+</header> 
+
+<nav>
+  <a href="dashboard.html">Dashboard</a>
+  <a href="report.html">Reports</a>
+
+
+</nav>
+<body>
+  <h1>Your Notifications</h1>
+  <div id="notifContainer">Loading…</div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const container = document.getElementById('notifContainer');
+      const uid = localStorage.getItem('user_uid'); // Must be stored after login
+
+      if (!uid) {
+        container.innerHTML = '<p>Please sign in to view your notifications.</p>';
+        return;
+      }
+
+      try {
+        const res = await fetch(`https://backend-k52m.onrender.com/notifications/${uid}`);
+        if (!res.ok) throw new Error('Server error: ' + res.statusText);
+
+        const notifications = await res.json();
+
+        if (!notifications.length) {
+          container.innerHTML = '<p>No notifications found.</p>';
+          return;
+        }
+
+        container.innerHTML = '';
+        notifications.forEach(n => {
+          const div = document.createElement('div');
+          div.className = 'notif' + (n.read === false ? ' unread' : '');
+          const date = n.created_at?._seconds
+            ? new Date(n.created_at._seconds * 1000).toLocaleString()
+            : 'No timestamp';
+
+          div.innerHTML = `
+            <p>${n.message}</p>
+            <small>${date}</small>
+          `;
+          container.appendChild(div);
+        });
+
+      } catch (err) {
+        console.error(err);
+        container.innerHTML = `<p style="color:red">Error: ${err.message}</p>`;
+      }
+    });
+  </script>
+</body>
+</html>

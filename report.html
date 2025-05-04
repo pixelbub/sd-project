@@ -1,0 +1,93 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GameOn - Report Issue</title>
+  <link rel="stylesheet" href="resHome.css" />
+  <link rel="stylesheet" href="dashboard.css" />
+  <link rel="stylesheet" href="report.css" />
+  <script type="module" src="report.js"></script>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+  
+    th, td {
+      padding: 12px 15px;
+      border: 1px solid #ccc;
+      text-align: left;
+    }
+  
+    th {
+      background-color: #f4f4f4;
+      font-weight: bold;
+    }
+  
+    tr:nth-child(even) {
+      background-color: #fafafa;
+    }
+  
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+  </style>
+  
+</head>
+<body>
+  <header>
+    <h1>GameOn</h1>
+
+  </header>
+
+  <nav>
+    <a href="dashboard.html">Bookings</a>
+    <a href="report.html" class="active">Report</a>
+
+  </nav>
+
+  <main>
+
+    
+    <section class="report-form" aria-labelledby="report-heading">
+        <h2>Report a Facility Issue</h2>
+        <form id="reportForm">
+          <label for="title">Title:</label>
+          <input type="text" id="title" required />
+
+          <label for="facilitySelect">Facility:</label>
+          <select id="facilitySelect" required>
+            <option value="">Select a facility</option>
+          </select>
+        
+          <label for="description">Description:</label>
+          <textarea id="description" required></textarea>
+        
+          
+        
+          <button type="submit">Submit Report</button>
+          <p id="formMsg" style="margin-top: 10px; color: green;"></p>
+
+        </form>
+        
+        <h3>Your Previous Reports</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Status</th>
+              <th>Description</th>
+              <th>Facility</th>
+              <th>feedback</th>
+              
+            </tr>
+          </thead>
+          <tbody id="reportsTableBody">
+            <!-- JS will insert rows here -->
+          </tbody>
+        </table>        
+    </section>
+  </main>
+</body>
+</html>
