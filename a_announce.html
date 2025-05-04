@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GameOn - Manage Events & Closures</title>
+  <link rel="stylesheet" href="view_users_style.css" />
+  <link rel="stylesheet" href="resHome.css" />
+  <style>
+    :root {
+      --primary-color: #007bff;
+      --border-radius: 8px;
+      --input-border: #ccc;
+      --box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+  
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 1.5rem;
+      background: #fff;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+    }
+  
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+  
+    fieldset {
+      border: none;
+      padding: 0;
+      margin: 0;
+    }
+  
+    legend {
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+  
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+  
+    select,
+    input[type="text"],
+    input[type="datetime-local"],
+    textarea {
+      width: 100%;
+      padding: 0.5rem;
+      border: 1px solid var(--input-border);
+      border-radius: 4px;
+      font-size: 1rem;
+    }
+  
+    textarea {
+      resize: vertical;
+    }
+  
+    input[type="checkbox"] {
+      margin-right: 0.5rem;
+    }
+  
+    button {
+      padding: 0.6rem 1.2rem;
+      background-color: var(--primary-color);
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+  
+    button:disabled {
+      background-color: #aaa;
+      cursor: not-allowed;
+    }
+  
+    #ecMessage {
+      margin-top: 1rem;
+      font-weight: bold;
+      color: #333;
+    }
+  </style>
+  
+</head>
+<body>
+  <header>
+    <h1>GameOn </h1>
+  </header>
+
+  <nav>
+
+    <a href="a_sHome.html">User Management</a>
+    <a href="a_booking_man.html">Booking Management</a>
+    <a href="a_report.html">Reports</a>
+    <a href="a_announce.html" class="active">Announcements</a>
+  </nav>
+
+  <main>
+    <section aria-labelledby="manage-events-heading">
+      <h2 id="manage-events-heading">Schedule Event or Maintenance Closure</h2>
+      <form id="ecForm">
+        <fieldset>
+          
+          <label for="ecType">Select Type:</label>
+          <select id="ecType" required>
+            <option value="event">Event</option>
+            <option value="closure">Maintenance Closure</option>
+          </select>
+        </fieldset>
+
+        <fieldset>
+          
+          <label for="ecFacility">Choose Facility:</label>
+          <select id="ecFacility" required>
+            <option value="">Loading…</option>
+          </select>
+        </fieldset>
+
+        <fieldset>
+         
+          <input type="checkbox" id="ecAllDay" />
+          <label for="ecAllDay">All Day </label>
+          
+          <label for="ecStart">Start Date & Time</label>
+          <input type="datetime-local" id="ecStart" required />
+
+          <label for="ecEnd">End Date & Time</label>
+          <input type="datetime-local" id="ecEnd" required />
+        </fieldset>
+
+        <fieldset id="titleGroup">
+          <legend>Event Details</legend>
+          <label for="ecTitle">Title</label>
+          <input type="text" id="ecTitle" placeholder="Event title" required />
+        </fieldset>
+
+        <fieldset id="reasonGroup" style="display:none">
+          <legend>Closure Reason</legend>
+          <label for="ecReason">Reason</label>
+          <input type="text" id="ecReason" placeholder="Closure reason" />
+        </fieldset>
+
+        <fieldset>
+          <label for="ecDescription">Description</label>
+          <textarea id="ecDescription" rows="3" placeholder="Enter description" required></textarea>
+        </fieldset>
+
+        <button type="submit" id="ecSubmit">Submit</button>
+        <p id="ecMessage"></p>
+      </form>
+    </section>
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const ecType     = document.getElementById('ecType');
+      const ecFacility = document.getElementById('ecFacility');
+      const ecStart    = document.getElementById('ecStart');
+      const ecEnd      = document.getElementById('ecEnd');
+      const ecAllDay   = document.getElementById('ecAllDay');
+      const ecTitle    = document.getElementById('ecTitle');
+      const ecReason   = document.getElementById('ecReason');
+      const ecDesc     = document.getElementById('ecDescription');
+      const titleGroup = document.getElementById('titleGroup');
+      const reasonGroup= document.getElementById('reasonGroup');
+      const descGroup  = document.getElementById('descGroup');
+      const ecForm     = document.getElementById('ecForm');
+      const ecMessage  = document.getElementById('ecMessage');
+      const ecSubmit   = document.getElementById('ecSubmit');
+
+      // Populate facilities
+      fetch('https://backend-k52m.onrender.com/facilities')
+        .then(res => res.json())
+        .then(facs => {
+          ecFacility.innerHTML = '<option value="">Select a facility</option>';
+          facs.forEach(f => {
+            const opt = document.createElement('option');
+            opt.value = f.id;
+            opt.textContent = f.facility_name;
+            ecFacility.appendChild(opt);
+          });
+        })
+        .catch(err => {
+          ecFacility.innerHTML = '<option value="">Error loading facilities</option>';
+          console.error(err);
+        });
+
+      // Toggle fields by type
+      ecType.addEventListener('change', () => {
+        const isEvent = ecType.value === 'event';
+        titleGroup.style.display  = isEvent ? '' : 'none';
+        reasonGroup.style.display = isEvent ? 'none' : '';
+        ecTitle.required       = isEvent;
+        ecReason.required      = !isEvent;
+      });
+
+      // All-day toggle
+      ecAllDay.addEventListener('change', () => {
+        const disabled = ecAllDay.checked;
+        ecStart.disabled = disabled;
+        ecEnd.disabled   = disabled;
+        if (disabled) {
+          ecStart.removeAttribute('required');
+          ecEnd.removeAttribute('required');
+        } else {
+          ecStart.setAttribute('required', '');
+          ecEnd.setAttribute('required', '');
+        }
+      });
+
+      ecForm.addEventListener('submit', async e => {
+        e.preventDefault();
+        ecSubmit.disabled = true;
+        ecMessage.textContent = 'Submitting…';
+
+        const payload = {
+          facility_id: ecFacility.value,
+          all_day:     ecAllDay.checked,
+          description: ecDesc.value.trim()
+        };
+
+        if (!ecAllDay.checked) {
+          payload.start_time = new Date(ecStart.value).toISOString();
+          payload.end_time   = new Date(ecEnd.value).toISOString();
+        }
+
+        let url = 'https://backend-k52m.onrender.com/events';
+        if (ecType.value === 'event') {
+          payload.title = ecTitle.value.trim();
+        } else {
+          url = 'https://backend-k52m.onrender.com/closures';
+          payload.reason = ecReason.value.trim();
+        }
+
+        try {
+          const res = await fetch(url, {
+            method: 'POST',
+            headers: {'Content-Type':'application/json'},
+            body: JSON.stringify(payload)
+          });
+          const body = await res.json();
+          if (body.success) {
+            ecMessage.textContent = `${ecType.value.charAt(0).toUpperCase()+ecType.value.slice(1)} scheduled successfully.`;
+            ecForm.reset();
+            ecType.dispatchEvent(new Event('change'));
+          } else {
+            throw new Error(body.error || 'Unknown error');
+          }
+        } catch (err) {
+          console.error(err);
+          ecMessage.textContent = `Error: ${err.message}`;
+        } finally {
+          ecSubmit.disabled = false;
+        }
+      });
+
+      // Initialize
+      ecType.dispatchEvent(new Event('change'));
+    });
+  </script>
+</body>
+</html>
