@@ -121,6 +121,25 @@ button:disabled,
     color: #7f8c8d;
 }
 
+.notification-button {
+    display: inline-block;
+    padding: 0.5em 1em;
+    background-color: white;
+    color: #2e8b57;
+    text-decoration: none;
+    border-radius: 999px; 
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  
+  .notification-button:hover {
+    
+    background-color: #2e8b57; 
+    color: white;
+  }
+
+
 .error-message {
     color: #e74c3c;
     margin-top: 1rem;
