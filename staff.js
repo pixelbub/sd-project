@@ -1,7 +1,4 @@
 
-// staff.js
-
-// Wait until the DOM is fully loaded
 document.addEventListener('DOMContentLoaded', () => {
   const loadButton = document.getElementById('load-users');
   const tableBody  = document.querySelector('#users-table tbody');
@@ -39,4 +36,58 @@ document.addEventListener('DOMContentLoaded', () => {
       loadButton.textContent = 'Load Users';
     }
   });
+    // 🔔 Notification system
+ // Notification toggle logic
+const notifBtn = document.getElementById('notifBtn');
+const notifPopup = document.getElementById('notifPopup');
+const notifList = document.getElementById('notifList');
+const notifCount = document.getElementById('notifCount');
+const notifFooter = notifPopup.querySelector('footer');
+const userUid = localStorage.getItem('user_uid');
+
+notifBtn.addEventListener('click', () => {
+  if (notifPopup.style.display === 'none' || notifPopup.style.display === '') {
+    notifPopup.style.display = 'block';
+  } else {
+    notifPopup.style.display = 'none';
+  }
 });
+
+// Fetch unread notifications
+async function fetchUnreadNotifications() {
+  try {
+    const res = await fetch(`http://localhost:3000/notifications/unread/${userUid}`);
+    const notifications = await res.json();
+
+    notifCount.textContent = notifications.length;
+    notifCount.style.display = notifications.length ? 'inline-block' : 'none';
+
+    notifList.innerHTML = notifications.length === 0
+      ? '<li>No new notifications</li>'
+      : '';
+
+    notifications.forEach(n => {
+      const li = document.createElement('li');
+      li.textContent = n.message;
+
+      const markBtn = document.createElement('button');
+      markBtn.textContent = 'Mark as read';
+      markBtn.style.marginLeft = '10px';
+      markBtn.addEventListener('click', async () => {
+        await fetch(`http://localhost:3000/notifications/mark-read/${userUid}/${n.id}`, {
+          method: 'PATCH'
+        });
+        await fetchUnreadNotifications();
+      });
+
+      li.appendChild(markBtn);
+      notifList.appendChild(li);
+    });
+  } catch (err) {
+    console.error('Error loading notifications:', err);
+  }
+}
+
+// Initial load
+fetchUnreadNotifications();
+});  
