@@ -56,7 +56,7 @@ notifBtn.addEventListener('click', () => {
 // Fetch unread notifications
 async function fetchUnreadNotifications() {
   try {
-    const res = await fetch(`http://localhost:3000/notifications/unread/${userUid}`);
+    const res = await fetch(`https://backend-k52m.onrender.com/notifications/unread/${userUid}`);
     const notifications = await res.json();
 
     notifCount.textContent = notifications.length;
@@ -74,7 +74,7 @@ async function fetchUnreadNotifications() {
       markBtn.textContent = 'Mark as read';
       markBtn.style.marginLeft = '10px';
       markBtn.addEventListener('click', async () => {
-        await fetch(`http://localhost:3000/notifications/mark-read/${userUid}/${n.id}`, {
+        await fetch(`https://backend-k52m.onrender.com/notifications/mark-read/${userUid}/${n.id}`, {
           method: 'PATCH'
         });
         await fetchUnreadNotifications();
