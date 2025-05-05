@@ -74,7 +74,7 @@ async function fetchUnreadNotifications() {
       markBtn.textContent = 'Mark as read';
       markBtn.style.marginLeft = '10px';
       markBtn.addEventListener('click', async () => {
-        await fetch(`https://backend-k52m.onrender.com/notifications/mark-read/${userUid}/${n.id}`, {
+        await fetch(`https://backend-k52m.onrender.com/mark-read/${userUid}/${n.id}`, {
           method: 'PATCH'
         });
         await fetchUnreadNotifications();
