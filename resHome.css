@@ -53,17 +53,16 @@ body {
   
   /* Profile Button Styles */
   aside a {
-    display: inline-block;
-    padding: 10px 16px;
-    border-radius: 50%; /* pill shape for text; use 50% for icon-only */
-    text-decoration: none;
-    font-weight: bold;
-    color: #2e8b57;
-    background-color: white;
-    border: 2px solid #2e8b57;
-    transition: all 0.3s ease;
-    white-space: nowrap;
-    margin: 4px 2px;
+  display: inline-block;
+  padding: 0.5em 1em;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: bold;
+  color: #2e8b57;
+  background-color: white;
+  border: solid #2e8b57;
+  transition: background-color 0.3s ease;
+  white-space:nowrap;
   }
   
   aside a:hover {
