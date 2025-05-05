@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const row = document.createElement('tr');
 
         // first_name, last_name, role
-        ['first_name', 'last_name', 'role'].forEach(key => {
+        ['first_name', 'last_name','uid','role'].forEach(key => {
           const cell = document.createElement('td');
           cell.textContent = user[key] ?? '';
           row.appendChild(cell);
