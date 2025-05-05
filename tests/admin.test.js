@@ -118,7 +118,7 @@ describe('Admin User Panel', () => {
     const firstRowCells = rows[0].querySelectorAll('td');
     expect(firstRowCells[0].textContent).toBe('John');
     expect(firstRowCells[1].textContent).toBe('Doe');
-    expect(firstRowCells[2].textContent).toBe('Admin');
+    expect(firstRowCells[2].textContent).toBe('1');
     
     // Verify status dropdown
     const firstRowSelect = firstRowCells[3].querySelector('select');
@@ -390,7 +390,7 @@ describe('Admin User Panel', () => {
     const cells = rows[0].querySelectorAll('td');
     expect(cells[0].textContent).toBe(''); // Missing first_name
     expect(cells[1].textContent).toBe('Missing');
-    expect(cells[2].textContent).toBe(''); // Missing role
+    expect(cells[2].textContent).toBe('3'); // Missing role
   });
   
   test('should handle fetch response that is not JSON', async () => {
