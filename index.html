@@ -1,48 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Meta tag for character encoding -->
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Added for mobile responsiveness -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MatchDay</title>
-
-  <!-- Link to external stylesheet -->
-  <link rel="stylesheet" href="ghome.css">
   <script type="module" src="login.js"></script>
   <style>
-    /* If you plan to add inline styles later, you can write them here. */
+
+    @font-face {
+    font-family: 'MyFont';
+    src: url('fonts/Avega-Italic.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'MyFont', sans-serif;
+    }
+
+    body::before {
+        content: "";
+      position: fixed;
+      top: -10px;
+      left: -20px;
+      right: -60px;
+      bottom: -10px;
+      background-image: url('images/welcome_bg.jpg');
+      background-size: cover;
+      background-position: center;
+      filter: blur(5px);
+      z-index: -1;
+    }
+
+    main {
+      position: relative;
+      z-index: 1;
+      color: #effe6d;
+      text-align: center;
+      margin-top: 10rem;
+    }
+
+    header{
+        margin: 0%;
+    }
+
+    h1{
+        margin: 0%;
+    }
+
+    p {
+    margin: 0.1rem 0 0; 
+    }
+
+    aside {
+    display: flex;
+    gap: 1.5%;
+    margin: 0.2%
+  }
+  
+  aside a {
+    display: flex;
+    justify-content: center;
+    padding: 0.5em 1em;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: bold;
+    color: #025036;
+    background-color: white;
+    border: solid #025036;
+    transition: background-color 0.3s ease;
+    white-space:nowrap;
+  }
+  
+  aside a:hover {
+    background-color: #025036;
+    color: white;
+  }
+
+  .auth-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.auth-buttons a {
+  display: inline-block;
+  padding: 0.9em 2em;
+  font-size: 1.2rem;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: bold;
+  color: #025036;
+  background-color: white;
+  border: 2px solid #025036;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  white-space: nowrap;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.auth-buttons a:hover {
+  background-color: #025036;
+  color: white;
+  transform: scale(1.05);
+}
+
   </style>
+
 </head>
 
 <body>
+  <figure aria-hidden="true"></figure>
+  <main>
+    <header>
+      <h1 style="font-size: 10rem; font-family: MyFont; color: #effe6d;">MatchDay</h1>
+    </header>
+    <p style="font-size: 2.3rem; font-family: MyFont; color: #6e7aff;">plan your play</p>
 
-  <!-- Header Section for the Website -->
-  <header>
-    <!-- Main heading for the page -->
-    <h1>MatchDay</h1>
     
-    <!-- Aside section with links for login and signup -->
-    <aside>
-      <a href="#" onclick="signInWithGoogleLogin()">Log in</a>
-
-      <a href="testsignup.html">Sign Up</a>
+    <section class="auth-buttons" style="margin: 5rem;">
+        <a href="#" onclick="signInWithGoogleLogin()"> Log in </a>
+        <a href="testsignup.html">Sign Up</a>
+      </section>
+        
       
-    </aside>
-  </header>
 
-  <!-- Navigation bar to provide quick links to sections -->
-  <nav>
-    <a href="#About">About</a>
-    <a href="#Bookings">Bookings</a>
-    <a href="#Leaderboard">Leaderboard</a>
-    <a href="#Dashboard">Dashboard</a>
-  </nav>
-
-  <!-- About Section with a brief description -->
-  <section id="About">
-    <h2>About Us</h2>
-    <p>Welcome to our community sports centre!</p>
-  </section>
-
+  </main>
 </body>
 </html>
