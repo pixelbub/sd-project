@@ -1,0 +1,131 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-image: url('grid_blue_bg.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+    color: white;
+  }
+  
+  /* Heading */
+  h1 {
+    margin-bottom: 3rem;
+    font-size: 2rem;
+  }
+
+  main{
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 20px;
+    background: black;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    h2{
+        margin-bottom: 3rem;
+        font-size: 1.5rem;
+        text-align: center;
+    }
+
+  form {
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  fieldset{
+    border: none;
+    padding: 0%;
+    margin-bottom:2rem;
+  }
+
+  .name-fields {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .name-fields input{
+    flex: 1;
+  }
+
+  input {
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    width: 100%;
+  }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+  
+  /* Dropdown label and select */
+  label {
+    font-size: 1rem;
+    margin-bottom: 8px;
+    display: block;
+  }
+  
+  select {
+    padding: 10px 12px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    min-width: 220px;
+    margin-bottom: 20px;
+    background-color: white;
+    appearance: none;
+    cursor: pointer;
+  }
+  
+  /* Button styling */
+  button {
+    background-color: #4285f4;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  button:hover {
+    background-color: #357ae8;
+  }
+  
+  /* Message styling */
+  #message {
+    margin-top: 20px;
+    color: #d8000c;
+    font-weight: bold;
+  }
