@@ -26,6 +26,9 @@ const port = process.env.PORT || 3000;
 // Middleware to parse JSON bodies
 app.use(express.json());
 
+// 👉 Serve static files from the project root (one level up from /backend)
+app.use(express.static(path.join(__dirname, '..')));
+
 // Optional: Set COOP header to avoid some popup warnings.
 // NOTE: Adjust this only if it fits your security model.
 app.use((req, res, next) => {
