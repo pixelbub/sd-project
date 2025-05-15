@@ -1,0 +1,93 @@
+
+  
+  header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* … */
+}
+
+/* make the logo container “fill” available space */
+header h1 {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+/* keep your image centered in that h1 */
+header .logo {
+  max-height: 200px; /* or whatever height you want */
+}
+  
+  section[aria-label="navigation-area"] {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin-top: 2%;
+  }
+  
+  nav {
+    display: flex;
+    gap: 0.5%;
+    flex-wrap: wrap;
+  }
+  
+  nav a {
+    padding: 1% 4%;
+    border-radius: 20px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    margin: 0.2%;
+  }
+  
+  nav a:nth-of-type(1) { background-color: #6e7aff; }
+  nav a:nth-of-type(2) { background-color: #6e7aff; }
+  nav a:nth-of-type(3) { background-color: #6e7aff; }
+  nav a:nth-of-type(4) { background-color: #6e7aff; }
+  nav a:nth-of-type(5) { background-color: #6e7aff; }
+
+  nav a:hover {
+    background-color: white;
+    color: #6e7aff;
+  }
+  
+  aside {
+    display: flex;
+    gap: 1.5%;
+    margin: 0.2%;
+  }
+  
+  /* Profile Button Styles */
+  aside a {
+  display: inline-block;
+  padding: 0.5em 1em;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: bold;
+  color: #2e8b57;
+  background-color: white;
+  border: solid #2e8b57;
+  transition: background-color 0.3s ease;
+  white-space:nowrap;
+  }
+  
+  aside a:hover {
+    background-color: #2e8b57;
+    color: white;
+ }
+
+h1 {
+     color: #effe6d;
+}
+
+#notifContainer > p:only-child {
+  color: #f85e00;
+}
+
+
+
+
+
