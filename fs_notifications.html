@@ -44,7 +44,7 @@
       }
 
       try {
-        const res = await fetch(`https://backend-k52m.onrender.com/notifications/${uid}`);
+        const res = await fetch(`/notifications/${uid}`);
         if (!res.ok) throw new Error('Server error: ' + res.statusText);
 
         const notifications = await res.json();

@@ -1,6 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
   const loadUsersBtn = document.getElementById('load-users');
   const tableBody = document.querySelector('#users-table tbody');
+
+  fetch('/api/hello')
+  .then(res => res.json())
+  .then(data => {
+    console.log(data.message); // Should print: Hello from backend!
+  });
   
 
   if (!loadUsersBtn || !tableBody ) return;
@@ -9,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loadUsersBtn.disabled = true;
     loadUsersBtn.textContent = 'Loading…';
     try {
-      const response = await fetch('https://backend-k52m.onrender.com/users');
+      const response = await fetch('/users');
       if (!response.ok) throw new Error(`Server error: ${response.status}`);
       const users = await response.json();
 
@@ -48,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
         updateBtn.addEventListener('click', async () => {
           try {
             const res = await fetch(
-              `https://backend-k52m.onrender.com/users/${user.uid}/status`,
+              `/users/${user.uid}/status`,
               {
                 method: 'PATCH',
                 headers: { 'Content-Type': 'application/json' },
@@ -71,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
         deleteBtn.addEventListener('click', async () => {
           try {
             const res = await fetch(
-              `https://backend-k52m.onrender.com/users/${user.uid}`,
+              `/users/${user.uid}`,
               { method: 'DELETE' }
             );
             if (!res.ok) throw new Error(`Failed to delete user: ${res.status}`);

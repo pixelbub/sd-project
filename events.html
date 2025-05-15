@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MatchDay - Upcoming Events</title>
+  <link rel="stylesheet" href="resHome.css" />
+  <link rel="stylesheet" href="dashboard.css" />
+  <style>
+    main {
+      padding: 20px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    #events-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .event-card {
+      background-color: #fff;
+      padding: 16px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+      position: relative;
+    }
+
+    .event-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .event-title {
+      font-size: 18px;
+      font-weight: bold;
+      color: #1e88e5;
+      margin-bottom: 6px;
+    }
+
+    .event-detail {
+      margin: 4px 0;
+      font-size: 14px;
+      color: #555;
+    }
+
+    .days-left {
+      color: red;
+      font-weight: bold;
+      margin-top: 8px;
+    }
+
+    .rsvp-btn {
+      margin-top: 10px;
+      background: #4CAF50;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .rsvp-btn:hover {
+      background: #45a049;
+    }
+
+    #loading, #no-events {
+      text-align: center;
+      margin-top: 40px;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>MatchDay</h1>
+  </header>
+
+  <nav>
+    <a href="dashboard.html">Bookings</a>
+    <a href="report.html">Report</a>
+    <a href="events.html" class="active">Events</a>
+  </nav>
+
+  <main>
+    <h2>Upcoming Events</h2>
+    <p id="loading">Loading events...</p>
+    <section id="events-container" style="display: none;"></section>
+    <p id="no-events" style="display: none;">No upcoming public events</p>
+  </main>
+  <script type="module" src="events.js"></script>
+</body>
+</html>

@@ -8,7 +8,7 @@ const initBookingManager = () => {
       loadBookingsBtn.disabled = true;
       loadBookingsBtn.textContent = 'Loading…';
       try {
-        const response = await fetch('https://backend-k52m.onrender.com/bookings?status=pending');
+        const response = await fetch('/bookings?status=pending');
         if (!response.ok) throw new Error(`Server error: ${response.status}`);
         const bookings = await response.json();
         bookingsTableBody.innerHTML = '';
@@ -59,7 +59,7 @@ async function updateBookingStatus(bookingId, status, rowElement) {
     }
     try {
       const res = await fetch(
-        `https://backend-k52m.onrender.com/bookings/${bookingId}/status`,
+        `/bookings/${bookingId}/status`,
         {
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },

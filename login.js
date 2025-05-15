@@ -25,7 +25,7 @@ function signInWithGoogleLogin() {
       const uid = user.uid;
       
       // Call your backend endpoint to check for the user's record.
-      fetch(`https://backend-k52m.onrender.com/users/${uid}`, {
+      fetch(`/users/${uid}`, {
         method: 'GET',
         mode: 'cors'
       })
@@ -45,7 +45,7 @@ function signInWithGoogleLogin() {
                 return; 
             } else if (data.status == "active"){
               //alert("Welcome admin, you can manage the users now.");
-              window.location.href = `a_sHome.html?first_name=${encodeURIComponent(data.first_name)}`;
+              window.location.href = `a_dashboard.html?first_name=${encodeURIComponent(data.first_name)}`;
               return;
             }else if(data.status == "blocked"){
               alert("Your account has been blocked. Please contact support.");

@@ -1,6 +1,6 @@
 // Export the functions for testing
 export function loadFacilities(facilitySelect) {
-  return fetch('https://backend-k52m.onrender.com/facilities')
+  return fetch('/facilities')
     .then(res => res.json())
     .then(facilities => {
       facilities.forEach(f => {
@@ -28,7 +28,7 @@ export async function handleReportSubmit(e, user_uid, formMsg, reportForm, facil
     status: 'pending'
   };
 
-  const res = await fetch('https://backend-k52m.onrender.com/reports', {
+  const res = await fetch('/reports', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(reportData)
@@ -68,7 +68,7 @@ export async function fetchNotifications(user_uid) {
 }
 
 export async function loadUserReports(user_uid, reportsTableBody) {
-  const res = await fetch(`https://backend-k52m.onrender.com/reports?user_uid=${user_uid}`);
+  const res = await fetch(`/reports?user_uid=${user_uid}`);
   const reports = await res.json();
 
   reportsTableBody.innerHTML = ''; // Clear current table

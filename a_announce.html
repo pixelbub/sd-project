@@ -95,7 +95,7 @@
   </header>
 
   <nav>
-
+   <a href="a_dashboard.html">Dashboard</a>
     <a href="a_sHome.html">User Management</a>
     <a href="a_booking_man.html">Booking Management</a>
     <a href="a_report.html">Reports</a>
@@ -176,7 +176,7 @@
       const ecSubmit   = document.getElementById('ecSubmit');
 
       // Populate facilities
-      fetch('https://backend-k52m.onrender.com/facilities')
+      fetch('/facilities')
         .then(res => res.json())
         .then(facs => {
           ecFacility.innerHTML = '<option value="">Select a facility</option>';
@@ -231,11 +231,11 @@
           payload.end_time   = new Date(ecEnd.value).toISOString();
         }
 
-        let url = 'https://backend-k52m.onrender.com/events';
+        let url = '/events';
         if (ecType.value === 'event') {
           payload.title = ecTitle.value.trim();
         } else {
-          url = 'https://backend-k52m.onrender.com/closures';
+          url = '/closures';
           payload.reason = ecReason.value.trim();
         }
 

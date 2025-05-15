@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MatchDay - Admin Dashboard</title>
+  <link rel="stylesheet" href="view_users_style.css" />
+  <link rel="stylesheet" href="resHome.css" />
+  <style>
+    main {
+      padding: 20px;
+    }
+
+    section {
+      margin-bottom: 40px;
+    }
+
+    section > h1 {
+      margin-bottom: 10px;
+    }
+
+    summary {
+      cursor: pointer;
+      outline: none;
+      padding: 0.5rem 0;
+    }
+
+    details > summary h2 {
+      display: inline;
+      font-size: 1.3rem;
+      margin: 0;
+    }
+
+    details {
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      padding: 1rem;
+      background: #f9f9f9;
+    }
+
+    form.controls {
+      margin-bottom: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      align-items: center;
+    }
+
+    figure {
+      width: 80%;
+      max-width: 800px;
+      margin: 2rem auto;
+    }
+
+    canvas {
+      width: 100% !important;
+      height: auto !important;
+      max-height: 300px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: .5rem;
+      text-align: left;
+    }
+
+    header[role="filter"] {
+      margin: 20px 0;
+      background: #025002;
+      padding: 1rem;
+      border-radius: 6px;
+    }
+
+    button {
+      padding: 8px 12px;
+      margin: 5px;
+      cursor: pointer;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+    }
+
+    button:hover {
+      opacity: 0.85;
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+</head>
+<body>
+  <header>
+    <h1>MatchDay</h1>
+  </header>
+
+  <nav>
+    <a href="a_dashboard.html">Dashboard</a>
+    <a href="a_sHome.html">View Users</a>    
+    <a href="a_booking_man.html">Booking Management</a>
+    <a href="a_report.html">Reports</a>
+    <a href="a_announce.html">Announcements</a>
+  </nav>
+
+  <main>
+    <header role="filter">
+      <label for="globalMonth">Select Month:
+        <input type="month" id="globalMonth" />
+      </label>
+      <button id="refreshAllBtn">Refresh All</button>
+    </header>
+
+    <section id="facilitySection">
+      <h1>Facility Closure vs. Open Hours</h1>
+      <details >
+        <summary><h2>Facility Stats</h2></summary>
+        <form class="controls" id="facilityControls">
+          <label for="facilitySelect">Facility:
+            <select id="facilitySelect" required>
+              <option value="" disabled selected>Loading…</option>
+            </select>
+          </label>
+          <button type="button" id="refreshFacilityBtn">Refresh</button>
+          <button type="button" id="exportFacilityCsvBtn">Export CSV</button>
+          <button type="button" id="exportFacilityChartBtn">Export Chart PNG</button>
+          <button type="button" id="exportFacilityPdfBtn">Export PDF</button>
+        </form>
+        <figure> 
+          <canvas id="facilityPieChart"></canvas>
+          <figcaption>Closed vs. Open Hours</figcaption>
+        </figure>
+        <h3>Summary</h3>
+        <table id="facilityStatsTable">
+          <thead>
+            <tr><th>Facility ID</th><th>Month</th><th>Closed Hours</th><th>Open Hours</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+        <h3>Closure Details</h3>
+        <table id="facilityDetailsTable">
+          <thead>
+            <tr><th>Start Time</th><th>End Time</th><th>Reason</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </details>
+    </section>
+
+    <section id="eventSection">
+      <h1>Event Attendance Stats</h1>
+      <details>
+        <summary><h2>Event Data</h2></summary>
+        <form class="controls" id="eventControls">
+          <button type="button" id="refreshEventBtn">Refresh Data</button>
+          <button type="button" id="exportEventCsvBtn">Export CSV</button>
+          <button type="button" id="exportEventChartBtn">Export Chart PNG</button>
+          <button type="button" id="exportEventPdfBtn">Export PDF</button>
+        </form>
+        <figure>
+          <canvas id="eventBarChart"></canvas>
+          <figcaption>Expected Attendance per Event</figcaption>
+        </figure>
+        <table id="eventTable">
+          <thead>
+            <tr><th>Event Title</th><th>Date</th><th>Expected Attendance</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </details>
+    </section>
+
+    <section id="bookingSection">
+      <h1>Facility Booking Frequency</h1>
+      <details>
+        <summary><h2>Booking Stats</h2></summary>
+        <form class="controls" id="bookingControls">
+          <button type="button" id="refreshBookingBtn">Refresh Data</button>
+          <button type="button" id="exportBookingCsvBtn">Export CSV</button>
+          <button type="button" id="exportBookingChartBtn">Export Chart PNG</button>
+          <button type="button" id="exportBookingPdfBtn">Export PDF</button>
+        </form>
+        <figure>
+          <canvas id="bookingBarChart"></canvas>
+          <figcaption>Bookings per Facility</figcaption>
+        </figure>
+        <table id="freqTable">
+          <thead>
+            <tr><th>Facility ID</th><th>Times Booked</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </details>
+    </section>
+  </main>
+  <script src="a_dashboard.js" defer></script>
+</body>
+</html>

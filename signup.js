@@ -51,7 +51,7 @@ function signInWithGoogle() {
 
       // Send UID and role to the backend.
       console.log("Selected role:", role);
-      fetch('https://backend-k52m.onrender.com/users', {
+      fetch('/users', {
         method: 'POST',
         mode: 'cors', // Explicitly set CORS mode.
         headers: {
