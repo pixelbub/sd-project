@@ -1,8 +1,10 @@
+
 {
   "name": "firebase",
   "version": "1.0.0",
   "main": "firebase.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -13,9 +15,6 @@
     "express": "^5.1.0",
     "firebase-admin": "^13.2.0"
   },
-<<<<<<< HEAD
   "devDependencies": {},
-=======
->>>>>>> 4422eed (Add RSVP functionality to events page ,adding the report views to dashboard and backend)
   "description": ""
 }
