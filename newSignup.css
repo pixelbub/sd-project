@@ -1,12 +1,19 @@
 * {
     box-sizing: border-box;
   }
+
+  @font-face {
+    font-family: 'MyFont';
+    src: url('fonts/Avega-Italic.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+    }
   
   body {
     margin: 0;
     padding: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-image: url('grid_blue_bg.jpg');
+    font-family: 'MyFont';
+    background-color: #6e7aff;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
