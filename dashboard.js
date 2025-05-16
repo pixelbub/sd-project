@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
   datePick.valueAsDate = new Date();
   datePick.min = new Date().toISOString().split('T')[0];
 
-  fetch('/facilities')
+  fetch('https://backend-k52m.onrender.com/facilities')
     .then(res => res.json())
     .then(facilities => {
       facilities.forEach(f => {
@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
     selectedSlot = null;
 
     try {
-      const res = await fetch(`/availability?facilityId=${facilityId}&date=${date}`);
+      const res = await fetch(`https://backend-k52m.onrender.com/availability?facilityId=${facilityId}&date=${date}`);
       if (!res.ok) throw new Error('Failed to load availability');
       const slots = await res.json();
 
@@ -145,7 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
         end_time: selectedSlot.dataset.end
       };
 
-      const res = await fetch('/bookings', {
+      const res = await fetch('https://backend-k52m.onrender.com/bookings', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
@@ -188,7 +188,7 @@ notifBtn.addEventListener('click', () => {
 // Fetch unread notifications
 async function fetchUnreadNotifications() {
   try {
-    const res = await fetch(`/notifications/unread/${userUid}`);
+    const res = await fetch(`https://backend-k52m.onrender.com/notifications/unread/${userUid}`);
     const notifications = await res.json();
 
     notifCount.textContent = notifications.length;
@@ -206,7 +206,7 @@ async function fetchUnreadNotifications() {
       markBtn.textContent = 'Mark as read';
       markBtn.style.marginLeft = '10px';
       markBtn.addEventListener('click', async () => {
-        await fetch(`/notifications/mark-read/${userUid}/${n.id}`, {
+        await fetch(`https://backend-k52m.onrender.com/notifications/mark-read/${userUid}/${n.id}`, {
           method: 'PATCH'
         });
         await fetchUnreadNotifications();
