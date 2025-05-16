@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loadButton.textContent = 'Loading…';
   
     try {
-      const res = await fetch('/users');
+      const res = await fetch('https://backend-k52m.onrender.com/users');
       if (!res.ok) throw new Error(`Server error: ${res.status}`);
       const users = await res.json();
   
