@@ -18,7 +18,7 @@ export async function loadAllReports(loadReportsBtn, reportsTableBody) {
   loadReportsBtn.disabled = true;
   loadReportsBtn.textContent = 'Loading…';
   try {
-    const res = await fetch('/admin/reports');
+    const res = await fetch('https://backend-k52m.onrender.com/admin/reports');
     console.log('Fetch /admin/reports →', res.status);
     if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
     const reports = await res.json();
@@ -84,7 +84,7 @@ export function addEventListeners() {
 // Helper: PATCH update a report
 export async function updateReport(reportId, update) {
   try {
-    const res = await fetch(`/reports/${reportId}`, {
+    const res = await fetch(`https://backend-k52m.onrender.com/reports/${reportId}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(update)
