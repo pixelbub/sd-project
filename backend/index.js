@@ -3,16 +3,17 @@ const express = require('express');
 const admin = require('firebase-admin');
 const cors = require('cors');
 const path = require('path');
-const serviceAccount = require('./privatekey.json');
+//const serviceAccount = require('./privatekey.json');
 
 // Initialize Firebase Admin using your service account JSON.
 // Make sure the file path is correct and that the file is deployed along with your app.
 admin.initializeApp({
   credential: admin.credential.cert({
-"project_id": "sd-project-c2b6c",
-  "private_key_id": "b977d687198d2366b229a5ece0c8e423b520a713",
-  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCc2guWpfWTNcqM\n8UmeRQAIX8ImMpohWZ//k8xov3VWqPZbMxmEGiW7Gkz0TgfAAdJbgWVewA0ZxmHT\nb5sMOa6uv5wSINvEMNLMqBFZjMQQY76ZsM2BIYMx56ZD5oxH0ycnL+THIHv5ePCX\nQaKJQeWWbXrglzVl4DtnKPnhu+NDd6QU3Mpo9SIoWFsmds/j4usdYwZ7+qX2ya3t\nzShmSUfItuilG3Rs9Crm1UQZDqRCp6xrO8qeXvV1XxeADJLZRoku330xSzV2gjQO\nwD8QclU6yPzq5FRXXSaNBn/khIl9ZoTA9f6biwg22ybNbKn2NxIdoYy6FdlJ2C0I\nCeH3uB/fAgMBAAECggEAMdudk2Vtij2vBN4t6IFGYWMO89Vh6Pf0Q+lXMHSrd8B9\njr/PfI5TMAZML9wd2oq5sxyOfG/PukG1FuCDCH/NZv7BPYH0WYireSJzYWO9bvhF\nvdTVfhaI/XQFBdBjBvG3oF04+5L31XT8BRh38elgcVCbnohyENAWEdSUmYx/0RHX\nE2d7fiRwLG0HRSDvqxoUl9pdx3KSC0kOUbKJcrRvy5/TFdeVrEvujlrJ3+II9i87\nR+VH9qqEIjKD2fRqmBh7HwgOSmWeQgsmS+rAytMWuyNSPlTlstYxX1HhC4zsCEj9\nhMp60A10o8G3y6gDBN19JBh4O9uZrmHMOmCGvEzXAQKBgQDVKAN8jlU6+QLlWafv\nTHfqJv+o/5sq07ihNzxXVRp9ZLyRBqSN5k15yNVI+kNMmoaIxAl1Qa/QuBu7od/z\nqU/RfGOVJwk2Nbpq0uRjXlN80GYeBqwsIMQ2HDV06V/4fREiX0F5r3CvLJur3pAr\nDeBwpMvHDT84nfgR38Nawt6u1QKBgQC8YN9ptHsn3MmeFKufjwpFKoFhALG/lliy\nubN7RrCHie4q6p9DSH/TAZJctacON1172SGfV1hNFkAjeywsNQnADz/4VFXyLpNh\n69JDo7gwuFIwqlM9vxpDix+vx9mPj5u0AafwvM/3sqx2cWt0hmpEpcrOeEsn0tyi\nFgeYjE014wKBgBD9p4l+Lv0MbFar1t8UUVqw0SA/f7biOY1gQccUWZA1P3Kv/N3y\nxao3gAjZKhQpHSA5wCdAnSseAdfrB1b84AfqymVRP0K69akeNmZVVoJUek9aaM77\nrahCh2BSWfwMvBjpTubMPUc5Xw9MJmHIMWPJPxUW0TtKHEQQehn5/pYhAoGBAJvE\nvvj5dJ0RxOYi0YevEB8BdtpvaIu0FsQzKmbVnUN2mqqCOA+683fX5N8klm76+SJf\n+Z147FtR+tdcErq7YMSf15XQpwEL4nMmPUgRKU2gHNaBATQdwen4MMt5xj0f0vCW\nLfizKIT6CgIm52QDgfwh3AG/FuZnRmoBLWbHHVFhAoGABQ1BKmISOn887Dzwcfi4\nJEkh9yDndm7/CJYiZgy3B1Gg7cpnvLUN2MLeeQs/uAVlrzzwXSlAcI2FNOBewQYk\nC3fhIQVUA8yf8qeoCvFG7B2Pi4ysBFXfcy7ckAhn42cLsdcjnDNGuefUgmO7TNk5\nqWxNMDZRBCk8wJfj92j8jrQ=\n-----END PRIVATE KEY-----\n",
-   })
+    "project_id": "sd-project-c2b6c",
+    "private_key_id": "2ac8f6b6fb05849e9699f8be8d2276ec206213cb",
+    "client_email": "firebase-adminsdk-fbsvc@sd-project-c2b6c.iam.gserviceaccount.com",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDArk29vc/dZMDN\nLqGkxfqdz3z22ZI1bIMYtbuAlaY0eWZykYmSc5oBK0Dy2se/5nnUGqECTJXFzN3F\nrmxqo1kpwVG1rRbE6Kx9o7V0TgBOl0u0EJ0vwTF7wubEvH3SVFLfUd2LPg0O1k2e\nrkPyMHmZQVh9mF3J8CAXD40WtXf2gNiKcfV4ah15guUUxzdDiBwu4c4SL9CufkV0\nTGioMwWPXNE7KhKq9xoJWhjsotiRWcZIXOaZ8h3EUWRWg8Xp3LTGapsIecayHDOp\nc8R+/d3HiroflBp9DILrugl+sJNaiQyRko48e6eHzEv8unf1i5fLYZu215Aj7XqH\nEQRQQTyzAgMBAAECggEAQUyxPx0tbaAgMUlc8c1AzqvLc5Mv2Fgyo7SvW3gcEEuW\nWzyUjaQM7Nl+VO+tY41V+3qc130iAxuXi0++IXPDm4GPUg1bmpcqIhhRvh1TQE9J\nEjjRNKZ6QTG/6Kvizl3Siimh9fctELqzKpRvpYwlIbnCJip1mqL9FSOpkqkkg073\naAq/bU53IIdJJMdD05q9aWf3S228tOrLmCHM1rTv4mUJEKluP/7ADzWkJtbqHkqc\noWCqppP5+5bp5KxirkLe4n16EKP2eVULKxiSSKtz2O530GziOezSRWwtebOvbj+B\nJ1wreVsbQH8HMINgMUUelk6LGvxb6qEe3aawBPe0qQKBgQDuhb7bM3m4D7xiq6Eg\n6l0Uo9gGpAKxxY0Mgm0caE5VHqR2QHd9sh6qgAWqEDCcrup7YBD1kUqYWtjCQQRN\nJ0QdCrDDmUn0Y8owYT0SiZnpOl0gW9IZvR/3eqhAOlPRyCAUCz1GlXGLdCpBSnQx\n++rtodpJmmEFpuYGV9+yQdluewKBgQDOzKb7uXx6p+P2W0orIZ+F+4dEVAR3eXws\nypkt5UQuhqquHtIDuh1g2M+0wWfAXmC2iET6veCh1aUJnbFRZCCyXay64Ioq2Ivy\n2xZ1RV4Aef6+ijSxAjulWvIdG/BCdovm1ut0gYVrkiVQ4NJjRFeBKjCZevc+B8A2\nETIHBQsxKQKBgQDOtaH9ndKyrRB6AnuVZwZbyNKCjsi2/5mJac7de5fHNNMamCv2\nBtOEt4YxJ+65Gu2jFlIcP1oCR1jqoCX2Jz1kXctq+AGbho/G9b5TvmRgN3BVhr3C\nCKEXfHkrkGDrwR/rvwHPldvdG0Mzai7g0o16e3YNq3jByS43+ReoCGFC2QKBgQCp\nZDU7aDowdilieHCOV+JFazznmTJ3cslmHyXN1Eg/HAveyFwatW6vD6lDVFDZ3/S0\nT3bBNJs1tLyU3diK5MtrjxOXl6lVYz9vVEpXENTo6wThqm9ytnOJBK/hbCsnJdd+\n5HjFW/qfnHx4fU+YBDjxEk/wyCqRYuPs5bTmzxjV0QKBgQCx4GKU2gRoV//49d8P\nwL3wBGu6NxMYq9/ZBeU/Jc/EMjgXPwudSubhSqah9cr+sQimwbagP0i98ZbiE+tw\nF4K4uRVeHNiz6KbZFjBzn6dFf/OciutLFexoBvBXRQry2OXB7gfVc5CGa7UE1Yuk\nrTnYUvLNi+zRh1qMtbosNBoxIg==\n-----END PRIVATE KEY-----\n",
+  })
 });
 // PATCH endpoint to update user status
 
