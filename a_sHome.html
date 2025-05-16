@@ -46,6 +46,7 @@
     #load-bookings, #load-users {
       background-color: #2196F3;
       padding: 10px 15px;
+      border-radius: 999px;
       font-size: 16px;
     }
     main {
@@ -119,20 +120,27 @@
 </head>
 <body>
   <header>
-    <h1>MatchDay</h1>
-
+    
+     <nav>
+    <a href="a_dashboard.html">Dashboard
+      <img src = "images/dashboardBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"> 
+    </a>
+    <a href="#view-users">User Management
+      <img src = "images/view_usersBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;">
+    </a>
+    <a href="a_booking_man.html">Booking Management
+      <img src = "images/bookings_res_manageASBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"> 
+    </a>
+    <a href="a_report.html">Reports
+      <img src = "images/reportASBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"> 
+    </a>
+    <a href="a_announce.html">Announcements 
+      <img src = "images/reportsRes_AnnounceASBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"> 
+    </a> 
+  </nav>
   </header>
 
-  <nav>
-    <a href="a_dashboard.html">Dashboard</a>
-    <a href="#view-users">User Management</a>
-    <a href="a_booking_man.html">Booking Management</a>
-    <a href="a_report.html">Reports</a>
-    <a href="a_announce.html">Announcements </a>
-
-
-    
-  </nav>
+ 
 
   <main>
     <!-- User Management Section -->
@@ -142,7 +150,9 @@
 
       <article class="table-container" aria-label="Users Table">
         <h3>Users Table
-          <button id="load-users">Load Users</button>
+          <button id="load-users">Load Users
+            <img src = "images/loadBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"> 
+          </button>
         </h3>
         
         <table id="users-table">
