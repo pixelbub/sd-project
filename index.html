@@ -33,9 +33,21 @@
       z-index: -1;
     }
 
+     .overlay-image{
+     position: absolute;
+     z-index:0;
+     top: 0;
+     left: 0;
+     right: 0;
+     bottom: 0;
+     object-fit: cover;
+     width: 100%;
+     height: 100%;
+    }
+
     main {
       position: relative;
-      z-index: 1;
+      z-index: 2;
       color: #effe6d;
       text-align: center;
       margin-top: 10rem;
@@ -113,6 +125,7 @@
 
 <body>
   <figure aria-hidden="true"></figure>
+  <img src ="images/plays_loginsignup.PNG" class="overlay-image" alt="overlay">
   <main>
     <header>
       <h1 style="font-size: 10rem; font-family: MyFont; color: #effe6d;">MatchDay</h1>
