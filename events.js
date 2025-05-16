@@ -22,8 +22,8 @@
 
       try {
         const [eventRes, rsvpRes] = await Promise.all([
-          fetch('/events/upcoming'),
-          fetch(`/users/${user_uid}/rsvps`)
+          fetch('https://backend-k52m.onrender.com/events/upcoming'),
+          fetch(`https://backend-k52m.onrender.com/users/${user_uid}/rsvps`)
         ]);
 
         const events = await eventRes.json();
