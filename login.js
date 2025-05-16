@@ -25,7 +25,7 @@ function signInWithGoogleLogin() {
       const uid = user.uid;
       
       // Call your backend endpoint to check for the user's record.
-      fetch(`https://backend-k52m.onrender.com//users/${uid}`, {
+      fetch(`https://backend-k52m.onrender.com/users/${uid}`, {
         method: 'GET',
         mode: 'cors'
       })
