@@ -44,7 +44,7 @@ async function loadFacilityData() {
     return alert('Please select both facility and month');
   }
 
-  const res = await fetch(`/closures?facilityId=${facilityId}&month=${year}-${String(month).padStart(2, '0')}`);
+  const res = await fetch(`https://backend-k52m.onrender.com/closures?facilityId=${facilityId}&month=${year}-${String(month).padStart(2, '0')}`);
   const closures = await res.json();
 
   // Update details table
@@ -122,7 +122,7 @@ function mergeAndTotal(intervals) {
 
 // Load facility options on page load
 async function loadFacilities() {
-  const res = await fetch('/facilities');
+  const res = await fetch('https://backend-k52m.onrender.com/facilities');
   const list = await res.json();
   const sel = document.getElementById('facilitySelect');
   sel.innerHTML = '<option value="" disabled selected>Select…</option>';
@@ -136,7 +136,7 @@ async function loadFacilities() {
 
 // Event Attendance Chart and Table Loader
 async function loadEventData() {
-  const res = await fetch(`/admin/events/attendance`);
+  const res = await fetch(`https://backend-k52m.onrender.com/admin/events/attendance`);
   const data = await res.json();
 
   const ctx = document.getElementById('eventBarChart').getContext('2d');
@@ -161,7 +161,7 @@ async function loadEventData() {
 // Booking Frequency Chart and Table Loader
 async function loadBookingData() {
   const month = getSelectedMonth();
-  const res = await fetch(`/bookings?status=approved`);
+  const res = await fetch(`https://backend-k52m.onrender.com/bookings?status=approved`);
   const data = await res.json();
 
   const [y, m] = month.split('-').map(n => parseInt(n, 10));
