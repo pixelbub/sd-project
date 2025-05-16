@@ -231,6 +231,7 @@ header {
 
 .logo {
     height: 200px; /* Adjust size as needed */
+    position: center;
 }
 
 #view-users {
