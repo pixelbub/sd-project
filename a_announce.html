@@ -176,7 +176,7 @@
       const ecSubmit   = document.getElementById('ecSubmit');
 
       // Populate facilities
-      fetch('/facilities')
+      fetch('https://backend-k52m.onrender.com/facilities')
         .then(res => res.json())
         .then(facs => {
           ecFacility.innerHTML = '<option value="">Select a facility</option>';
@@ -231,11 +231,11 @@
           payload.end_time   = new Date(ecEnd.value).toISOString();
         }
 
-        let url = '/events';
+        let url = 'https://backend-k52m.onrender.com/events';
         if (ecType.value === 'event') {
           payload.title = ecTitle.value.trim();
         } else {
-          url = '/closures';
+          url = 'https://backend-k52m.onrender.com/closures';
           payload.reason = ecReason.value.trim();
         }
 
