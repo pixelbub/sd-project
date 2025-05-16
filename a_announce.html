@@ -18,10 +18,14 @@
       max-width: 800px;
       margin: 2rem auto;
       padding: 1.5rem;
-      background: #fff;
+      background: black;
+      color: #fff;
       border-radius: var(--border-radius);
       box-shadow: var(--box-shadow);
+      
     }
+
+    
   
     form {
       display: flex;
@@ -91,20 +95,31 @@
 </head>
 <body>
   <header>
-    <h1>MatchDay</h1>
+      <nav>
+   <a href="a_dashboard.html">Dashboard
+     <img src = "images/dashboardBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"> 
+   </a>
+    <a href="a_sHome.html">User Management
+       <img src = "images/view_usersBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"> 
+    </a>
+    <a href="a_booking_man.html">Booking Management
+       <img src = "images/bookings_res_manageASBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"> 
+    </a>
+    <a href="a_report.html">Reports
+       <img src = "images/reportASBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"> 
+    </a>
+    <a href="a_announce.html" class="active">Announcements
+       <img src = "images/reportsRes_AnnounceASBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"> 
+    </a>
+  </nav>
+
   </header>
 
-  <nav>
-   <a href="a_dashboard.html">Dashboard</a>
-    <a href="a_sHome.html">User Management</a>
-    <a href="a_booking_man.html">Booking Management</a>
-    <a href="a_report.html">Reports</a>
-    <a href="a_announce.html" class="active">Announcements</a>
-  </nav>
 
   <main>
     <section aria-labelledby="manage-events-heading">
-      <h2 id="manage-events-heading">Schedule Event or Maintenance Closure</h2>
+      <h2 id="manage-events-heading">Schedule Event or Maintenance Closure
+      </h2>
       <form id="ecForm">
         <fieldset>
           
@@ -152,7 +167,9 @@
           <textarea id="ecDescription" rows="3" placeholder="Enter description" required></textarea>
         </fieldset>
 
-        <button type="submit" id="ecSubmit">Submit</button>
+        <button type="submit" id="ecSubmit">Submit
+          <img src = "images/submit_confirmBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"> 
+        </button>
         <p id="ecMessage"></p>
       </form>
     </section>
