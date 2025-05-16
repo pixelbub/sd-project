@@ -15,7 +15,7 @@
   body {
      margin: 0;
     font-family: 'MyFont';
-    background-color: #7f43e5;
+    background-color:white;
     
   }
 .profile-link{
@@ -74,7 +74,7 @@
   
   thead {
     background-color: black;
-    color: #f85e00;
+    color: #effe6d;
   }
   
   /* Aside Section */
@@ -235,7 +235,7 @@ header {
 
 #view-users {
     
-    color: #effe6d;
+    color:black;
 
 }
 
