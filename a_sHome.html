@@ -1,45 +1,400 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Meta tag for character encoding -->
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Added for mobile responsiveness -->
-  <title>GameOn</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <title>MatchDay - Admin Panel</title>
 
-  <!-- Link to external stylesheet -->
-  <link rel="stylesheet" href="resHome.css">
+  <!-- Admin-specific overrides: inline styles for layout -->
   <style>
-    /* If you plan to add inline styles later, you can write them here. */
+    /* Basic Reset */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      background-color: #025036;
+      color: white;
+      
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      
+    }
+
+    .logo {
+  height: 200px;  /* adjust as needed */
+  object-fit: contain;
+  display: block;
+  margin: 0 auto; /* center horizontally if needed */
+}
+
+    h1 {
+      margin-bottom: 1rem;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 3rem;
+    }
+
+   nav a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ff6237;
+  color: white;
+  height: 60px;
+  width: 60px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: bold;
+  overflow: hidden;
+  transition: width 0.3s ease;
+  position: relative;
+  padding: 0 16px;
+}
+
+nav a i,
+nav a span {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: opacity 0.3s ease;
+  white-space: nowrap;
+}
+
+nav a i {
+  opacity: 1;
+}
+
+nav a span {
+  opacity: 0;
+}
+
+nav a:hover {
+  width: 250px;
+  justify-content: flex-start;
+}
+
+nav a:hover i {
+  opacity: 0;
+  left: 16px;
+  transform: none;
+}
+
+nav a:hover span {
+  opacity: 1;
+  left: 48px; 
+  transform: none;
+}
+
+    
+
+    nav a:nth-of-type(1) { background-color: #ff6237; }
+    nav a:nth-of-type(2) { background-color: #ff7b54; }
+    nav a:nth-of-type(3) { background-color: #effe60; }
+    nav a:nth-of-type(4) { background-color: #6e7aff; }
+    nav a:nth-of-type(5) { background-color: #7f42e5; }
+
+    
+    /* Buttons */
+    button {
+      padding: 8px 12px;
+      margin: 5px;
+      cursor: pointer;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 999px;
+    }
+
+    button:hover {
+      opacity: 0.8;
+    }
+
+    #load-bookings, #load-users {
+      background-color: #6e7aff;
+      padding: 10px 15px;
+      font-size: 16px;
+    }
+
+    /* Main */
+    main {
+      padding: 20px;
+    }
+
+    section {
+      margin-bottom: 40px;
+    }
+
+    article h3 {
+      margin-top: 0;
+    }
+
+    aside {
+      background-color: #f4f4f4;
+      padding: 15px;
+      border-radius: 4px;
+      margin-top: 20px;
+    }
+
+    .search {
+      margin-bottom: 20px;
+    }
+
+    .search label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .details h3 {
+      margin-top: 0;
+    }
+
+    .details p, .details label {
+      margin: 10px 0 5px;
+      display: block;
+    }
+
+    .table-container {
+      margin: 20px 0;
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #ffffff;
+      border-radius: 1rem;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+
+    th, td {
+      padding: 0.75rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+    }
+
+    thead {
+      background-color: black;
+      color: #effe60;
+      border-radius: 999px;
+    }
+
+    /* Layout Grid for Management Sections */
+    section#view-users,
+    section#bookings-management {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      grid-template-rows: auto auto;
+      grid-template-areas:
+        "header header"
+        "table sidebar";
+      gap: 1.5rem;
+    }
+
+    section#view-users > h2,
+    section#view-users > button,
+    section#bookings-management > h2,
+    section#bookings-management > button {
+      grid-column: 1 / -1;
+    }
+
+    section#view-users > article.table-container,
+    section#bookings-management > article.table-container {
+      grid-area: table;
+    }
+
+    section#view-users > aside,
+    section#view-users > section.details,
+    section#bookings-management > aside,
+    section#bookings-management > section.details {
+      grid-area: sidebar;
+    }
+
+    /* Search and Details in Sidebar */
+    main aside {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .search,
+    .details {
+      background-color: #ffffff;
+      padding: 1.5rem;
+      border-radius: 0.75rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .search label,
+    .details label {
+      margin-top: 1rem;
+      display: block;
+      font-weight: bold;
+    }
+
+    .search input,
+    .details select,
+    .details input {
+      width: 100%;
+      margin-top: 0.5rem;
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 0.4rem;
+      font-size: 1rem;
+    }
+
+    .details p {
+      margin: 0.5rem 0 0.25rem;
+    }
+
+    .details button {
+      padding: 0.6rem 1.2rem;
+      border: none;
+      border-radius: 999px;
+      font-weight: bold;
+      cursor: pointer;
+      color: white;
+      margin-top: 1rem;
+      margin-right: 0.5rem;
+    }
+
+    .details button:first-of-type {
+      background-color: #0077cc;
+    }
+
+    .details button:last-of-type {
+      background-color: #28a745;
+    }
+
+    .details button:hover {
+      opacity: 0.9;
+    }
+
+    header aside {
+      flex: 0 0 auto;
+      padding: 0 !important;
+      margin: 0 !important;
+      background: none !important;
+    }
+
+    header aside a {
+      display: inline-block;
+      width: auto !important;
+      padding: 4px 8px;
+      background-color: #2196F3;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 4px;
+      font-size: 0.9rem;
+    }
+
+     body {
+      margin: 0;
+      font-family: 'MyFont', sans-serif;
+    }
+
+    body::before {
+        content: "";
+      position: fixed;
+      top: -10px;
+      left: -20px;
+      right: -60px;
+      bottom: -10px;
+      background-image: url('images/sport_bgrd.PNG');
+      background-size: cover;
+      background-position: center;
+      filter: blur(20px);
+      z-index: -1;
+    }
+  
+
   </style>
 </head>
-
 <body>
-
-  <!-- Header Section for the Website -->
   <header>
-    <!-- Main heading for the page -->
-    <h1>GameOn</h1>
-    <!-- Aside section with links for Profile -->
-    <aside>
-        <!-- Profile button with icon and text -->
-        <a href="profile.html">👤 Profile</a>
-    </aside>
+    <img src="images/matchday_logo.png" alt="Dashboard Logo" class="logo">
+
+    <nav>
+ <a href="#view-users"><i class="fas fa-users"></i><span>User Management</span></a>
+<a href="a_booking_man.html"><i class="fas fa-calendar-check"></i><span>Booking Management</span></a>
+<a href="a_report.html"><i class="fas fa-chart-line"></i><span>Reports</span></a>
+<a href="a_announce.html" ><i class="fas fa-bullhorn"></i><span>Announcements</span></a>
+</nav>
+
   </header>
 
-  <!-- Navigation bar to provide quick links to sections -->
-  <nav>
-    <a href="#About">About</a>
-    <a href="#Bookings">Bookings</a>
-    <a href="#Leaderboard">Leaderboard</a>
-    <a href="#Dashboard">Dashboard</a>
-    <a href="View_Users">View Users</a>
-  </nav>
+  
 
-  <!-- About Section with a brief description -->
-  <section id="About">
-    <h2>About Us</h2>
-    <p>Welcome to our community sports centre!</p>
-  </section>
+  <main>
+    <!-- User Management Section -->
+    <section id="view-users" aria-labelledby="view-users-heading">
+      <h2 id="view-users-heading">User Management</h2>
+      
 
+      <article class="table-container" aria-label="Users Table">
+        <h3>Users Table
+          <button id="load-users">Load Users</button>
+        </h3>
+        
+        <table id="users-table">
+          <thead>
+            <tr>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Role</th>
+              <th>Status</th>
+              <th>Actions</th>
+
+              
+            </tr>
+          </thead>
+          
+          <tbody></tbody>
+        </table>
+
+        <table>
+  <tr>
+    <th>Company</th>
+    <th>Contact</th>
+    <th>Country</th>
+  </tr>
+  <tr>
+    <td>Alfreds Futterkiste</td>
+    <td>Maria Anders</td>
+    <td>Germany</td>
+  </tr>
+  <tr>
+    <td>Centro comercial Moctezuma</td>
+    <td>Francisco Chang</td>
+    <td>Mexico</td>
+  </tr>
+</table>
+      </article>
+
+      
+    </section>
+    
+  </main>
+
+  <script src="admin.js"></script>
 </body>
 </html>
