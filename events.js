@@ -113,7 +113,7 @@
       const count = parseInt(guestInput.value) || 1;
 
       try {
-        const res = await fetch(`/events/${eventId}/rsvp`, {
+        const res = await fetch(`https://backend-k52m.onrender.com/events/${eventId}/rsvp`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ user_uid, count })
@@ -134,7 +134,7 @@
 
     async function cancelRsvp(eventId, btn) {
       try {
-        const res = await fetch(`/events/${eventId}/rsvp`, {
+        const res = await fetch(`https://backend-k52m.onrender.com/events/${eventId}/rsvp`, {
           method: 'DELETE',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ user_uid })
