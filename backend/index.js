@@ -1,12 +1,11 @@
 // index.js
 const express = require('express');
-const admin = require('firebase-admin');
 const cors = require('cors');
 const path = require('path');
-//const serviceAccount = require('./privatekey.json');
 
-// Initialize Firebase Admin using your service account JSON.
-// Make sure the file path is correct and that the file is deployed along with your app.
+const admin = require("firebase-admin");
+
+
 admin.initializeApp({
   credential: admin.credential.cert({
     "project_id": "sd-project-c2b6c",
@@ -15,7 +14,6 @@ admin.initializeApp({
     "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDArk29vc/dZMDN\nLqGkxfqdz3z22ZI1bIMYtbuAlaY0eWZykYmSc5oBK0Dy2se/5nnUGqECTJXFzN3F\nrmxqo1kpwVG1rRbE6Kx9o7V0TgBOl0u0EJ0vwTF7wubEvH3SVFLfUd2LPg0O1k2e\nrkPyMHmZQVh9mF3J8CAXD40WtXf2gNiKcfV4ah15guUUxzdDiBwu4c4SL9CufkV0\nTGioMwWPXNE7KhKq9xoJWhjsotiRWcZIXOaZ8h3EUWRWg8Xp3LTGapsIecayHDOp\nc8R+/d3HiroflBp9DILrugl+sJNaiQyRko48e6eHzEv8unf1i5fLYZu215Aj7XqH\nEQRQQTyzAgMBAAECggEAQUyxPx0tbaAgMUlc8c1AzqvLc5Mv2Fgyo7SvW3gcEEuW\nWzyUjaQM7Nl+VO+tY41V+3qc130iAxuXi0++IXPDm4GPUg1bmpcqIhhRvh1TQE9J\nEjjRNKZ6QTG/6Kvizl3Siimh9fctELqzKpRvpYwlIbnCJip1mqL9FSOpkqkkg073\naAq/bU53IIdJJMdD05q9aWf3S228tOrLmCHM1rTv4mUJEKluP/7ADzWkJtbqHkqc\noWCqppP5+5bp5KxirkLe4n16EKP2eVULKxiSSKtz2O530GziOezSRWwtebOvbj+B\nJ1wreVsbQH8HMINgMUUelk6LGvxb6qEe3aawBPe0qQKBgQDuhb7bM3m4D7xiq6Eg\n6l0Uo9gGpAKxxY0Mgm0caE5VHqR2QHd9sh6qgAWqEDCcrup7YBD1kUqYWtjCQQRN\nJ0QdCrDDmUn0Y8owYT0SiZnpOl0gW9IZvR/3eqhAOlPRyCAUCz1GlXGLdCpBSnQx\n++rtodpJmmEFpuYGV9+yQdluewKBgQDOzKb7uXx6p+P2W0orIZ+F+4dEVAR3eXws\nypkt5UQuhqquHtIDuh1g2M+0wWfAXmC2iET6veCh1aUJnbFRZCCyXay64Ioq2Ivy\n2xZ1RV4Aef6+ijSxAjulWvIdG/BCdovm1ut0gYVrkiVQ4NJjRFeBKjCZevc+B8A2\nETIHBQsxKQKBgQDOtaH9ndKyrRB6AnuVZwZbyNKCjsi2/5mJac7de5fHNNMamCv2\nBtOEt4YxJ+65Gu2jFlIcP1oCR1jqoCX2Jz1kXctq+AGbho/G9b5TvmRgN3BVhr3C\nCKEXfHkrkGDrwR/rvwHPldvdG0Mzai7g0o16e3YNq3jByS43+ReoCGFC2QKBgQCp\nZDU7aDowdilieHCOV+JFazznmTJ3cslmHyXN1Eg/HAveyFwatW6vD6lDVFDZ3/S0\nT3bBNJs1tLyU3diK5MtrjxOXl6lVYz9vVEpXENTo6wThqm9ytnOJBK/hbCsnJdd+\n5HjFW/qfnHx4fU+YBDjxEk/wyCqRYuPs5bTmzxjV0QKBgQCx4GKU2gRoV//49d8P\nwL3wBGu6NxMYq9/ZBeU/Jc/EMjgXPwudSubhSqah9cr+sQimwbagP0i98ZbiE+tw\nF4K4uRVeHNiz6KbZFjBzn6dFf/OciutLFexoBvBXRQry2OXB7gfVc5CGa7UE1Yuk\nrTnYUvLNi+zRh1qMtbosNBoxIg==\n-----END PRIVATE KEY-----\n",
   })
 });
-// PATCH endpoint to update user status
 
 
 
@@ -961,6 +959,10 @@ app.get('/notifications/:uid', async (req, res) => {
     res.status(500).json({ error: 'Failed to fetch notifications' });
   }
 });
+
+
+
+
 
 
 
