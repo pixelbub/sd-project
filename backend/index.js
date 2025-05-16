@@ -8,7 +8,11 @@ const serviceAccount = require('./privatekey.json');
 // Initialize Firebase Admin using your service account JSON.
 // Make sure the file path is correct and that the file is deployed along with your app.
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount)
+  credential: admin.credential.cert({
+"project_id": "sd-project-c2b6c",
+  "private_key_id": "b977d687198d2366b229a5ece0c8e423b520a713",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCc2guWpfWTNcqM\n8UmeRQAIX8ImMpohWZ//k8xov3VWqPZbMxmEGiW7Gkz0TgfAAdJbgWVewA0ZxmHT\nb5sMOa6uv5wSINvEMNLMqBFZjMQQY76ZsM2BIYMx56ZD5oxH0ycnL+THIHv5ePCX\nQaKJQeWWbXrglzVl4DtnKPnhu+NDd6QU3Mpo9SIoWFsmds/j4usdYwZ7+qX2ya3t\nzShmSUfItuilG3Rs9Crm1UQZDqRCp6xrO8qeXvV1XxeADJLZRoku330xSzV2gjQO\nwD8QclU6yPzq5FRXXSaNBn/khIl9ZoTA9f6biwg22ybNbKn2NxIdoYy6FdlJ2C0I\nCeH3uB/fAgMBAAECggEAMdudk2Vtij2vBN4t6IFGYWMO89Vh6Pf0Q+lXMHSrd8B9\njr/PfI5TMAZML9wd2oq5sxyOfG/PukG1FuCDCH/NZv7BPYH0WYireSJzYWO9bvhF\nvdTVfhaI/XQFBdBjBvG3oF04+5L31XT8BRh38elgcVCbnohyENAWEdSUmYx/0RHX\nE2d7fiRwLG0HRSDvqxoUl9pdx3KSC0kOUbKJcrRvy5/TFdeVrEvujlrJ3+II9i87\nR+VH9qqEIjKD2fRqmBh7HwgOSmWeQgsmS+rAytMWuyNSPlTlstYxX1HhC4zsCEj9\nhMp60A10o8G3y6gDBN19JBh4O9uZrmHMOmCGvEzXAQKBgQDVKAN8jlU6+QLlWafv\nTHfqJv+o/5sq07ihNzxXVRp9ZLyRBqSN5k15yNVI+kNMmoaIxAl1Qa/QuBu7od/z\nqU/RfGOVJwk2Nbpq0uRjXlN80GYeBqwsIMQ2HDV06V/4fREiX0F5r3CvLJur3pAr\nDeBwpMvHDT84nfgR38Nawt6u1QKBgQC8YN9ptHsn3MmeFKufjwpFKoFhALG/lliy\nubN7RrCHie4q6p9DSH/TAZJctacON1172SGfV1hNFkAjeywsNQnADz/4VFXyLpNh\n69JDo7gwuFIwqlM9vxpDix+vx9mPj5u0AafwvM/3sqx2cWt0hmpEpcrOeEsn0tyi\nFgeYjE014wKBgBD9p4l+Lv0MbFar1t8UUVqw0SA/f7biOY1gQccUWZA1P3Kv/N3y\nxao3gAjZKhQpHSA5wCdAnSseAdfrB1b84AfqymVRP0K69akeNmZVVoJUek9aaM77\nrahCh2BSWfwMvBjpTubMPUc5Xw9MJmHIMWPJPxUW0TtKHEQQehn5/pYhAoGBAJvE\nvvj5dJ0RxOYi0YevEB8BdtpvaIu0FsQzKmbVnUN2mqqCOA+683fX5N8klm76+SJf\n+Z147FtR+tdcErq7YMSf15XQpwEL4nMmPUgRKU2gHNaBATQdwen4MMt5xj0f0vCW\nLfizKIT6CgIm52QDgfwh3AG/FuZnRmoBLWbHHVFhAoGABQ1BKmISOn887Dzwcfi4\nJEkh9yDndm7/CJYiZgy3B1Gg7cpnvLUN2MLeeQs/uAVlrzzwXSlAcI2FNOBewQYk\nC3fhIQVUA8yf8qeoCvFG7B2Pi4ysBFXfcy7ckAhn42cLsdcjnDNGuefUgmO7TNk5\nqWxNMDZRBCk8wJfj92j8jrQ=\n-----END PRIVATE KEY-----\n",
+   })
 });
 // PATCH endpoint to update user status
 
