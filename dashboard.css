@@ -16,7 +16,8 @@ section {
 }
 
 .booking-controls {
-    background-color: #ffffff;
+    background-color: black;
+    color: #effe6d;
     padding: 1.5rem;
     border-radius: 0.75rem;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
@@ -26,6 +27,8 @@ section {
     max-width: 1200px;
     margin: 10px auto;
 }
+
+
 
 .booking-details {
     flex: 1 1 300px;
@@ -65,16 +68,19 @@ select {
     transition: border-color 0.2s;
     text-align: center;
     font-size: 0.9rem;
+    background-color: #7f43e5;
+    border-color:#7f43e5
 }
 
 .time-slot:hover {
-    border-color: #3498db;
+    background-color: #6e7aff;
+    border-color: #6e7aff;
 }
 
 .time-slot.selected {
-    background: #2ecc71;
+    background: #fe7b54;
     color: white;
-    border-color: #27ae60;
+    border-color: white;
 }
 
 .time-slot.unavailable {
@@ -111,7 +117,8 @@ button:disabled,
 }
 
 #bookBtn {
-    background-color: #28a745;
+    background-color: #6e7aff;
+    border-radius: 999px;
 }
 
 .notification-button {
