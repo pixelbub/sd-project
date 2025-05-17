@@ -1,4 +1,3 @@
-// jest.config.js
 export default {
   testEnvironment: 'jsdom',
   collectCoverageFrom: [
@@ -6,6 +5,6 @@ export default {
     '!jest.config.js',
     '!/node_modules/',
     '!/vendor/**',
-    '!**/backend/index.js'
+    '!**/backend/**',
   ],
 };
