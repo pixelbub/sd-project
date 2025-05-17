@@ -195,11 +195,11 @@ main aside {
   }
   
   .details button:first-of-type {
-    background-color: #0077cc;
+    background-color:#6e7aff;
   }
   
   .details button:last-of-type {
-    background-color: #28a745;
+    background-color:#6e7aff;
   }
   
 #load-users {
