@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -47,6 +47,7 @@
       background-color: #2196F3;
       padding: 10px 15px;
       font-size: 16px;
+      border-radius: 999px;
     }
     main {
       padding: 20px;
@@ -119,17 +120,27 @@
 </head>
 <body>
   <header>
-    <h1>MatchDay</h1>
-
+    <h1></h1>
+    <nav>
+       <a href="a_dashboard.html">Dashboard
+        <img src = "images/dashboardBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"> 
+       </a>
+    <a href="a_sHome.html">User Management
+      <img src = "images/view_usersBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"> 
+    </a>
+    <a href="#bookings-management">Booking Management
+      <img src = "images/bookings_res_manageASBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"> 
+    </a>
+    <a href="a_report.html">Reports
+      <img src = "images/reportASBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"> 
+    </a>
+    <a href="a_announce.html">Announcements
+      <img src = "images/reportsRes_AnnounceASBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"> 
+    </a>
+  </nav>
   </header>
 
-  <nav>
-       <a href="a_dashboard.html">Dashboard</a>
-    <a href="a_sHome.html">User Management</a>
-    <a href="#bookings-management">Booking Management</a>
-    <a href="a_report.html">Reports</a>
-    <a href="a_announce.html">Announcements</a>
-  </nav>
+  
   <main>
     <section id="bookings-management" aria-labelledby="bookings-management-heading">
       <h2 id="bookings-management-heading">Booking Management</h2>
@@ -137,7 +148,9 @@
 
       <article class="table-container" aria-label="Bookings Table">
         <h3>Bookings Table
-          <button id="load-bookings">Load Pending Bookings</button>
+          <button id="load-bookings">Load Pending Bookings
+            <img src = "images/loadBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;">
+          </button>
         </h3>
         
         <table id="bookings-table">
