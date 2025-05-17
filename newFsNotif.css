@@ -43,10 +43,10 @@ header .logo {
     margin: 0.2%;
   }
   
-  nav a:nth-of-type(1) { background-color: #6e7aff; }
-  nav a:nth-of-type(2) { background-color: #6e7aff; }
-  nav a:nth-of-type(3) { background-color: #6e7aff; }
-  nav a:nth-of-type(4) { background-color: #6e7aff; }
+  nav a:nth-of-type(1) { background-color: #fe7b54; }
+  nav a:nth-of-type(2) { background-color: #7f43e5; }
+  nav a:nth-of-type(3) { background-color: #effe6d; }
+  nav a:nth-of-type(4) { background-color: #ff6237; }
   nav a:nth-of-type(5) { background-color: #6e7aff; }
 
   nav a:hover {
@@ -80,7 +80,7 @@ header .logo {
  }
 
 h1 {
-     color: #effe6d;
+     color:black;
 }
 
 #notifContainer > p:only-child {
