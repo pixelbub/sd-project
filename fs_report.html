@@ -13,10 +13,10 @@
       padding: 8px 12px;
       margin: 5px;
       cursor: pointer;
-      background-color: #2196F3;
+      background-color: #6e7aff;
       color: white;
       border: none;
-      border-radius: 4px;
+      border-radius: 999px;
     }
     button:hover {
       opacity: 0.8;
@@ -31,19 +31,37 @@
 <body>
   <header>
     <h1><img src="images/matchday_logo.png" alt="Logo" class="logo"></h1>
+    <nav>
+    <a href="a_dashboard.html">Dashboard
+      <img src = "images/dashboardBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"> 
+    </a>
+    <a href="fs_report.html">Reports
+      <img src = "images/reportASBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"> </a>
+     <a href="a_announce.html">Announcements
+      <img src = "images/reportsRes_AnnounceASBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"> 
+    </a>
+    <a href="fs_notifications.html">Notifications
+      <img src = "images/notificationsBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"> 
+    </a>
+    <a href="staffHome.html">View Users
+      <img src = "images/view_usersBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"> 
+    </a>
+    
+  </nav>
+  <button id="notifBtn" aria-label="Unread notifications" style="position: relative;">
+      <img src = "images/notificationsBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;">
+  </button>
   </header>
 
-  <nav>
-    <a href="staffHome.html">User Management</a>
-   <!-- <a href="a_booking_man.html">Booking Management</a>--> 
-    <a href="fs_report.html">Reports</a>
+  
 
-
-  </nav>
+  
   <main>
     <h2  id="load-users" >Manage Reports</h2>
     <h3>Reports
-      <button id="load-reports">Load Reports</button>
+      <button id="load-reports">Load Reports
+        <img src = "images/loadBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;">
+      </button>
     </h3>
     <table>
       <thead>
