@@ -24,39 +24,27 @@
 </head>
 <body>
   <header>
-    <h1>MatchDay</h1>
+     <nav>
+    <a href="#Dashboard">Dashboard
+      <img src = "images/dashboardBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"> 
+    </a>
+    <a href="report.html">Report
+      <img src = "images/reportsRes_AnnounceASBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"> </a>
+    <a href="events.html">Events
+      <img src = "images/idkBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"> 
+    </a>
+    <a href="dashboard.html">
+       Bookings
+      <img src = "images/bookings_res_manageASBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;">
+    </a>
+     <a href="notifications.html">Notifications
+      <img src = "images/notificationsBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"> 
+    </a>
+  </nav>
 
   </header>
 
-  <nav>
-    <a href="#Dashboard">Dashboard</a>
-    <a href="report.html">Report</a>
- 
-    <button id="notifBtn" aria-label="Unread notifications" style="position: relative;
-    background-color: #3498db;
-    color: white;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    cursor: pointer;
-    font-size: 0.9rem;
-    transition: background-color 0.2s;
-    margin-top: 0.25rem;">
-      🔔
-      <span id="notifCount" style="
-        position: absolute;
-        top: -5px;
-        right: -5px;
-        background: red;
-        color: white;
-        font-size: 0.7em;
-        padding: 2px 5px;
-        border-radius: 50%;
-        display: none;
-      ">0</span>
-    </button>
-    
-  </nav>
+
   
   <aside id="notifPopup"  style="display: none;" aria-label="Unread notifications">
     <section>
@@ -87,7 +75,9 @@
           <label for="groupSize">Number of People:</label>
           <input type="number" id="groupSize" min="1" value="1" required />
 
-          <button type="button" id="bookBtn" disabled>Confirm Booking</button>
+          <button type="button" id="bookBtn" disabled>Confirm Booking
+            <img src = "images/submit_confirmBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"> 
+          </button>
           <p id="errorMessage" class="error-message" aria-live="polite"></p>
         </fieldset>
       </section>
