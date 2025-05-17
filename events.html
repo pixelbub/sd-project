@@ -39,7 +39,7 @@
     .event-title {
       font-size: 18px;
       font-weight: bold;
-      color: #1e88e5;
+      color: #ff6237;
       margin-bottom: 6px;
     }
 
@@ -57,16 +57,22 @@
 
     .rsvp-btn {
       margin-top: 10px;
-      background: #4CAF50;
+      background-color: #6e7aff;
       color: white;
       border: none;
       padding: 8px 12px;
-      border-radius: 8px;
+      border-radius: 999px;
       cursor: pointer;
+      background-image: url('images/submit_confirmBtn.PNG');
+      background-repeat:no-repeat;
+      background-size: 16px 16px;
+      background-position: 12px center;
     }
 
     .rsvp-btn:hover {
-      background: #45a049;
+      background:white;
+      border-color: #6e7aff;
+      color:#6e7aff;
     }
 
     #loading, #no-events {
@@ -78,14 +84,27 @@
 </head>
 <body>
   <header>
-    <h1>MatchDay</h1>
+    <h1></h1>
+     <nav>
+    <a href="#Dashboard">Dashboard
+      <img src = "images/dashboardBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"> 
+    </a>
+    <a href="report.html">Report
+      <img src = "images/reportsRes_AnnounceASBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"> </a>
+    <a href="events.html">Events
+      <img src = "images/idkBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"> 
+    </a>
+    <a href="dashboard.html">
+       Bookings
+      <img src = "images/bookings_res_manageASBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;">
+    </a>
+     <a href="notifications.html">Notifications
+      <img src = "images/notificationsBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"> 
+    </a>
+  </nav>
   </header>
 
-  <nav>
-    <a href="dashboard.html">Bookings</a>
-    <a href="report.html">Report</a>
-    <a href="events.html" class="active">Events</a>
-  </nav>
+  
 
   <main>
     <h2>Upcoming Events</h2>
