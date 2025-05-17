@@ -1,94 +1,158 @@
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MatchDay - Report Issue</title>
-  <link rel="stylesheet" href="resHome.css" />
-  <link rel="stylesheet" href="dashboard.css" />
-  <link rel="stylesheet" href="report.css" />
-  <script type="module" src="report.js"></script>
-  <style>
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 1rem;
-    }
-  
-    th, td {
-      padding: 12px 15px;
-      border: 1px solid #ccc;
-      text-align: left;
-    }
-  
-    th {
-      background-color: #f4f4f4;
-      font-weight: bold;
-    }
-  
-    tr:nth-child(even) {
-      background-color: #fafafa;
-    }
-  
-    tr:hover {
-      background-color: #f1f1f1;
-    }
-  </style>
-  
-</head>
-<body>
-  <header>
-    <h1>MatchDay</h1>
+/* Reset box sizing only */
+* {
+    box-sizing: border-box;
+}
 
-  </header>
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    padding: 1rem;
+}
 
-  <nav>
-    <a href="dashboard.html">Bookings</a>
-    <a href="report.html" class="active">Report</a>
-    <a href="events.html">Events</a>
+section {
+    padding: 2rem;
+    margin: 0 auto;
+}
 
-  </nav>
+.booking-controls {
+    background-color: black;
+    color: #effe6d;
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    max-width: 1200px;
+    margin: 10px auto;
+}
 
-  <main>
 
+
+.booking-details {
+    flex: 1 1 300px;
+}
+
+.slot-container {
+    flex: 1 1 400px;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+input,
+select {
+    width: 40%;
+    padding: 0.6rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+}
+
+.slot-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 0.5rem;
+    margin: 1rem 0;
+}
+
+.time-slot {
+    padding: 0.5rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: border-color 0.2s;
+    text-align: center;
+    font-size: 0.9rem;
+    background-color: #7f43e5;
+    border-color:#7f43e5
+}
+
+.time-slot:hover {
+    background-color: #6e7aff;
+    border-color: #6e7aff;
+}
+
+.time-slot.selected {
+    background: #fe7b54;
+    color: white;
+    border-color: white;
+}
+
+.time-slot.unavailable {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: #f1f1f1;
+}
+
+.time-slot small {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: 0.75rem;
+}
+
+button {
+    background-color: #6e7aff;
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: #6e7aff;
+}
+
+button:disabled,
+#bookBtn:disabled {
+    background-color: #95a5a6;
+    cursor: not-allowed;
+}
+
+#bookBtn {
+    background-color: #6e7aff;
+    border-radius: 999px;
+}
+
+.notification-button {
+    display: inline-block;
+    padding: 0.5em 1em;
+    background-color: white;
+    color: #2e8b57;
+    text-decoration: none;
+    border-radius: 999px; 
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  
+  .notification-button:hover {
     
-    <section class="report-form" aria-labelledby="report-heading">
-        <h2>Report a Facility Issue</h2>
-        <form id="reportForm">
-          <label for="title">Title:</label>
-          <input type="text" id="title" required />
+    background-color: #2e8b57; 
+    color: white;
+  }
 
-          <label for="facilitySelect">Facility:</label>
-          <select id="facilitySelect" required>
-            <option value="">Select a facility</option>
-          </select>
-        
-          <label for="description">Description:</label>
-          <textarea id="description" required></textarea>
-        
-          
-        
-          <button type="submit">Submit Report</button>
-          <p id="formMsg" style="margin-top: 10px; color: green;"></p>
+#loading {
+    display: none;
+    padding: 1rem;
+    text-align: center;
+    color: #7f8c8d;
+}
 
-        </form>
-        
-        <h3>Your Previous Reports</h3>
-        <table>
-          <thead>
-            <tr>
-              <th>Title</th>
-              <th>Status</th>
-              <th>Description</th>
-              <th>Facility</th>
-              <th>feedback</th>
-              
-            </tr>
-          </thead>
-          <tbody id="reportsTableBody">
-            <!-- JS will insert rows here -->
-          </tbody>
-        </table>        
-    </section>
-  </main>
-</body>
-</html>
+.error-message {
+    color: #e74c3c;
+    margin-top: 1rem;
+}
+
+@media (max-width: 800px) {
+    .booking-controls {
+        flex-direction: column;
+    }
+}
