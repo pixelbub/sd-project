@@ -2,46 +2,52 @@
  * @jest-environment jsdom
  */
 
-// Import the script to test
-// Note: You'll need to export the functionality from admin.js or use jest.mock
-// For this test file, we assume the code is in a separate admin.js file that we can import
-import '../admin.js';
+// Mock fetch before importing admin.js
+global.fetch = jest.fn();
 
-describe('Admin User Panel', () => {
+// Mock a successful response for the initial hello API call
+global.fetch.mockResolvedValue({
+  ok: true,
+  json: function() {
+    return Promise.resolve({ message: 'Hello from backend!' });
+  }
+});
+
+// Now import the admin module which will use our mocked fetch
+require('../admin.js');
+
+describe('Admin User Panel', function() {
   // Setup variables
-  let loadUsersBtn;
-  let tableBody;
-  let fetchMock;
-  let mockUsers;
+  var loadUsersBtn;
+  var tableBody;
+  var mockUsers;
   
   // Mock console.error to prevent test output pollution
-  const originalConsoleError = console.error;
+  var originalConsoleError = console.error;
   
-  beforeEach(() => {
+  beforeEach(function() {
+    // Reset the fetch mock for each test, but keep the initial implementation
+    global.fetch.mockClear();
+    
     // Reset the DOM
-    document.body.innerHTML = `
-      <button id="load-users">Load Users</button>
-      <table id="users-table">
-        <thead>
-          <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Role</th>
-            <th>Status</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    `;
+    document.body.innerHTML = 
+      '<button id="load-users">Load Users</button>' +
+      '<table id="users-table">' +
+        '<thead>' +
+          '<tr>' +
+            '<th>First Name</th>' +
+            '<th>Last Name</th>' +
+            '<th>Role</th>' +
+            '<th>Status</th>' +
+            '<th>Actions</th>' +
+          '</tr>' +
+        '</thead>' +
+        '<tbody></tbody>' +
+      '</table>';
     
     // Set up DOM elements
     loadUsersBtn = document.getElementById('load-users');
     tableBody = document.querySelector('#users-table tbody');
-    
-    // Mock fetch API
-    fetchMock = jest.fn();
-    global.fetch = fetchMock;
     
     // Mock alert
     global.alert = jest.fn();
@@ -67,34 +73,37 @@ describe('Admin User Panel', () => {
     // Mock console.error
     console.error = jest.fn();
     
-    // Trigger DOMContentLoaded
-    const event = new Event('DOMContentLoaded');
+    // Manually trigger DOMContentLoaded
+    var event = new Event('DOMContentLoaded');
     document.dispatchEvent(event);
   });
   
-  afterEach(() => {
+  afterEach(function() {
     // Restore console.error
     console.error = originalConsoleError;
-    jest.resetAllMocks();
   });
   
-  test('should early return if required elements are not found', () => {
+  test('should early return if required elements are not found', function() {
     // Setup DOM without required elements
     document.body.innerHTML = '<div>No elements here</div>';
     
-    // Trigger DOMContentLoaded
-    const event = new Event('DOMContentLoaded');
+    // Trigger DOMContentLoaded again with no elements
+    var event = new Event('DOMContentLoaded');
     document.dispatchEvent(event);
     
     // Nothing should happen, no errors should be thrown
     expect(true).toBeTruthy(); // Just to make the test pass
   });
   
-  /*test('should load users when button is clicked', async () => {
-    // Mock successful fetch response
-    fetchMock.mockResolvedValueOnce({
-      ok: true,
-      json: jest.fn().mockResolvedValueOnce(mockUsers)
+  test('should load users when button is clicked', function() {
+    // Mock successful fetch response for users
+    global.fetch.mockImplementationOnce(function() {
+      return Promise.resolve({
+        ok: true,
+        json: function() {
+          return Promise.resolve(mockUsers);
+        }
+      });
     });
     
     // Click the button
@@ -104,264 +113,334 @@ describe('Admin User Panel', () => {
     expect(loadUsersBtn.disabled).toBe(true);
     expect(loadUsersBtn.textContent).toBe('Loading…');
     
-    // Wait for async operations
-    await new Promise(process.nextTick);
-    
-    // Verify fetch was called with correct URL
-    expect(fetchMock).toHaveBeenCalledWith('https://backend-k52m.onrender.com/users');
-    
-    // Verify table rows were created
-    const rows = tableBody.querySelectorAll('tr');
-    expect(rows).toHaveLength(2);
-    
-    // Verify first user's data is displayed correctly
-    const firstRowCells = rows[0].querySelectorAll('td');
-    expect(firstRowCells[0].textContent).toBe('John');
-    expect(firstRowCells[1].textContent).toBe('Doe');
-    expect(firstRowCells[2].textContent).toBe('1');
-    
-    // Verify status dropdown
-    const firstRowSelect = firstRowCells[3].querySelector('select');
-    expect(firstRowSelect).toBeTruthy();
-    expect(firstRowSelect.value).toBe('active');
-    
-    // Verify action buttons exist
-    const actionBtns = firstRowCells[4].querySelectorAll('button');
-    expect(actionBtns).toHaveLength(2);
-    expect(actionBtns[0].textContent).toBe('Update');
-    expect(actionBtns[1].textContent).toBe('Delete');
-    
-    // Verify button is re-enabled after loading
-    expect(loadUsersBtn.disabled).toBe(false);
-    expect(loadUsersBtn.textContent).toBe('Load Users');
-  }); */
+    // Return a promise to let Jest know we're testing async code
+    return new Promise(function(resolve) {
+      // Use setTimeout to wait for async operations to complete
+      setTimeout(function() {
+        // Verify fetch was called with correct URL
+        expect(global.fetch).toHaveBeenCalledWith('https://backend-k52m.onrender.com/users');
+        
+        // Verify table rows were created
+        var rows = tableBody.querySelectorAll('tr');
+        expect(rows.length).toBe(2);
+        
+        // Verify first user's data is displayed correctly
+        var firstRowCells = rows[0].querySelectorAll('td');
+        expect(firstRowCells[0].textContent).toBe('John');
+        expect(firstRowCells[1].textContent).toBe('Doe');
+        expect(firstRowCells[2].textContent).toBe('1');
+        expect(firstRowCells[3].textContent).toBe('Admin');
+        
+        // Verify status dropdown
+        var firstRowSelect = firstRowCells[4].querySelector('select');
+        expect(firstRowSelect).toBeTruthy();
+        expect(firstRowSelect.value).toBe('active');
+        
+        // Verify action buttons exist
+        var actionBtns = firstRowCells[5].querySelectorAll('button');
+        expect(actionBtns.length).toBe(2);
+        expect(actionBtns[0].textContent).toBe('Update');
+        expect(actionBtns[1].textContent).toBe('Delete');
+        
+        // Verify button is re-enabled after loading
+        expect(loadUsersBtn.disabled).toBe(false);
+        expect(loadUsersBtn.textContent).toBe('Load Users');
+        
+        resolve();
+      }, 0);
+    });
+  });
   
-  test('should handle server error when loading users', async () => {
+  test('should handle server error when loading users', function() {
     // Mock failed fetch response
-    fetchMock.mockResolvedValueOnce({
-      ok: false,
-      status: 500
+    global.fetch.mockImplementationOnce(function() {
+      return Promise.resolve({
+        ok: false,
+        status: 500
+      });
     });
     
     // Click the button
     loadUsersBtn.click();
     
-    // Wait for async operations
-    await new Promise(process.nextTick);
-    
-    // Verify error handling
-    expect(console.error).toHaveBeenCalled();
-    expect(alert).toHaveBeenCalledWith('Could not load users. See console for details.');
-    
-    // Verify button is re-enabled after error
-    expect(loadUsersBtn.disabled).toBe(false);
-    expect(loadUsersBtn.textContent).toBe('Load Users');
+    // Return a promise to let Jest know we're testing async code
+    return new Promise(function(resolve) {
+      // Use setTimeout to wait for async operations to complete
+      setTimeout(function() {
+        // Verify error handling
+        expect(console.error).toHaveBeenCalled();
+        expect(alert).toHaveBeenCalledWith('Could not load users. See console for details.');
+        
+        // Verify button is re-enabled after error
+        expect(loadUsersBtn.disabled).toBe(false);
+        expect(loadUsersBtn.textContent).toBe('Load Users');
+        
+        resolve();
+      }, 0);
+    });
   });
   
-  test('should handle network error when loading users', async () => {
+  test('should handle network error when loading users', function() {
     // Mock fetch rejection
-    fetchMock.mockRejectedValueOnce(new Error('Network error'));
+    global.fetch.mockImplementationOnce(function() {
+      return Promise.reject(new Error('Network error'));
+    });
     
     // Click the button
     loadUsersBtn.click();
     
-    // Wait for async operations
-    await new Promise(process.nextTick);
-    
-    // Verify error handling
-    expect(console.error).toHaveBeenCalled();
-    expect(alert).toHaveBeenCalledWith('Could not load users. See console for details.');
-    
-    // Verify button is re-enabled after error
-    expect(loadUsersBtn.disabled).toBe(false);
-    expect(loadUsersBtn.textContent).toBe('Load Users');
+    // Return a promise to let Jest know we're testing async code
+    return new Promise(function(resolve) {
+      // Use setTimeout to wait for async operations to complete
+      setTimeout(function() {
+        // Verify error handling
+        expect(console.error).toHaveBeenCalled();
+        expect(alert).toHaveBeenCalledWith('Could not load users. See console for details.');
+        
+        // Verify button is re-enabled after error
+        expect(loadUsersBtn.disabled).toBe(false);
+        expect(loadUsersBtn.textContent).toBe('Load Users');
+        
+        resolve();
+      }, 0);
+    });
   });
   
-  test('should update user status', async () => {
+  test('should update user status', function() {
     // First load the users
-    fetchMock.mockResolvedValueOnce({
-      ok: true,
-      json: jest.fn().mockResolvedValueOnce(mockUsers)
+    global.fetch.mockImplementationOnce(function() {
+      return Promise.resolve({
+        ok: true,
+        json: function() {
+          return Promise.resolve(mockUsers);
+        }
+      });
     });
     
     loadUsersBtn.click();
-    await new Promise(process.nextTick);
     
-    // Mock successful status update
-    fetchMock.mockResolvedValueOnce({
-      ok: true
+    return new Promise(function(resolve) {
+      setTimeout(function() {
+        // Mock successful status update
+        global.fetch.mockImplementationOnce(function() {
+          return Promise.resolve({
+            ok: true
+          });
+        });
+        
+        // Get the update button for the first user
+        var rows = tableBody.querySelectorAll('tr');
+        var firstRow = rows[0];
+        var statusSelect = firstRow.querySelector('select');
+        var updateBtn = firstRow.querySelectorAll('button')[0];
+        
+        // Change status and click update
+        statusSelect.value = 'blocked';
+        updateBtn.click();
+        
+        setTimeout(function() {
+          // Verify fetch called with correct parameters
+          expect(global.fetch).toHaveBeenCalledWith(
+            'https://backend-k52m.onrender.com/users/1/status',
+            {
+              method: 'PATCH',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ status: 'blocked' })
+            }
+          );
+          
+          // Verify alert was shown
+          expect(alert).toHaveBeenCalledWith('Status updated to "blocked" for John');
+          
+          resolve();
+        }, 0);
+      }, 0);
     });
-    
-    // Get the update button for the first user
-    const rows = tableBody.querySelectorAll('tr');
-    const firstRow = rows[0];
-    const statusSelect = firstRow.querySelector('select');
-    const updateBtn = firstRow.querySelectorAll('button')[0];
-    
-    // Change status and click update
-    statusSelect.value = 'blocked';
-    updateBtn.click();
-    
-    // Wait for async operations
-    await new Promise(process.nextTick);
-    
-    // Verify fetch called with correct parameters
-    expect(fetchMock).toHaveBeenCalledWith(
-      'https://backend-k52m.onrender.com/users/1/status',
-      {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ status: 'blocked' })
-      }
-    );
-    
-    // Verify alert was shown
-    expect(alert).toHaveBeenCalledWith('Status updated to "blocked" for John');
   });
   
-  test('should handle error when updating status', async () => {
+  test('should handle error when updating status', function() {
     // First load the users
-    fetchMock.mockResolvedValueOnce({
-      ok: true,
-      json: jest.fn().mockResolvedValueOnce(mockUsers)
+    global.fetch.mockImplementationOnce(function() {
+      return Promise.resolve({
+        ok: true,
+        json: function() {
+          return Promise.resolve(mockUsers);
+        }
+      });
     });
     
     loadUsersBtn.click();
-    await new Promise(process.nextTick);
     
-    // Mock failed status update
-    fetchMock.mockResolvedValueOnce({
-      ok: false,
-      status: 403
+    return new Promise(function(resolve) {
+      setTimeout(function() {
+        // Mock failed status update
+        global.fetch.mockImplementationOnce(function() {
+          return Promise.resolve({
+            ok: false,
+            status: 403
+          });
+        });
+        
+        // Get the update button for the first user
+        var rows = tableBody.querySelectorAll('tr');
+        var firstRow = rows[0];
+        var updateBtn = firstRow.querySelectorAll('button')[0];
+        
+        // Click update
+        updateBtn.click();
+        
+        setTimeout(function() {
+          // Verify error handling
+          expect(console.error).toHaveBeenCalled();
+          expect(alert).toHaveBeenCalledWith('Error updating status. See console.');
+          
+          resolve();
+        }, 0);
+      }, 0);
     });
-    
-    // Get the update button for the first user
-    const rows = tableBody.querySelectorAll('tr');
-    const firstRow = rows[0];
-    const updateBtn = firstRow.querySelectorAll('button')[0];
-    
-    // Click update
-    updateBtn.click();
-    
-    // Wait for async operations
-    await new Promise(process.nextTick);
-    
-    // Verify error handling
-    expect(console.error).toHaveBeenCalled();
-    expect(alert).toHaveBeenCalledWith('Error updating status. See console.');
   });
   
-  test('should handle network error when updating status', async () => {
+  test('should handle network error when updating status', function() {
     // First load the users
-    fetchMock.mockResolvedValueOnce({
-      ok: true,
-      json: jest.fn().mockResolvedValueOnce(mockUsers)
+    global.fetch.mockImplementationOnce(function() {
+      return Promise.resolve({
+        ok: true,
+        json: function() {
+          return Promise.resolve(mockUsers);
+        }
+      });
     });
     
     loadUsersBtn.click();
-    await new Promise(process.nextTick);
     
-    // Mock network error
-    fetchMock.mockRejectedValueOnce(new Error('Network error'));
-    
-    // Get the update button for the first user
-    const rows = tableBody.querySelectorAll('tr');
-    const firstRow = rows[0];
-    const updateBtn = firstRow.querySelectorAll('button')[0];
-    
-    // Click update
-    updateBtn.click();
-    
-    // Wait for async operations
-    await new Promise(process.nextTick);
-    
-    // Verify error handling
-    expect(console.error).toHaveBeenCalled();
-    expect(alert).toHaveBeenCalledWith('Error updating status. See console.');
+    return new Promise(function(resolve) {
+      setTimeout(function() {
+        // Mock network error
+        global.fetch.mockImplementationOnce(function() {
+          return Promise.reject(new Error('Network error'));
+        });
+        
+        // Get the update button for the first user
+        var rows = tableBody.querySelectorAll('tr');
+        var firstRow = rows[0];
+        var updateBtn = firstRow.querySelectorAll('button')[0];
+        
+        // Click update
+        updateBtn.click();
+        
+        setTimeout(function() {
+          // Verify error handling
+          expect(console.error).toHaveBeenCalled();
+          expect(alert).toHaveBeenCalledWith('Error updating status. See console.');
+          
+          resolve();
+        }, 0);
+      }, 0);
+    });
   });
   
-  test('should delete user', async () => {
+  test('should delete user', function() {
     // First load the users
-    fetchMock.mockResolvedValueOnce({
-      ok: true,
-      json: jest.fn().mockResolvedValueOnce(mockUsers)
+    global.fetch.mockImplementationOnce(function() {
+      return Promise.resolve({
+        ok: true,
+        json: function() {
+          return Promise.resolve(mockUsers);
+        }
+      });
     });
     
     loadUsersBtn.click();
-    await new Promise(process.nextTick);
     
-    // Mock successful delete
-    fetchMock.mockResolvedValueOnce({
-      ok: true
+    return new Promise(function(resolve) {
+      setTimeout(function() {
+        // Mock successful delete
+        global.fetch.mockImplementationOnce(function() {
+          return Promise.resolve({
+            ok: true
+          });
+        });
+        
+        // Count initial rows
+        var rows = tableBody.querySelectorAll('tr');
+        var initialRowCount = rows.length;
+        
+        // Get the delete button for the first user
+        var firstRow = rows[0];
+        var deleteBtn = firstRow.querySelectorAll('button')[1];
+        
+        // Click delete
+        deleteBtn.click();
+        
+        setTimeout(function() {
+          // Verify fetch called with correct parameters
+          expect(global.fetch).toHaveBeenCalledWith(
+            'https://backend-k52m.onrender.com/users/1',
+            { method: 'DELETE' }
+          );
+          
+          // Verify alert was shown
+          expect(alert).toHaveBeenCalledWith('User John deleted.');
+          
+          // Verify row was removed
+          var currentRows = tableBody.querySelectorAll('tr');
+          expect(currentRows.length).toBe(initialRowCount - 1);
+          
+          resolve();
+        }, 0);
+      }, 0);
     });
-    
-    // Count initial rows
-    let rows = tableBody.querySelectorAll('tr');
-    const initialRowCount = rows.length;
-    
-    // Get the delete button for the first user
-    const firstRow = rows[0];
-    const deleteBtn = firstRow.querySelectorAll('button')[1];
-    
-    // Click delete
-    deleteBtn.click();
-    
-    // Wait for async operations
-    await new Promise(process.nextTick);
-    
-    // Verify fetch called with correct parameters
-    expect(fetchMock).toHaveBeenCalledWith(
-      'https://backend-k52m.onrender.com/users/1',
-      { method: 'DELETE' }
-    );
-    
-    // Verify alert was shown
-    expect(alert).toHaveBeenCalledWith('User John deleted.');
-    
-    // Verify row was removed
-    rows = tableBody.querySelectorAll('tr');
-    expect(rows.length).toBe(initialRowCount - 1);
   });
   
-  test('should handle error when deleting user', async () => {
+  test('should handle error when deleting user', function() {
     // First load the users
-    fetchMock.mockResolvedValueOnce({
-      ok: true,
-      json: jest.fn().mockResolvedValueOnce(mockUsers)
+    global.fetch.mockImplementationOnce(function() {
+      return Promise.resolve({
+        ok: true,
+        json: function() {
+          return Promise.resolve(mockUsers);
+        }
+      });
     });
     
     loadUsersBtn.click();
-    await new Promise(process.nextTick);
     
-    // Mock failed delete
-    fetchMock.mockResolvedValueOnce({
-      ok: false,
-      status: 403
+    return new Promise(function(resolve) {
+      setTimeout(function() {
+        // Mock failed delete
+        global.fetch.mockImplementationOnce(function() {
+          return Promise.resolve({
+            ok: false,
+            status: 403
+          });
+        });
+        
+        // Get the delete button for the first user
+        var rows = tableBody.querySelectorAll('tr');
+        var firstRow = rows[0];
+        var deleteBtn = firstRow.querySelectorAll('button')[1];
+        
+        // Click delete
+        deleteBtn.click();
+        
+        setTimeout(function() {
+          // Verify error handling
+          expect(console.error).toHaveBeenCalled();
+          expect(alert).toHaveBeenCalledWith('Error deleting user. See console.');
+          
+          // Verify row was not removed
+          var currentRows = tableBody.querySelectorAll('tr');
+          expect(currentRows.length).toBe(rows.length);
+          
+          resolve();
+        }, 0);
+      }, 0);
     });
-    
-    // Get the delete button for the first user
-    const rows = tableBody.querySelectorAll('tr');
-    const firstRow = rows[0];
-    const deleteBtn = firstRow.querySelectorAll('button')[1];
-    
-    // Click delete
-    deleteBtn.click();
-    
-    // Wait for async operations
-    await new Promise(process.nextTick);
-    
-    // Verify error handling
-    expect(console.error).toHaveBeenCalled();
-    expect(alert).toHaveBeenCalledWith('Error deleting user. See console.');
-    
-    // Verify row was not removed
-    const currentRows = tableBody.querySelectorAll('tr');
-    expect(currentRows.length).toBe(rows.length);
   });
   
-  test('should handle missing properties in user data', async () => {
+  test('should handle missing properties in user data', function() {
     // Mock user with missing properties
-    const incompleteUsers = [
+    var incompleteUsers = [
       {
         uid: '3',
         // first_name missing
@@ -371,43 +450,58 @@ describe('Admin User Panel', () => {
       }
     ];
     
-    fetchMock.mockResolvedValueOnce({
-      ok: true,
-      json: jest.fn().mockResolvedValueOnce(incompleteUsers)
+    global.fetch.mockImplementationOnce(function() {
+      return Promise.resolve({
+        ok: true,
+        json: function() {
+          return Promise.resolve(incompleteUsers);
+        }
+      });
     });
     
     // Click the button
     loadUsersBtn.click();
     
-    // Wait for async operations
-    await new Promise(process.nextTick);
-    
-    // Verify table row was created
-    const rows = tableBody.querySelectorAll('tr');
-    expect(rows).toHaveLength(1);
-    
-    // Verify empty cells are handled properly
-    const cells = rows[0].querySelectorAll('td');
-    expect(cells[0].textContent).toBe(''); // Missing first_name
-    expect(cells[1].textContent).toBe('Missing');
-    expect(cells[2].textContent).toBe('3'); // Missing role
+    return new Promise(function(resolve) {
+      setTimeout(function() {
+        // Verify table row was created
+        var rows = tableBody.querySelectorAll('tr');
+        expect(rows.length).toBe(1);
+        
+        // Verify empty cells are handled properly
+        var cells = rows[0].querySelectorAll('td');
+        expect(cells[0].textContent).toBe(''); // Missing first_name
+        expect(cells[1].textContent).toBe('Missing');
+        expect(cells[2].textContent).toBe('3'); // uid is present
+        expect(cells[3].textContent).toBe(''); // Missing role
+        
+        resolve();
+      }, 0);
+    });
   });
   
-  test('should handle fetch response that is not JSON', async () => {
+  test('should handle fetch response that is not JSON', function() {
     // Mock failed json parsing
-    fetchMock.mockResolvedValueOnce({
-      ok: true,
-      json: jest.fn().mockRejectedValueOnce(new Error('Invalid JSON'))
+    global.fetch.mockImplementationOnce(function() {
+      return Promise.resolve({
+        ok: true,
+        json: function() {
+          return Promise.reject(new Error('Invalid JSON'));
+        }
+      });
     });
     
     // Click the button
     loadUsersBtn.click();
     
-    // Wait for async operations
-    await new Promise(process.nextTick);
-    
-    // Verify error handling
-    expect(console.error).toHaveBeenCalled();
-    expect(alert).toHaveBeenCalledWith('Could not load users. See console for details.');
+    return new Promise(function(resolve) {
+      setTimeout(function() {
+        // Verify error handling
+        expect(console.error).toHaveBeenCalled();
+        expect(alert).toHaveBeenCalledWith('Could not load users. See console for details.');
+        
+        resolve();
+      }, 0);
+    });
   });
 });
