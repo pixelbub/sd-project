@@ -22,8 +22,8 @@
 
       try {
         const [eventRes, rsvpRes] = await Promise.all([
-          fetch('/events/upcoming'),
-          fetch(`/users/${user_uid}/rsvps`)
+          fetch('https://backend-k52m.onrender.com/events/upcoming'),
+          fetch(`https://backend-k52m.onrender.com/users/${user_uid}/rsvps`)
         ]);
 
         const events = await eventRes.json();
@@ -116,7 +116,7 @@
       const user_uid = localStorage.getItem('user_uid');
 
       try {
-        const res = await fetch(`/events/${eventId}/rsvp`, {
+        const res = await fetch(`https://backend-k52m.onrender.com/events/${eventId}/rsvp`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ user_uid, count })
@@ -138,7 +138,7 @@
     async function cancelRsvp(eventId, btn) {
     const user_uid = localStorage.getItem('user_uid');
       try {
-        const res = await fetch(`/events/${eventId}/rsvp`, {
+        const res = await fetch(`https://backend-k52m.onrender.com/events/${eventId}/rsvp`, {
           method: 'DELETE',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ user_uid })
