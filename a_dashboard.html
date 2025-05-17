@@ -7,6 +7,111 @@
   <link rel="stylesheet" href="view_users_style.css" />
   <link rel="stylesheet" href="resHome.css" />
   <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      background-color: #025036;
+      color: white;
+      
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      
+    }
+
+    .logo {
+  height: 200px;  /* adjust as needed */
+  object-fit: contain;
+  display: block;
+  margin: 0 auto; /* center horizontally if needed */
+}
+
+    h1 {
+      margin-bottom: 1rem;
+      padding: 1rem;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 3rem;
+    }
+
+   nav a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ff6237;
+  color: white;
+  height: 60px;
+  width: 60px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: bold;
+  overflow: hidden;
+  transition: width 0.3s ease;
+  position: relative;
+  padding: 0 16px;
+}
+
+nav a img,
+nav a span {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: opacity 0.3s ease, left 0.3s ease;
+  white-space: nowrap;
+}
+
+nav a img {
+  opacity: 1;
+}
+
+nav a span {
+  opacity: 0;
+}
+
+nav a:hover {
+  width: 250px;
+  justify-content: flex-start;
+}
+
+nav a:hover img {
+  opacity: 0;
+  left: 16px;
+  transform: none;
+}
+
+nav a:hover span {
+  opacity: 1;
+  left: 48px; 
+  transform: none;
+}
+
+    
+
+    nav a:nth-of-type(1) { background-color: #ff6237; }
+    nav a:nth-of-type(2) { background-color: #ff7b54; }
+    nav a:nth-of-type(3) { background-color: #effe60; }
+    nav a:nth-of-type(4) { background-color: #6e7aff; }
+    nav a:nth-of-type(5) { background-color: #7f42e5; }
+
+
     main {
       padding: 20px;
     }
@@ -69,7 +174,7 @@
     }
 
     th, td {
-      border: 1px solid #ccc;
+      border: 1px solid #000;
       padding: .5rem;
       text-align: left;
     }
@@ -84,6 +189,7 @@
     button {
       padding: 8px 12px;
       margin: 5px;
+      padding-left: 2rem;
       cursor: pointer;
       background-color: #6e7aff;
       color: white;
@@ -102,23 +208,24 @@
 </head>
 <body>
   <header>
-    <h1></h1>
-      <nav>
-    <a href="a_dashboard.html">Dashboard
-      <img src = "images/dashboardBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"> 
+   <img src="images/matchday_logo.png" alt="Dashboard Logo" class="logo">
+
+ <nav>
+    <a href="a_dashboard.html"><img src = "images/dashboardBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"><span>Dashboard</span> 
     </a>
-    <a href="a_sHome.html">View Users
-      <img src = "images/view_usersBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"> 
-    </a>    
-    <a href="a_booking_man.html">Booking Management
-      <img src = "images/bookings_res_manageASBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"> 
+    
+    <a href="a_booking_man.html"><img src = "images/bookings_res_manageASBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"><span>Booking Management</span>  
     </a>
-    <a href="a_report.html">Reports
-      <img src = "images/reportASBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"> 
+
+    <a href="#view-users"><img src = "images/view_usersBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"><span>User Management</span> 
     </a>
-    <a href="a_announce.html">Announcements
-      <img src = "images/reportsRes_AnnounceASBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"> 
+    
+    <a href="a_report.html">
+      <img src = "images/reportASBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"><span>Reports</span>  
     </a>
+    <a href="a_announce.html"> 
+      <img src = "images/reportsRes_AnnounceASBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"><span>Announcements</span>  
+    </a> 
   </nav>
   </header>
 
