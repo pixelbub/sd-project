@@ -345,7 +345,7 @@ describe('Reports Module', () => {
     const result = await fetchNotifications(user_uid);
     
     // Verify fetch was called with user_uid
-    expect(global.fetch).toHaveBeenCalledWith('/notifications?user_uid=test-user-123');
+    expect(global.fetch).toHaveBeenCalledWith('https://backend-k52m.onrender.com/notifications?user_uid=test-user-123');
     
     // Verify badge was updated
     expect(document.getElementById('notificationBadge').textContent).toBe('3');
