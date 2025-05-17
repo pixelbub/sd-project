@@ -6,7 +6,18 @@
   <link rel="stylesheet" href="view_users_style.css" />
   <link rel="stylesheet" href="resHome.css" />
   <style>
+     #notifPopup button {
+        background-color: #6e7aff;
+        color: white;
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 999px;
+        cursor: pointer;
+        font-size: 0.9rem;
+        transition: background-color 0.2s;
+}
     .notif {
+         
       border: 1px solid #ccc;
       padding: 10px;
       margin: 10px;
@@ -18,15 +29,30 @@
   </style>
 </head>
 <header>
-  <h1>MatchDay</h1>
+  <h1></h1>
+   <nav>
+    <a href="#Dashboard">Dashboard
+      <img src = "images/dashboardBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"> 
+    </a>
+    <a href="report.html">Report
+      <img src = "images/reportsRes_AnnounceASBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"> </a>
+    <a href="events.html">Events
+      <img src = "images/idkBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"> 
+    </a>
+    <a href="dashboard.html">
+       Bookings
+      <img src = "images/bookings_res_manageASBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;">
+    </a>
+     <a href="notifications.html">Notifications
+      <img src = "images/notificationsBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"> 
+    </a>
+  <button id="notifBtn" aria-label="Unread notifications" style="position: relative;">
+      <img src = "images/notificationsBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;">
+  </button>
+  </nav>
 </header> 
 
-<nav>
-  <a href="dashboard.html">Dashboard</a>
-  <a href="report.html">Reports</a>
 
-
-</nav>
 <body>
   <h1>Your Notifications</h1>
   <div id="notifContainer">Loading…</div>
