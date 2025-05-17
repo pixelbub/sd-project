@@ -3,34 +3,118 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <title>MatchDay - Admin Panel</title>
-  <link rel="stylesheet" href="view_users_style.css" />
-  <link rel="stylesheet" href="resHome.css" />
 
-  <!-- Admin-specific overrides: inline styles for layout -->
+  
   <style>
-    /* Admin-specific styles */
-    header aside {
-      flex: 0 0 auto;      /* prevent it from growing */
-      padding: 0 !important;
-      margin: 0 !important;
-      background: none !important;
-    }
-    header aside a {
-      display: inline-block;
-      width: auto !important;
-      padding: 4px 8px;
-      background-color: #2196F3;
-      color: #fff;
-      text-decoration: none;
-      border-radius: 4px;
-      font-size: 0.9rem;
-    }
-    .table-container {
-      margin: 20px 0;
-      overflow-x: auto;
-    }
    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      background-color: #025036;
+      color: white;
+      
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      
+    }
+
+    .logo {
+  height: 200px;  /* adjust as needed */
+  object-fit: contain;
+  display: block;
+  margin: 0 auto; /* center horizontally if needed */
+}
+
+    h1 {
+      margin-bottom: 1rem;
+      padding: 1rem;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 3rem;
+    }
+
+   nav a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ff6237;
+  color: white;
+  height: 60px;
+  width: 60px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: bold;
+  overflow: hidden;
+  transition: width 0.3s ease;
+  position: relative;
+  padding: 0 16px;
+}
+
+nav a img,
+nav a span {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: opacity 0.3s ease, left 0.3s ease;
+  white-space: nowrap;
+}
+
+nav a img {
+  opacity: 1;
+}
+
+nav a span {
+  opacity: 0;
+}
+
+nav a:hover {
+  width: 250px;
+  justify-content: flex-start;
+}
+
+nav a:hover img {
+  opacity: 0;
+  left: 16px;
+  transform: none;
+}
+
+nav a:hover span {
+  opacity: 1;
+  left: 48px; 
+  transform: none;
+}
+
+    
+
+    nav a:nth-of-type(1) { background-color: #ff6237; }
+    nav a:nth-of-type(2) { background-color: #ff7b54; }
+    nav a:nth-of-type(3) { background-color: #effe60; }
+    nav a:nth-of-type(4) { background-color: #6e7aff; }
+    nav a:nth-of-type(5) { background-color: #7f42e5; }
+
+    
+    /* Buttons */
     button {
       padding: 8px 12px;
       margin: 5px;
@@ -38,48 +122,87 @@
       background-color: #4CAF50;
       color: white;
       border: none;
-      border-radius: 4px;
+      border-radius: 999px;
     }
+
     button:hover {
       opacity: 0.8;
     }
+
     #load-bookings, #load-users {
-      background-color: #2196F3;
+      background-color: #6e7aff;
       padding: 10px 15px;
-      border-radius: 999px;
       font-size: 16px;
     }
+
+    /* Main */
     main {
-      padding: 20px;
+      padding: 2rem;
     }
+
     section {
       margin-bottom: 40px;
+      padding: 2rem;
+      border-radius: 20px;
     }
+
     article h3 {
       margin-top: 0;
     }
+
     aside {
       background-color: #f4f4f4;
       padding: 15px;
       border-radius: 4px;
       margin-top: 20px;
     }
+
     .search {
       margin-bottom: 20px;
     }
+
     .search label {
       display: block;
       margin-bottom: 5px;
     }
+
     .details h3 {
       margin-top: 0;
     }
+
     .details p, .details label {
       margin: 10px 0 5px;
       display: block;
     }
 
-    /* Grid layout for User and Booking Management sections */
+    .table-container {
+      margin: 20px 0;
+      overflow-x: auto;
+      padding: 2rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #ffffff;
+      border-radius: 1rem;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+
+    th, td {
+      padding: 0.75rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+    }
+
+    thead {
+      background-color: black;
+      color: #effe60;
+      border-radius: 999px;
+    }
+
+    /* Layout Grid for Management Sections */
     section#view-users,
     section#bookings-management {
       display: grid;
@@ -91,7 +214,6 @@
       gap: 1.5rem;
     }
 
-    /* Make the section heading and button span both columns */
     section#view-users > h2,
     section#view-users > button,
     section#bookings-management > h2,
@@ -99,60 +221,134 @@
       grid-column: 1 / -1;
     }
 
-    /* Place the table on the left */
-    section#view-users > article.table-container {
-      grid-area: table;
-    }
+    section#view-users > article.table-container,
     section#bookings-management > article.table-container {
       grid-area: table;
     }
 
-    /* Stack search and details on the right */
     section#view-users > aside,
-    section#view-users > section.details {
-      grid-area: sidebar;
-    }
+    section#view-users > section.details,
     section#bookings-management > aside,
     section#bookings-management > section.details {
       grid-area: sidebar;
     }
+
+    /* Search and Details in Sidebar */
+    main aside {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .search,
+    .details {
+      background-color: #ffffff;
+      padding: 1.5rem;
+      border-radius: 0.75rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .search label,
+    .details label {
+      margin-top: 1rem;
+      display: block;
+      font-weight: bold;
+    }
+
+    .search input,
+    .details select,
+    .details input {
+      width: 100%;
+      margin-top: 0.5rem;
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 0.4rem;
+      font-size: 1rem;
+    }
+
+    .details p {
+      margin: 0.5rem 0 0.25rem;
+    }
+
+    .details button {
+      padding: 0.6rem 1.2rem;
+      border: none;
+      border-radius: 999px;
+      font-weight: bold;
+      cursor: pointer;
+      color: white;
+      margin-top: 1rem;
+      margin-right: 0.5rem;
+    }
+
+    .details button:first-of-type {
+      background-color: #0077cc;
+    }
+
+    .details button:last-of-type {
+      background-color: #28a745;
+    }
+
+    .details button:hover {
+      opacity: 0.9;
+    }
+
+    header aside {
+      flex: 0 0 auto;
+      padding: 0 !important;
+      margin: 0 !important;
+      background: none !important;
+    }
+
+    header aside a {
+      display: inline-block;
+      width: auto !important;
+      padding: 4px 8px;
+      background-color: #2196F3;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 4px;
+      font-size: 0.9rem;
+    }
+  
+
   </style>
 </head>
 <body>
   <header>
+    <img src="images/matchday_logo.png" alt="Dashboard Logo" class="logo">
+
+ <nav>
+    <a href="a_dashboard.html"><img src = "images/dashboardBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"><span>Dashboard</span> 
+    </a>
     
-     <nav>
-    <a href="a_dashboard.html">Dashboard
-      <img src = "images/dashboardBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"> 
+    <a href="a_booking_man.html"><img src = "images/bookings_res_manageASBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"><span>Booking Management</span>  
     </a>
-    <a href="#view-users">User Management
-      <img src = "images/view_usersBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;">
+
+    <a href="#view-users"><img src = "images/view_usersBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"><span>User Management</span> 
     </a>
-    <a href="a_booking_man.html">Booking Management
-      <img src = "images/bookings_res_manageASBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"> 
+    
+    <a href="a_report.html">
+      <img src = "images/reportASBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"><span>Reports</span>  
     </a>
-    <a href="a_report.html">Reports
-      <img src = "images/reportASBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"> 
-    </a>
-    <a href="a_announce.html">Announcements 
-      <img src = "images/reportsRes_AnnounceASBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"> 
+    <a href="a_announce.html"> 
+      <img src = "images/reportsRes_AnnounceASBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"><span>Announcements</span>  
     </a> 
   </nav>
+
   </header>
 
- 
+  
 
   <main>
     <!-- User Management Section -->
-    <section id="view-users" aria-labelledby="view-users-heading">
+    <section id="view-users" aria-labelledby="view-users-heading" style="background-color: white;">
       <h2 id="view-users-heading">User Management</h2>
       
 
       <article class="table-container" aria-label="Users Table">
-        <h3>Users Table
-          <button id="load-users">Load Users
-            <img src = "images/loadBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"> 
-          </button>
+        <h3 style=" margin-bottom: 1rem;">Users Table
+          <button id="load-users">Load Users</button>
         </h3>
         
         <table id="users-table">
@@ -160,46 +356,21 @@
             <tr>
               <th>First Name</th>
               <th>Last Name</th>
-              <th>UID</th>
               <th>Role</th>
               <th>Status</th>
               <th>Actions</th>
+
+              
             </tr>
           </thead>
           
           <tbody></tbody>
         </table>
+
+    
       </article>
 
-      <!--<aside aria-label="User Search">
-        <form role="search" class="search">
-          <label for="search-users">Search Users</label>
-          <input type="text" id="search-users" placeholder="Enter name" />
-        </form>
-      </aside>
-
-      <section class="details" aria-label="User Details">
-        <h3>User Details</h3>
-        <label for="user-name"><strong>Name:</strong></label>
-        <input type="text" id="user-name" placeholder="Enter name" />
-
-        <label for="user-role"><strong>Role:</strong></label>
-        <select id="user-role">
-          <option value="admin">Admin</option>
-          <option value="staff">Facility Staff</option>
-          <option value="resident">Resident</option>
-        </select>
-
-        <label for="user-status"><strong>Status:</strong></label>
-        <select id="user-status">
-          <option value="pending">Pending</option>
-          <option value="active">Active</option>
-          <option value="blocked">Blocked</option>
-        </select>
-
-        <button type="button">Update</button>
-        <button type="button">Delete</button>
-      </section>-->
+      
     </section>
     
   </main>
