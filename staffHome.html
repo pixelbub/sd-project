@@ -12,12 +12,121 @@
   <!--<link rel="stylesheet" href="dashboard.css" />-->
   <script src="staff.js"></script>
   <style>
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      background-color: #025036;
+      color: white;
+      
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      
+    }
+
+    .logo {
+  height: 200px;  /* adjust as needed */
+  object-fit: contain;
+  display: block;
+  margin: 0 auto; /* center horizontally if needed */
+}
+
+    h1 {
+      margin-bottom: 1rem;
+      padding: 1rem;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 3rem;
+    }
+
+   nav a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ff6237;
+  color: white;
+  height: 60px;
+  width: 60px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: bold;
+  overflow: hidden;
+  transition: width 0.3s ease;
+  position: relative;
+  padding: 0 16px;
+}
+
+nav a img,
+nav a span {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: opacity 0.3s ease, left 0.3s ease;
+  white-space: nowrap;
+}
+
+nav a img {
+  opacity: 1;
+}
+
+nav a span {
+  opacity: 0;
+}
+
+nav a:hover {
+  width: 250px;
+  justify-content: flex-start;
+}
+
+nav a:hover img {
+  opacity: 0;
+  left: 16px;
+  transform: none;
+}
+
+nav a:hover span {
+  opacity: 1;
+  left: 48px; 
+  transform: none;
+}
+
+    
+
+    nav a:nth-of-type(1) { background-color: #ff6237; }
+    nav a:nth-of-type(2) { background-color: #ff7b54; }
+    nav a:nth-of-type(3) { background-color: #effe60; }
+    nav a:nth-of-type(4) { background-color: #6e7aff; }
+    nav a:nth-of-type(5) { background-color: #7f42e5; }
+
+    
+
+
+
     #notifPopup button {
   background-color: #6e7aff;
   color: white;
   border: none;
   padding: 0.5rem 1rem;
-  border-radius: 999px;
+  border-radius: 20px;
   cursor: pointer;
   font-size: 0.9rem;
   transition: background-color 0.2s;
@@ -25,9 +134,230 @@
 
 button{
   background-color:#6e7aff;
+  border: none;
   border-radius: 999px;
-  border-color:#6e7aff;
+  padding: 0.75rem 1rem;
 }
+  
+  
+section[aria-label="navigation-area"] {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin-top: 2%;
+}
+  
+  
+  aside {
+    display: flex;
+    gap: 1.5%;
+    margin: 0.2%;
+  }
+  
+  /* Profile Button Styles */
+  aside a {
+  display: inline-block;
+  padding: 0.5em 1em;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: bold;
+  color: #ff6237;
+  background-color: white;
+  border: solid #ff6237;
+  transition: background-color 0.3s ease;
+  white-space:nowrap;
+  }
+  
+  aside a:hover {
+    background-color: #ff6237;
+    color: white;
+ }
+
+ 
+.profile-link{
+    display: inline-block;
+    padding: 10px 16px;
+    border-radius: 50%; /* pill shape for text; use 50% for icon-only */
+    text-decoration: none;
+    font-weight: bold;
+    color: #ff6237;
+    background-color: white;
+    border: 2px solid #ff6237;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    margin: 4px 2px;
+}
+  
+  /* Header Layout */
+
+  
+  .home_button {
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: bold;
+    background-color: black;
+    color: #effe60;
+    padding: 0.4rem 0.8rem;
+    border-radius: 1rem;
+  }
+  
+  .home_button:hover {
+    background-color: #0b3953;
+  }
+  
+  /* Main split layout */
+ 
+  
+  /* Table Section */
+  section {
+    flex: 2;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  }
+  
+  th, td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+  }
+  
+  thead {
+    background-color: black;
+    color: #effe60;
+  }
+  
+  /* Aside Section */
+  aside {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+  }
+  
+  /* Search Field */
+  main aside section[aria-label="Search"] {
+    background-color: #ffffff;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  }
+  
+  #search {
+    width: 100%;
+    padding: 0.6rem;
+    border: 1px solid #ccc;
+    border-radius: 0.4rem;
+    margin-top: 0.5rem;
+  }
+  
+  /* User Details Card */
+  main aside section[aria-label="Details"] {
+    background-color: #ffffff;
+    padding: 1.2rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  main aside section[aria-label="Details"] select {
+    padding: 0.5rem;
+    border-radius: 0.4rem;
+    border: 1px solid #ccc;
+  }
+  
+  /* Buttons */
+  main aside section[aria-label="Details"] button {
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    color: white;
+    margin-top: 0.5rem;
+  }
+  
+  main aside section[aria-label="Details"] button:first-of-type {
+    background-color: #0077cc;
+    
+  }
+  
+  main aside section[aria-label="Details"] button:last-of-type {
+    background-color: #d62828;
+  }
+  
+  main aside section[aria-label="Details"] button:hover {
+    opacity: 0.9;
+  }
+/* General sidebar layout */
+main aside {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  /* Form and details spacing */
+  .search,
+  .details {
+    background-color: #ffffff;
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Consistent spacing inside forms */
+  .search label,
+  .details label {
+    margin-top: 1rem;
+    display: block;
+    font-weight: bold;
+  }
+  
+  .search input,
+  .details select,
+  .details input {
+    width: 100%;
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 0.4rem;
+    font-size: 1rem;
+  }
+  
+  /* Name styling to prevent overlap */
+  .details p {
+    margin: 0.5rem 0 0.25rem;
+  }
+  
+  /* Button group styling */
+  .details button {
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    color: white;
+    margin-top: 1rem;
+    margin-right: 0.5rem;
+  }
+  
+  .details button:first-of-type {
+    background-color: #0077cc;
+  }
+  
+  .details button:last-of-type {
+    background-color: #28a745;
+  }
 
 </style>
 </head>
@@ -37,23 +367,33 @@ button{
   <!-- Header Section for the Website -->
   <header>
     <!-- Main heading for the page -->
-    <h1><img src="images/matchday_logo.png" alt="Logo" class="logo"></h1>
+     
+      <img src="images/matchday_logo.png" alt="Logo" class="logo">
+     <nav>
+   
+    <a href="fs_report.html">
+      <img src = "images/reportASBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"><span>Reports</span>  
+    </a>
+   
+    <a href="staffHome.html">
+      <img src = "images/view_usersBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"><span>View Users</span> 
+    </a> 
+  </nav>
+
+     
     <!-- Aside section with links for Profile -->
      <!-- Navigation bar to provide quick links to sections -->
    
-   <nav>
-   
-    <a href="fs_report.html">Reports
-      <img src = "images/reportASBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"> </a>
-   
-    <a href="staffHome.html">View Users
-      <img src = "images/view_usersBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"> 
-    </a> 
-  </nav>
-    <button id="notifBtn" aria-label="Unread notifications" style="position: relative;">
-      <img src = "images/notificationsBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;">
-    </button>
+    
   </header>
+
+  <section style="position: absolute; right: 2rem; top: 50%; transform: translateY(-750%);">
+      <button id="notifBtn" aria-label="Unread notifications" style="position: relative;">
+      <img src = "images/notificationsBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;">
+      </button>
+
+     </section>
+    
 
  
 
@@ -71,17 +411,17 @@ button{
     
   </section>
 
-  <section id="view-users">
-    <h2>View Users</h2>
+  <section id="view-users" style="margin: 2rem; background-color: white; padding: 2rem; border-radius: 20px;">
+    <h2 style="margin-bottom: 2rem;">View Users</h2>
     <!-- Button to trigger loading -->
-    <button id="load-users">
+    <button id="load-users" style="color: white; font-family: Arial;">
       Load Users
-      <img src = "images/loadBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;">   
+      <img src = "images/loadBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px; color: white;">   
     </button>
     <!-- Container for the users table -->
-    <div class="table-container">
+    <section class="table-container">
       <table id="users-table">
-        <caption>All Registered Users</caption>
+        <caption style="font-weight: 600; margin-bottom: 1rem;">All Registered Users</caption>
         <thead>
           <tr>
             
@@ -94,7 +434,7 @@ button{
           <!-- Rows will be injected here by JavaScript -->
         </tbody>
       </table>
-    </div>
+    </section>
   </section>
 
 </body>
