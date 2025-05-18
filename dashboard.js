@@ -180,7 +180,13 @@ async function onBook() {
     errorMessage.textContent = err.message;
   } finally {
     bookBtn.disabled = false;
-    bookBtn.textContent = 'Confirm Booking <img src = "images/markReadBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;">';
+    const icon = document.createElement('img');
+    icon.src = 'images/submit_confirmBtn.PNG';
+    icon.alt = 'Icon';
+    icon.style.height = '36px';
+    icon.style.verticalAlign = 'middle';
+    bookBtn.textContent = 'Confirm Booking';
+    bookBtn.appendChild(icon);
   }
 }
 
@@ -207,7 +213,13 @@ async function fetchUnreadNotifications() {
       li.textContent = n.message;
 
       const markBtn = document.createElement('button');
-      markBtn.textContent = 'Mark as read <img src = "images/markReadBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;">';
+      const icon = document.createElement('img');
+      icon.src = 'images/markReadBtn.PNG';
+      icon.alt = 'Icon';
+      icon.style.height = '36px';
+      icon.style.verticalAlign = 'middle';
+      markBtn.textContent = 'Mark as read ';
+      markBtn.appendChild(icon);
       markBtn.style.marginLeft = '10px';
       markBtn.addEventListener('click', async () => {
         await fetch(`https://backend-k52m.onrender.com/notifications/mark-read/${userUid}/${n.id}`, {
