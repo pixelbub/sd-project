@@ -1,3 +1,4 @@
+
 let currentFacilityCapacity = 0;
 let selectedSlot = null;
 
@@ -21,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
   datePick.valueAsDate = new Date();
   datePick.min = new Date().toISOString().split('T')[0];
 
-  fetch('/facilities')
+  fetch('https://backend-k52m.onrender.com/facilities')
     .then(res => res.json())
     .then(facilities => {
       facilities.forEach(f => {
@@ -72,7 +73,7 @@ async function updateAvailability() {
   selectedSlot = null;
 
   try {
-    const res = await fetch(`/availability?facilityId=${facilityId}&date=${date}`);
+    const res = await fetch(`https://backend-k52m.onrender.com/availability?facilityId=${facilityId}&date=${date}`);
     if (!res.ok) throw new Error('Failed to load availability');
     const slots = await res.json();
 
@@ -160,7 +161,7 @@ async function onBook() {
       end_time: selectedSlot.dataset.end
     };
 
-    const res = await fetch('/bookings', {
+    const res = await fetch('https://backend-k52m.onrender.com/bookings', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
@@ -179,7 +180,7 @@ async function onBook() {
     errorMessage.textContent = err.message;
   } finally {
     bookBtn.disabled = false;
-    bookBtn.textContent = 'Confirm Booking';
+    bookBtn.textContent = 'Confirm Booking <img src = "images/markReadBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;">';
   }
 }
 
@@ -191,7 +192,7 @@ function toggleNotifPopup() {
 
 async function fetchUnreadNotifications() {
   try {
-    const res = await fetch(`/notifications/unread/${userUid}`);
+    const res = await fetch(`https://backend-k52m.onrender.com/notifications/unread/${userUid}`);
     const notifications = await res.json();
 
     notifCount.textContent = notifications.length;
@@ -206,10 +207,10 @@ async function fetchUnreadNotifications() {
       li.textContent = n.message;
 
       const markBtn = document.createElement('button');
-      markBtn.textContent = 'Mark as read';
+      markBtn.textContent = 'Mark as read <img src = "images/markReadBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;">';
       markBtn.style.marginLeft = '10px';
       markBtn.addEventListener('click', async () => {
-        await fetch(`/notifications/mark-read/${userUid}/${n.id}`, {
+        await fetch(`https://backend-k52m.onrender.com/notifications/mark-read/${userUid}/${n.id}`, {
           method: 'PATCH'
         });
         await fetchUnreadNotifications();
