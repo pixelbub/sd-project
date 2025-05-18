@@ -19,7 +19,7 @@ section {
     background-color: black;
     color: #effe6d;
     padding: 1.5rem;
-    border-radius: 0.75rem;
+    border-radius: 2rem;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
     display: flex;
     flex-wrap: wrap;
@@ -40,6 +40,7 @@ section {
 
 label {
     display: block;
+    padding: 1rem;
     margin-bottom: 0.5rem;
     font-weight: bold;
 }
@@ -48,9 +49,14 @@ input,
 select {
     width: 40%;
     padding: 0.6rem;
-    border: 1px solid #ccc;
-    border-radius: 0.5rem;
+    border: none;
+    border-radius: 1rem;
     font-size: 1rem;
+    margin-left: 1rem;
+}
+
+input:hover{
+    opacity: 0.85;
 }
 
 .slot-grid {
@@ -62,7 +68,7 @@ select {
 
 .time-slot {
     padding: 0.5rem;
-    border: 2px solid #e0e0e0;
+    border: none;
     border-radius: 8px;
     cursor: pointer;
     transition: border-color 0.2s;
