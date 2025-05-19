@@ -1,51 +1,165 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>MatchDay - Manage Events & Closures</title>
-  <link rel="stylesheet" href="view_users_style.css" />
-  <link rel="stylesheet" href="resHome.css" />
   <style>
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      background-color: #025036;
+      color: white;
+      
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      
+    }
+
+    .logo {
+  height: 200px;  /* adjust as needed */
+  object-fit: contain;
+  display: block;
+  margin: 0 auto; /* center horizontally if needed */
+}
+
+    h1 {
+      margin-bottom: 1rem;
+      padding: 1rem;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 3rem;
+    }
+
+   nav a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ff6237;
+  color: white;
+  height: 60px;
+  width: 60px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: bold;
+  overflow: hidden;
+  transition: width 0.3s ease;
+  position: relative;
+  padding: 0 16px;
+}
+
+nav a img,
+nav a span {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: opacity 0.3s ease, left 0.3s ease;
+  white-space: nowrap;
+}
+
+nav a img {
+  opacity: 1;
+}
+
+nav a span {
+  opacity: 0;
+}
+
+nav a:hover {
+  width: 250px;
+  justify-content: flex-start;
+}
+
+nav a:hover img {
+  opacity: 0;
+  left: 16px;
+  transform: none;
+}
+
+nav a:hover span {
+  opacity: 1;
+  left: 48px; 
+  transform: none;
+}
+
+    
+
+    nav a:nth-of-type(1) { background-color: #ff6237; }
+    nav a:nth-of-type(2) { background-color: #ff7b54; }
+    nav a:nth-of-type(3) { background-color: #effe60; }
+    nav a:nth-of-type(4) { background-color: #6e7aff; }
+    nav a:nth-of-type(5) { background-color: #7f42e5; }
+
+    
     :root {
-      --primary-color: #007bff;
+      --primary-color: #6e7aff;
       --border-radius: 8px;
       --input-border: #ccc;
       --box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
-
+  
     main {
       max-width: 800px;
       margin: 2rem auto;
       padding: 1.5rem;
-      background: #fff;
-      border-radius: var(--border-radius);
+      background: rgb(34, 34, 34);
+      color: #fff;
+      border-radius: 20px;
       box-shadow: var(--box-shadow);
+      
     }
 
+    section {
+      padding: 1rem;
+      border-radius: 20px;
+    }
+
+    
+  
     form {
       display: flex;
       flex-direction: column;
       gap: 1.5rem;
     }
-
+  
     fieldset {
       border: none;
       padding: 0;
       margin: 0;
     }
-
+  
     legend {
       font-weight: bold;
       margin-bottom: 0.5rem;
     }
-
+  
     label {
       display: block;
       font-weight: 600;
       margin-bottom: 0.25rem;
     }
-
+  
     select,
     input[type="text"],
     input[type="datetime-local"],
@@ -56,15 +170,15 @@
       border-radius: 4px;
       font-size: 1rem;
     }
-
+  
     textarea {
       resize: vertical;
     }
-
+  
     input[type="checkbox"] {
       margin-right: 0.5rem;
     }
-
+  
     button {
       padding: 0.6rem 1.2rem;
       background-color: var(--primary-color);
@@ -75,37 +189,57 @@
       cursor: pointer;
       transition: background-color 0.2s ease;
     }
-
+  
     button:disabled {
       background-color: #aaa;
       cursor: not-allowed;
     }
-
+  
     #ecMessage {
       margin-top: 1rem;
       font-weight: bold;
       color: #333;
     }
+    #ecSubmit{
+        border-radius: 999px;
+    }
   </style>
+  
 </head>
 <body>
   <header>
-    <h1>MatchDay</h1>
+   <img src="images/matchday_logo.png" alt="Dashboard Logo" class="logo">
+
+ <nav>
+    <a href="a_dashboard.html"><img src = "images/dashboardBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"><span>Dashboard</span> 
+    </a>
+    
+    <a href="a_booking_man.html"><img src = "images/bookings_res_manageASBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"><span>Booking Management</span>  
+    </a>
+
+    <a href="a_sHome.html"><img src = "images/view_usersBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"><span>User Management</span> 
+    </a>
+    
+    <a href="a_report.html">
+      <img src = "images/reportASBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"><span>Reports</span>  
+    </a>
+    <a href="a_announce.html"> 
+      <img src = "images/reportsRes_AnnounceASBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"><span>Announcements</span>  
+    </a> 
+  </nav>
+
   </header>
 
-  <nav>
-    <a href="a_dashboard.html">Dashboard</a>
-    <a href="a_sHome.html">User Management</a>
-    <a href="a_booking_man.html">Booking Management</a>
-    <a href="a_report.html">Reports</a>
-    <a href="a_announce.html" class="active">Announcements</a>
-  </nav>
+  <section style="margin: 2rem; background-color: white;">
+    <h2 style="margin: 1rem;">Announcements</h2>
 
   <main>
     <section aria-labelledby="manage-events-heading">
-      <h2 id="manage-events-heading">Schedule Event or Maintenance Closure</h2>
+      <h2 id="manage-events-heading" style="margin-bottom: 2rem;">Schedule Event or Maintenance Closure
+      </h2>
       <form id="ecForm">
         <fieldset>
+          
           <label for="ecType">Select Type:</label>
           <select id="ecType" required>
             <option value="event">Event</option>
@@ -114,6 +248,7 @@
         </fieldset>
 
         <fieldset>
+          
           <label for="ecFacility">Choose Facility:</label>
           <select id="ecFacility" required>
             <option value="">Loading…</option>
@@ -121,9 +256,10 @@
         </fieldset>
 
         <fieldset>
+         
           <input type="checkbox" id="ecAllDay" />
           <label for="ecAllDay">All Day </label>
-
+          
           <label for="ecStart">Start Date & Time</label>
           <input type="datetime-local" id="ecStart" required />
 
@@ -133,12 +269,14 @@
 
         <fieldset id="titleGroup">
           <legend>Event Details</legend>
+
           <label for="ecTitle">Title</label>
           <input type="text" id="ecTitle" placeholder="Event title" required />
 
           <input type="checkbox" id="ecPrivate" />
           <label for="ecPrivate">Private Event</label>
         </fieldset>
+
 
         <fieldset id="reasonGroup" style="display:none">
           <legend>Closure Reason</legend>
@@ -151,11 +289,17 @@
           <textarea id="ecDescription" rows="3" placeholder="Enter description" required></textarea>
         </fieldset>
 
-        <button type="submit" id="ecSubmit">Submit</button>
+        <button type="submit" id="ecSubmit">Submit
+          <img src = "images/submit_confirmBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"> 
+        </button>
         <p id="ecMessage"></p>
       </form>
     </section>
   </main>
+    
+  </section>
+  
+    
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -165,11 +309,11 @@
       const ecEnd      = document.getElementById('ecEnd');
       const ecAllDay   = document.getElementById('ecAllDay');
       const ecTitle    = document.getElementById('ecTitle');
-      const ecPrivate  = document.getElementById('ecPrivate');
       const ecReason   = document.getElementById('ecReason');
       const ecDesc     = document.getElementById('ecDescription');
       const titleGroup = document.getElementById('titleGroup');
       const reasonGroup= document.getElementById('reasonGroup');
+      const descGroup  = document.getElementById('descGroup');
       const ecForm     = document.getElementById('ecForm');
       const ecMessage  = document.getElementById('ecMessage');
       const ecSubmit   = document.getElementById('ecSubmit');
@@ -233,7 +377,7 @@
         let url = 'https://backend-k52m.onrender.com/events';
         if (ecType.value === 'event') {
           payload.title = ecTitle.value.trim();
-          payload.private = ecPrivate.checked;
+          payload.private = document.getElementById('ecPrivate').checked;
         } else {
           url = 'https://backend-k52m.onrender.com/closures';
           payload.reason = ecReason.value.trim();
@@ -248,7 +392,7 @@
           const body = await res.json();
           if (body.success) {
             ecMessage.textContent = `${ecType.value.charAt(0).toUpperCase()+ecType.value.slice(1)} scheduled successfully.`;
-            ecMessage.style.color = '#28a745';
+            ecMessage.style.color = '#EFFE6D';
             ecForm.reset();
             ecType.dispatchEvent(new Event('change'));
           } else {
@@ -257,7 +401,6 @@
         } catch (err) {
           console.error(err);
           ecMessage.textContent = `Error: ${err.message}`;
-          ecMessage.style.color = 'red';
         } finally {
           ecSubmit.disabled = false;
         }
