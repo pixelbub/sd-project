@@ -277,3 +277,16 @@ window.addEventListener('DOMContentLoaded', () => {
     downloadPDF(bookingChart, 'freqTable', 'Facility Booking Frequency')
   );
 });
+module.exports = {
+  scrollToSection,
+  getSelectedMonth,
+  filterClosuresByMonth,
+  mergeAndTotal,
+  hoursInMonth,
+  loadFacilityData,
+  loadEventData,
+  loadBookingData,
+  downloadCSV,
+  downloadChartPNG,
+  downloadPDF,
+};
