@@ -385,6 +385,7 @@ nav a:hover span {
           const body = await res.json();
           if (body.success) {
             ecMessage.textContent = `${ecType.value.charAt(0).toUpperCase()+ecType.value.slice(1)} scheduled successfully.`;
+            ecMessage.style.color = '#EFFE60D';
             ecForm.reset();
             ecType.dispatchEvent(new Event('change'));
           } else {
