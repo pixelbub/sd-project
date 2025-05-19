@@ -216,7 +216,8 @@ async function fetchUnreadNotifications() {
       const icon = document.createElement('img');
       icon.src = 'images/markReadBtn.PNG';
       icon.alt = 'Icon';
-      icon.style.height = '36px';
+      icon.style.height = '30px';
+      markBtn.style.margin="5px"
       icon.style.verticalAlign = 'middle';
       markBtn.textContent = 'Mark as read ';
       markBtn.appendChild(icon);
