@@ -10,4 +10,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Ping Render Backend
-        run: curl -s https://backend-k52m.onrender.com/render/ping
+        run: curl -s https://backend-k52m.onrender.com/ping
