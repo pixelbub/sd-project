@@ -1,11 +1,11 @@
-name:Keep Backend Awake
+name: Keep Backend Awake
 
-on: 
+on:
   schedule:
-    - cron:"*/10 * * * *"
+    - cron: "*/5 * * * *"
   workflow_dispatch:
 
-jobs: 
+jobs:
   ping:
     runs-on: ubuntu-latest
     steps:
