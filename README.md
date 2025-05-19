@@ -2,7 +2,7 @@
 
 [![codecov](https://codecov.io/github/pixelbub/sd-project/graph/badge.svg?token=7PNF4KTZZB)](https://codecov.io/github/pixelbub/sd-project)
 
-## site link
+## Site Link
 https://victorious-bush-007efa41e.6.azurestaticapps.net/
 
 ## Overview
