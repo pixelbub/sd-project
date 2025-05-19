@@ -236,16 +236,4 @@ async function fetchUnreadNotifications() {
     console.error('Error loading notifications:', err);
   }
 }
-module.exports = {
-  scrollToSection,
-  getSelectedMonth,
-  filterClosuresByMonth,
-  mergeAndTotal,
-  hoursInMonth,
-  loadFacilityData,
-  loadEventData,
-  loadBookingData,
-  downloadCSV,
-  downloadChartPNG,
-  downloadPDF,
-};
+
