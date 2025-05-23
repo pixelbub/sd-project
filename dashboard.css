@@ -1,164 +1,247 @@
-/* Reset box sizing only */
-* {
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
-    padding: 1rem;
-}
-
-section {
-    padding: 2rem;
-    margin: 0 auto;
-}
-
-.booking-controls {
-    background-color: black;
-    color: #effe6d;
-    padding: 1.5rem;
-    border-radius: 2rem;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    max-width: 1200px;
-    margin: 10px auto;
-}
-
-
-
-.booking-details {
-    flex: 1 1 300px;
-}
-
-.slot-container {
-    flex: 1 1 400px;
-}
-
-label {
-    display: block;
-    padding: 1rem;
-    margin-bottom: 0.5rem;
-    font-weight: bold;
-}
-
-input,
-select {
-    width: 40%;
-    padding: 0.6rem;
-    border: none;
-    border-radius: 1rem;
-    font-size: 1rem;
-    margin-left: 1rem;
-}
-
-input:hover{
-    opacity: 0.85;
-}
-
-.slot-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 0.5rem;
-    margin: 1rem 0;
-}
-
-.time-slot {
-    padding: 0.5rem;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: border-color 0.2s;
-    text-align: center;
-    font-size: 0.9rem;
-    background-color: #7f43e5;
-    border-color:#7f43e5
-}
-
-.time-slot:hover {
-    background-color: #6e7aff;
-    border-color: #6e7aff;
-}
-
-.time-slot.selected {
-    background: #fe7b54;
-    color: white;
-    border-color: white;
-}
-
-.time-slot.unavailable {
-    opacity: 0.5;
-    cursor: not-allowed;
-    background: #f1f1f1;
-}
-
-.time-slot small {
-    display: block;
-    margin-top: 0.25rem;
-    font-size: 0.75rem;
-}
-
-button {
-    background-color: #6e7aff;
-    color: white;
-    border: none;
-    padding: 1rem 2rem;
-    border-radius: 999px;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: background-color 0.2s;
-}
-
-button:hover {
-    background-color: #6e7aff;
-}
-
-button:disabled,
-#bookBtn:disabled {
-    background-color: #95a5a6;
-    cursor: not-allowed;
-}
-
-#bookBtn {
-    background-color: #6e7aff;
-    border-radius: 999px;
-}
-
-.notification-button {
-    display: inline-block;
-    padding: 0.5em 1em;
-    background-color: white;
-    color: #2e8b57;
-    text-decoration: none;
-    border-radius: 999px; 
-    font-weight: bold;
-    transition: background-color 0.2s ease;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MatchDay - Book Facilities</title>
+  <link rel="stylesheet" href="dashboard.css" />
+  <script type="module" src="dashboard.js"></script>
   
-  .notification-button:hover {
-    
-    background-color: #2e8b57; 
-    color: white;
-  }
+  <style>
 
-#loading {
-    display: none;
-    padding: 1rem;
-    text-align: center;
-    color: #7f8c8d;
-}
-
-.error-message {
-    color: #e74c3c;
-    margin-top: 1rem;
-}
-
-@media (max-width: 800px) {
-    .booking-controls {
-        flex-direction: column;
+    *{
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
     }
+   
+    html, body {
+
+       margin: 0;
+      padding: 0;
+    }
+
+    body {
+  font-family: system-ui, sans-serif;
+  background-color: #f5f5f5;
 }
+
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      background-color: #025036;
+      color: white;
+      position: relative;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      
+    }
+
+    .logo {
+  height: 200px;  /* adjust as needed */
+  object-fit: contain;
+  display: block;
+  margin: 0 auto; /* center horizontally if needed */
+}
+
+    h1 {
+      margin-bottom: 1rem;
+      padding: 1rem;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 3rem;
+    }
+
+   nav a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ff6237;
+  color: white;
+  height: 60px;
+  width: 60px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: bold;
+  overflow: hidden;
+  transition: width 0.3s ease;
+  position: relative;
+  padding: 0 16px;
+}
+
+nav a img,
+nav a span {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: opacity 0.3s ease, left 0.3s ease;
+  white-space: nowrap;
+}
+
+nav a img {
+  opacity: 1;
+}
+
+nav a span {
+  opacity: 0;
+}
+
+nav a:hover {
+  width: 250px;
+  justify-content: flex-start;
+}
+
+nav a:hover img {
+  opacity: 0;
+  left: 16px;
+  transform: none;
+}
+
+nav a:hover span {
+  opacity: 1;
+  left: 48px; 
+  transform: none;
+}
+    nav a:nth-of-type(1) { background-color: #ff6237; }
+    nav a:nth-of-type(2) { background-color: #d3f63c; }
+    nav a:nth-of-type(3) { background-color: #7f42e5; }
+    nav a:nth-of-type(4) { background-color: #6e7aff; }
+    nav a:nth-of-type(5) { background-color: #7f42e5; }
+    
+  #notifPopup button {
+      background-color: #6e7aff;;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: background-color 0.2s;
+    }
+
+    legend{
+      font-size: 1.2em;
+      font-weight: bold;
+      margin: 1rem;
+
+    }
+
+     main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 1.5rem;
+      background: #d3f63c;
+      color: black;
+      border-radius: 20px;
+      box-shadow: var(--box-shadow);
+    }
+    
+</style>
+  
+</head>
+<body>
+  <header>
+
+     <img src="images/matchday_logo.png" alt="Logo" class="logo">
+
+    <nav>
+    
+    <a href="dashboard.html">
+       
+      <img src = "images/bookings_res_manageASBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"><span>Bookings</span>
+    </a>
+  
+    <a href="events.html">
+      <img src = "images/idkBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"> <span>Events</span>
+    </a>
+    
+
+    <a href="report.html">
+      <img src = "images/reportsRes_AnnounceASBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"><span>Report</span> </a>
+    
+     
+  
+     
+  </nav>
+   
+  </header>
+
+  <button id="notifBtn" aria-label="Unread notifications" style="position: relative; margin: 2rem;">
+      <img src = "images/notificationsBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;">
+      <data
+        id="notifCount"
+        value="0"
+        aria-live="polite"
+        style="
+          position: absolute;
+          top: -5px;
+          right: -5px;
+          background: red;
+          color: white;
+          font-size: 0.7em;
+          padding: 2px 5px;
+          border-radius: 50%;
+          display: none;
+        "
+      >
+        0
+      </data>
+   
+   </button>
+
+
+  
+  <aside id="notifPopup"  style="display: none; margin: 2rem;" aria-label="Unread notifications">
+    <section>
+      <ul id="notifList"></ul>
+    </section>
+    <footer >
+      <button  onclick="window.location.href = 'notifications.html'">View All Notifications
+        <img src = "images/notificationsBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;">
+      </button>
+    </footer>
+  </aside>
+  
+  
+
+  <main>
+    <section class="booking-controls" aria-labelledby="booking-heading">
+      <section class="booking-details" aria-labelledby="booking-heading">
+        <h2 id="booking-heading">Make a Booking</h2>
+        <fieldset>
+          <legend>Booking Details</legend>
+
+          <label for="facilitySelect">Facility:</label>
+          <select id="facilitySelect" required>
+            <option value="">Select a facility</option>
+          </select>
+
+          <label for="datePick">Date:</label>
+          <input type="date" id="datePick" required />
+
+          <label for="groupSize">Number of People:</label>
+          <input type="number" id="groupSize" min="1" value="1" required />
+
+          <button type="button" id="bookBtn" disabled>Confirm Booking
+            <img src = "images/submit_confirmBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"> 
+          </button>
+          <p id="errorMessage" class="error-message" aria-live="polite"></p>
+        </fieldset>
+      </section>
+
+      <section class="slot-container" aria-labelledby="slots-heading">
+        <h3 id="slots-heading">Available Time Slots</h3>
+        <output id="loading">Loading available slots…</output>
+        <section id="timeSlots" class="slot-grid" aria-live="polite"></section>
+      </section>
+    </section>
+  </main>
+</body>
+</html>
