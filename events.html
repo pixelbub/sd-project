@@ -108,13 +108,19 @@ nav a:hover span {
   transform: none;
 }
     nav a:nth-of-type(1) { background-color: #ff6237; }
-    nav a:nth-of-type(2) { background-color: #effe60; }
+    nav a:nth-of-type(2) { background-color: #d3f63c; }
     nav a:nth-of-type(3) { background-color: #7f42e5; }
     nav a:nth-of-type(4) { background-color: #6e7aff; }
     nav a:nth-of-type(5) { background-color: #7f42e5; }
     
     main {
-      padding: 0px;
+       max-width: 800px;
+      margin: 2rem auto;
+      padding: 1.5rem;
+      background: #d3f63c;
+      color: black;
+      border-radius: 20px;
+      box-shadow: var(--box-shadow);
     }
 
     h2 {
@@ -127,6 +133,7 @@ nav a:hover span {
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 16px;
       margin-top: 20px;
+      background-color: white;
     }
 
     .event-card {
