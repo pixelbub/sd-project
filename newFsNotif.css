@@ -1,22 +1,25 @@
 
   
-  header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  /* … */
-}
+header {
+      display: flex;
+      justify-content: space-between;
+      background-color: #025036;
+      color: white;
+      
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      
+    }
 
-/* make the logo container “fill” available space */
 header h1 {
   flex: 1;
   display: flex;
   justify-content: center;
 }
 
-/* keep your image centered in that h1 */
 header .logo {
-  max-height: 200px; /* or whatever height you want */
+  max-height: 200px; 
 }
   
   section[aria-label="navigation-area"] {
@@ -27,32 +30,7 @@ header .logo {
     margin-top: 2%;
   }
   
-  nav {
-    display: flex;
-    gap: 0.5%;
-    flex-wrap: wrap;
-  }
   
-  nav a {
-    padding: 1% 4%;
-    border-radius: 20px;
-    text-decoration: none;
-    color: white;
-    font-weight: bold;
-    transition: background-color 0.3s;
-    margin: 0.2%;
-  }
-  
-  nav a:nth-of-type(1) { background-color: #fe7b54; }
-  nav a:nth-of-type(2) { background-color: #7f43e5; }
-  nav a:nth-of-type(3) { background-color: #effe6d; }
-  nav a:nth-of-type(4) { background-color: #ff6237; }
-  nav a:nth-of-type(5) { background-color: #6e7aff; }
-
-  nav a:hover {
-    background-color: white;
-    color: #6e7aff;
-  }
   
   aside {
     display: flex;

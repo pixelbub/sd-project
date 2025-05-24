@@ -6,6 +6,7 @@
   <link rel="stylesheet" href="newViewUsers.css" />
   <link rel="stylesheet" href="newFsNotif.css" />
   <style>
+
     .notif {
       border: 1px solid #ccc;
       padding: 10px;
@@ -16,7 +17,32 @@
       background-color: #e8f4ff;
     }
 
-        nav {
+* {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+    }
+    
+
+    .logo {
+  height: 200px;  
+  object-fit: contain;
+  display: block;
+  margin: 0 auto; 
+}
+
+    h1 {
+      margin-bottom: 1rem;
+      padding: 1rem;
+    }
+
+    nav {
       display: flex;
       align-items: center;
       gap: 10px;
@@ -94,14 +120,14 @@ nav a:hover span {
   </style>
 </head>
 <header>
-  <h1><img src="images/matchday_logo.png" alt="Logo" class="logo"></h1>
+  <img src="images/matchday_logo.png" alt="Logo" class="logo">
    <nav>
 
-    <a href="fs_report.html">Reports
-      <img src = "images/reportASBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"> </a>
+    <a href="fs_report.html">
+      <img src = "images/reportASBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"><span>Reports</span> </a>
     
-    <a href="staffHome.html">View Users
-      <img src = "images/view_usersBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"> 
+    <a href="staffHome.html">
+      <img src = "images/view_usersBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"> <span>View Users</span>
     </a>
     
   </nav>
@@ -110,7 +136,7 @@ nav a:hover span {
 
 <body>
   <h1>Your Notifications</h1>
-  <div id="notifContainer">Loading…</div>
+  <section id="notifContainer">Loading…</section>
 
   <script>
     document.addEventListener('DOMContentLoaded', async () => {
