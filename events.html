@@ -123,6 +123,13 @@ nav a:hover span {
       box-shadow: var(--box-shadow);
     }
 
+    section{
+      background-color: white;
+      border-radius: 20px;
+      padding: 2rem;
+      margin: 0 auto;
+    }
+
     h2 {
       text-align: center;
       color: #333;
@@ -239,10 +246,12 @@ nav a:hover span {
   
 
   <main>
+    <section>
     <h2 style="margin-top: 2rem;">Upcoming Events</h2>
     <p id="loading">Loading events...</p>
     <section id="events-container" style="display: none;"></section>
     <p id="no-events" style="display: none;">No upcoming public events</p>
+    </section>
   </main>
   <script type="module" src="events.js"></script>
 </body>
