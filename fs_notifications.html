@@ -16,6 +16,80 @@
       background-color: #e8f4ff;
     }
 
+        nav {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 3rem;
+    }
+
+   nav a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ff6237;
+  color: white;
+  height: 60px;
+  width: 60px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: bold;
+  overflow: hidden;
+  transition: width 0.3s ease;
+  position: relative;
+  padding: 0 16px;
+}
+
+nav a img,
+nav a span {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: opacity 0.3s ease, left 0.3s ease;
+  white-space: nowrap;
+}
+
+nav a img {
+  opacity: 1;
+}
+
+nav a span {
+  opacity: 0;
+}
+
+nav a:hover {
+  width: 250px;
+  justify-content: flex-start;
+}
+
+nav a:hover img {
+  opacity: 0;
+  left: 16px;
+  transform: none;
+}
+
+nav a:hover span {
+  opacity: 1;
+  left: 48px; 
+  transform: none;
+}
+    nav a:nth-of-type(1) { background-color: #ff6237; }
+    nav a:nth-of-type(2) { background-color: #d3f63c; }
+    nav a:nth-of-type(3) { background-color: #7f42e5; }
+    nav a:nth-of-type(4) { background-color: #6e7aff; }
+    nav a:nth-of-type(5) { background-color: #7f42e5; }
+    
+  #notifPopup button {
+      background-color: #6e7aff;;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: background-color 0.2s;
+    }
   
   </style>
 </head>
