@@ -5,12 +5,7 @@
     padding: 0;
   }
   
-  @font-face {
-    font-family: 'MyFont';
-    src: url('fonts/Avega-Italic.otf') format('opentype');
-    font-weight: normal;
-    font-style: normal;
-    }
+ 
 
   body {
      margin: 0;
@@ -209,7 +204,7 @@ main aside {
         padding: 1% 4%;
         border-radius: 999px;      
         cursor: pointer;
-        font-family: 'MyFont';
+        
     
         transition: background-color 0.3s, color 0.3s;
       }
