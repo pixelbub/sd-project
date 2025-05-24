@@ -31,6 +31,34 @@ describe('a_dashboard.js utilities and loaders', () => {
     // Clear any global Chart or jsPDF stubs
     delete global.Chart;
     delete window.jspdf;
+
+    // Mock getContext for canvas
+    HTMLCanvasElement.prototype.getContext = () => ({
+      fillRect: () => {},
+      // Add minimal mocks or full as needed
+      getImageData: () => ({ data: [] }),
+      putImageData: () => {},
+      createImageData: () => [],
+      setTransform: () => {},
+      drawImage: () => {},
+      save: () => {},
+      fillText: () => {},
+      restore: () => {},
+      beginPath: () => {},
+      moveTo: () => {},
+      lineTo: () => {},
+      closePath: () => {},
+      stroke: () => {},
+      translate: () => {},
+      scale: () => {},
+      rotate: () => {},
+      arc: () => {},
+      fill: () => {},
+      measureText: () => ({ width: 0 }),
+      transform: () => {},
+      rect: () => {},
+      clip: () => {},
+    });
   });
 
   // Pure functions
