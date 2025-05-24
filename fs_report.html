@@ -260,6 +260,12 @@ header h1 {
       border-radius: 20px;
       box-shadow: var(--box-shadow);
   }
+  section{
+    background-color: white;
+    border-radius: 20px;
+    padding: 2rem;
+    margin: 0 auto;
+  }
   /* Search Field */
   main aside section[aria-label="Search"] {
     background-color: #ffffff;
@@ -428,10 +434,12 @@ main aside {
 
     
  
+    
+    <section>
     <h2 style="margin-bottom: 2rem; margin-left: 2rem;">Reports
-      <button id="load-reports">Load Reports
-        <img src = "images/loadBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;">
-      </button>
+    <button id="load-reports">Load Reports
+    <img src = "images/loadBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;">
+    </button>
     </h3>
     <table style="margin-left: 0.25rem; margin-right: 1rem;">
       <thead>
@@ -469,6 +477,7 @@ main aside {
   
       <button id="updateReportBtn">Update Report</button>
       <button onclick="document.getElementById('reportDetail').style.display='none'">Close</button>
+    </section>
     </section>
   </main>
   
