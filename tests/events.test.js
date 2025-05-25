@@ -441,33 +441,6 @@ describe('Event Management Functions', () => {
   });
   
   describe('rsvp', () => {
-    /*test('should submit RSVP with guest count', async () => {
-      mockLocalStorage.getItem.mockReturnValue('user123');
-      
-      const mockBtn = {
-        previousElementSibling: { value: '3' }
-      };
-      
-      fetch.mockResolvedValue({
-        json: () => Promise.resolve({ success: true })
-      });
-      
-      await rsvp('123', mockBtn);
-      
-      // Verify API call
-      expect(fetch).toHaveBeenCalledWith(
-        'https://backend-k52m.onrender.com/events/123/rsvp',
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ user_uid: 'user123', count: 3 })
-        }
-      );
-      
-      // Verify UI updates
-      expect(alert).toHaveBeenCalledWith('RSVP confirmed for 3 guest(s)');
-      expect(window.location.reload).toHaveBeenCalled();
-    });*/
     
     test('should handle invalid guest input and default to 1', async () => {
       mockLocalStorage.getItem.mockReturnValue('user123');
@@ -544,31 +517,6 @@ describe('Event Management Functions', () => {
   });
   
   describe('cancelRsvp', () => {
-    /*test('should cancel RSVP successfully', async () => {
-      mockLocalStorage.getItem.mockReturnValue('user123');
-      
-      const mockBtn = {};
-      
-      fetch.mockResolvedValue({
-        json: () => Promise.resolve({ success: true })
-      });
-      
-      await cancelRsvp('123', mockBtn);
-      
-      // Verify API call
-      expect(fetch).toHaveBeenCalledWith(
-        'https://backend-k52m.onrender.com/events/123/rsvp',
-        {
-          method: 'DELETE',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ user_uid: 'user123' })
-        }
-      );
-      
-      // Verify UI updates
-      expect(alert).toHaveBeenCalledWith('RSVP cancelled');
-      expect(window.location.reload).toHaveBeenCalled();
-    });*/
     
     test('should handle failed cancellation', async () => {
       mockLocalStorage.getItem.mockReturnValue('user123');
@@ -614,8 +562,4 @@ describe('Event Management Functions', () => {
     });
   });
   
-  /*test('should register DOMContentLoaded event listener', () => {
-    // Verify that the event listener was registered
-    expect(window.addEventListener).toHaveBeenCalledWith('DOMContentLoaded', loadEvents);
-  });*/
 });
