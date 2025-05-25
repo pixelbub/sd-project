@@ -5,6 +5,5 @@ export default {
     '!jest.config.js',
     '!/node_modules/',
     '!/vendor/**',
-    '!**/backend/**',
   ],
 };
