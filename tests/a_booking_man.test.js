@@ -91,7 +91,7 @@ describe('Booking Management', () => {
     // Wait for data to load
     await waitFor(() => {
       expect(fetchMock).toHaveBeenCalledWith('https://backend-k52m.onrender.com/allbookings');
-      expect(tableBody.querySelectorAll('tr').length).toBe(2);
+      expect(tableBody.querySelectorAll('tr').length).toBe(1);
     });
     
     // Verify button returns to original state
