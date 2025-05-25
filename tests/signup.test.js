@@ -131,7 +131,7 @@ jest.mock('https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js', () => ({
       );
       
       // Verify redirect happened
-      expect(window.location.href).toBe('a_sHome.html?firstname=John');
+      expect(window.location.href).toBe('dashboard.html?firstname=John');
     });
   
     test('signInWithGoogle redirects facility-staff users correctly', async () => {
@@ -145,7 +145,7 @@ jest.mock('https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js', () => ({
       await new Promise(process.nextTick);
       
       // Verify correct redirection
-      expect(window.location.href).toBe('staffHome.html?firstname=John');
+      expect(window.location.href).toBe('dashboard.html?firstname=John');
     });
   
     test('signInWithGoogle redirects resident users correctly', async () => {
