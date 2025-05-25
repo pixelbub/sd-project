@@ -27,6 +27,8 @@ A web app used to manage shared community sports facillities. The app supports t
 
 ## Roles
 - **Resident**: Book facilities, report issues
+  **Login**: wstill675@gmail.com
+  **Password**: WillStill99@?
 
 - **Staff**: Update maintenance status  
   **Login**: thecarguido@gmail.com  
