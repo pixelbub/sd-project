@@ -96,7 +96,7 @@ describe('Booking Management', () => {
     
     // Verify button returns to original state
     expect(loadButton.disabled).toBe(false);
-    expect(loadButton.textContent).toBe('Load Pending Bookings');
+    expect(loadButton.textContent).toBe('Load Upcoming Bookings');
     
     // Verify first row data
     const firstRow = tableBody.querySelectorAll('tr')[0];
