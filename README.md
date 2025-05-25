@@ -10,7 +10,7 @@ A web app used to manage shared community sports facillities. The app supports t
 
 ## Features
 - Google authentication for all users
-- Admin/staff suer management (add/delete/block users)
+- Admin/staff user management (add/delete/block users)
 - Facility booking and booking approval system
 - Event publishing, viewing and RSVP
 - Maintenance issue reporting and status tracking
@@ -27,7 +27,6 @@ A web app used to manage shared community sports facillities. The app supports t
 
 ## Roles
 - **Resident**: Book facilities, report issues.
-  
   **Login**: wstill675@gmail.com
   **Password**: WillStill99@?
 
