@@ -67,49 +67,6 @@ describe('Booking Management', () => {
     expect(document.body.innerHTML).toBe('');
   });
 
-  /*test('should load bookings and display them in the table', async () => {
-    // Mock bookings data
-    const mockBookings = [
-      createMockBooking('1', 'F1', { seconds: 1620000000 }, { seconds: 1620003600 }),
-      createMockBooking('2', 'F2', '2023-05-03T12:00:00', '2023-05-03T14:00:00')
-    ];
-    
-    // Mock fetch response
-    fetchMock.mockResponseOnce(JSON.stringify(mockBookings));
-    
-    // Get elements
-    const loadButton = document.getElementById('load-bookings');
-    const tableBody = document.querySelector('#bookings-table tbody');
-    
-    // Click the load button
-    fireEvent.click(loadButton);
-    
-    // Verify button is disabled and text changes while loading
-    expect(loadButton.disabled).toBe(true);
-    expect(loadButton.textContent).toBe('Loading…');
-    
-    // Wait for data to load
-    await waitFor(() => {
-      expect(fetchMock).toHaveBeenCalledWith('https://backend-k52m.onrender.com/allbookings');
-      expect(tableBody.querySelectorAll('tr').length).toBe(1);
-    });
-    
-    // Verify button returns to original state
-    expect(loadButton.disabled).toBe(false);
-    expect(loadButton.textContent).toBe('Load Upcoming Bookings');
-    
-    // Verify first row data
-    const firstRow = tableBody.querySelectorAll('tr')[0];
-    //expect(firstRow.dataset.bookingId).toBe('1');
-    expect(firstRow.querySelectorAll('td')[0].textContent).toBe('No upcoming bookings found');
-    
-    // Verify action buttons exist
-    const actionButtons = firstRow.querySelectorAll('td:last-child button');
-    expect(actionButtons.length).toBe(0);
-    expect(actionButtons[0].textContent).toBe('Approved');
-    expect(actionButtons[1].textContent).toBe('Blocked');
-  });*/
-
   test('should display message when no bookings found', async () => {
     // Mock empty bookings response
     fetchMock.mockResponseOnce(JSON.stringify([]));
@@ -167,76 +124,6 @@ describe('Booking Management', () => {
       expect(tableBody.innerHTML).toContain('Error loading bookings: Server error: 500');
     });
   });
-
-  /*test('should update booking status when action button is clicked', async () => {
-    // Setup with mock bookings
-    const mockBookings = [createMockBooking('1', 'F1', '2023-05-03T12:00:00', '2023-05-03T14:00:00')];
-    fetchMock.mockResponseOnce(JSON.stringify(mockBookings));
-    
-    // Get elements and load bookings
-    const loadButton = document.getElementById('load-bookings');
-    fireEvent.click(loadButton);
-    
-    // Wait for bookings to load
-    await waitFor(() => {
-      expect(document.querySelector('#bookings-table tbody tr')).not.toBeNull();
-    });
-    
-    // Mock update response
-    fetchMock.mockResponseOnce(JSON.stringify({ message: 'Booking approved successfully' }));
-    
-    // Get approve button and click it
-    const approveButton = document.querySelector('#bookings-table tbody tr button');
-    fireEvent.click(approveButton);
-    
-    // Verify fetch request
-    await waitFor(() => {
-      expect(fetchMock).toHaveBeenCalledWith(
-        'https://backend-k52m.onrender.com/bookings/1/status',
-        expect.objectContaining({
-          method: 'PATCH',
-          body: JSON.stringify({ status: 'approved' })
-        })
-      );
-      
-      // Verify alert message
-      expect(global.alert).toHaveBeenCalledWith('Booking approved successfully');
-    });
-    
-    // Row should be removed - this needs to be outside the waitFor since the removal happens after
-    expect(document.querySelector('#bookings-table tbody tr')).toBeNull();
-  });*/
-
-  /*test('should handle error when updating booking status', async () => {
-    // Setup with mock bookings
-    const mockBookings = [createMockBooking('1', 'F1', '2023-05-03T12:00:00', '2023-05-03T14:00:00')];
-    fetchMock.mockResponseOnce(JSON.stringify(mockBookings));
-    
-    // Get elements and load bookings
-    const loadButton = document.getElementById('load-bookings');
-    fireEvent.click(loadButton);
-    
-    // Wait for bookings to load
-    await waitFor(() => {
-      expect(document.querySelector('#bookings-table tbody tr')).not.toBeNull();
-    });
-    
-    // Mock error response
-    fetchMock.mockRejectOnce(new Error('Network error'));
-    
-    // Get block button and click it
-    const blockButton = document.querySelectorAll('#bookings-table tbody tr button')[1];
-    fireEvent.click(blockButton);
-    
-    // Verify error handling
-    await waitFor(() => {
-      expect(console.error).toHaveBeenCalledWith('Error updating booking:', expect.any(Error));
-      expect(global.alert).toHaveBeenCalledWith('Error updating booking: Network error');
-      
-      // Verify row is not removed
-      expect(document.querySelector('#bookings-table tbody tr')).not.toBeNull();
-    });
-  });*/
 
   test('should alert if no booking ID is found when updating status', async () => {
     // Create a row without booking ID
