@@ -9,7 +9,7 @@ const initBookingManager = () => {
     loadBookingsBtn.textContent = 'Loading…';
 
     try {
-      const response = await fetch(https://backend-k52m.onrender.com/allbookings', );
+      const response = await fetch('`https://backend-k52m.onrender.com/allbookings');
       if (!response.ok) throw new Error(`Server error: ${response.status}`);
       const bookings = await response.json();
       bookingsTableBody.innerHTML = '';
