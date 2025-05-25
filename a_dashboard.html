@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="module" src="authGuard.js"></script>
   <title>MatchDay - Admin Dashboard</title>
   <style>
     * {
@@ -211,6 +212,35 @@ nav a:hover span {
       color: #6e7aff;
     }
   </style>
+   <script type="module" >
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js';
+  import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js';
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyB_x1uvBqjrZXXz63K2JzwjuRilFpKAAys",
+    authDomain: "sd-project-4e3f9.firebaseapp.com",
+    projectId: "sd-project-4e3f9",
+    storageBucket: "sd-project-4e3f9.appspot.com",
+    messagingSenderId: "120329407460",
+    appId: "1:120329407460:web:d755d1b7a34597908155f1"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  onAuthStateChanged(auth, (user) => {
+    if (!user) {
+      window.location.href = "index.html";
+    } else {
+      const role = localStorage.getItem("user_role");
+
+      if (role !== "admin") {
+        alert("Unauthorized: You don't have access to this page.");
+        window.location.href = "index.html";
+      }
+    }
+  });
+  </script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>

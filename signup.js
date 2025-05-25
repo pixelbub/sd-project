@@ -71,10 +71,12 @@ function signInWithGoogle() {
     
               // Redirect based on role
               if (role == "admin") {
-                window.location.href = `a_sHome.html?firstname=${encodeURIComponent(first_name)}`;
+                alert("Your account is still pending approval. .redirecting to residents");
+                window.location.href = `dashboard.html?firstname=${encodeURIComponent(first_name)}`;
               } else if (role == "facility-staff") {
+                 alert("Your account is still pending approval..redirecting to resident")
                 console.log("Redirecting to staff home page.");
-                window.location.href = `staffHome.html?firstname=${encodeURIComponent(first_name)}`;
+                window.location.href = `dashboard.html?firstname=${encodeURIComponent(first_name)}`;
               } else if (role == "resident") {
                 window.location.href = `dashboard.html?firstname=${encodeURIComponent(first_name)}`;
               } else {

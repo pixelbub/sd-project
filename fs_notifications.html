@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>MatchDay</title>
+  <title>MatchDay - Staff panel</title>
   <link rel="stylesheet" href="newViewUsers.css" />
   <link rel="stylesheet" href="newFsNotif.css" />
   <style>
@@ -118,6 +118,35 @@ nav a:hover span {
     }
   
   </style>
+   <script type="module" >
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js';
+  import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js';
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyB_x1uvBqjrZXXz63K2JzwjuRilFpKAAys",
+    authDomain: "sd-project-4e3f9.firebaseapp.com",
+    projectId: "sd-project-4e3f9",
+    storageBucket: "sd-project-4e3f9.appspot.com",
+    messagingSenderId: "120329407460",
+    appId: "1:120329407460:web:d755d1b7a34597908155f1"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  onAuthStateChanged(auth, (user) => {
+    if (!user) {
+      window.location.href = "index.html";
+    } else {
+      const role = localStorage.getItem("user_role");
+
+      if (role !== "facility_staff") {
+        alert("Unauthorized: You don't have access to this page.");
+        window.location.href = "index.html";
+      }
+    }
+  });
+  </script>
 </head>
 <header>
   <img src="images/matchday_logo.png" alt="Logo" class="logo">

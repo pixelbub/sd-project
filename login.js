@@ -34,6 +34,8 @@ function signInWithGoogleLogin() {
           if (user) {
             localStorage.setItem('user_uid', user.uid);
             localStorage.setItem('first_name', user.displayName.split(" ")[0]);
+            localStorage.setItem('user_role', data.role); 
+
         
           }
           const data = await res.json();
