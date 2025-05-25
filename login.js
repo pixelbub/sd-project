@@ -29,8 +29,9 @@ function signInWithGoogleLogin() {
         method: 'GET',
         mode: 'cors'
       })
-      const data = await res.json();
+      
       .then(async res => {
+      const data = await res.json();
         if (res.ok) {
           if (user) {
             localStorage.setItem('user_uid', user.uid);
