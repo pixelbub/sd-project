@@ -1,36 +1,48 @@
 // Main initialization function
 const initBookingManager = () => {
-    const loadBookingsBtn = document.getElementById('load-bookings');
-    const bookingsTableBody = document.querySelector('#bookings-table tbody');
-    if (!loadBookingsBtn || !bookingsTableBody) return;
-    
-    loadBookingsBtn.addEventListener('click', async () => {
-      loadBookingsBtn.disabled = true;
-      loadBookingsBtn.textContent = 'Loading…';
-      try {
-        const response = await fetch('https://backend-k52m.onrender.com/bookings?status=pending');
-        if (!response.ok) throw new Error(`Server error: ${response.status}`);
-        const bookings = await response.json();
-        bookingsTableBody.innerHTML = '';
-        if (bookings.length === 0) {
-          bookingsTableBody.innerHTML = '<tr><td colspan="5">No pending bookings found</td></tr>';
-          return;
-        }
-        bookings.forEach(booking => {
-          const row = document.createElement('tr');
-          row.dataset.bookingId = booking.id;
-          // Facility
-          ['facilityId', 'startTime', 'endTime', 'status'].forEach((key, i) => {
-            const cell = document.createElement('td');
-            if (key === 'startTime' || key === 'endTime') {
-              cell.textContent = formatFirestoreTimestamp(booking[key]);
-            } else {
-              cell.textContent = booking[key] || (key === 'facilityId' ? 'N/A' : 'pending');
-            }
-            row.appendChild(cell);
-          });
-          // Actions (Approve + Block)
-          const actionsCell = document.createElement('td');
+  const loadBookingsBtn = document.getElementById('load-bookings');
+  const bookingsTableBody = document.querySelector('#bookings-table tbody');
+  if (!loadBookingsBtn || !bookingsTableBody) return;
+
+  loadBookingsBtn.addEventListener('click', async () => {
+    loadBookingsBtn.disabled = true;
+    loadBookingsBtn.textContent = 'Loading…';
+
+    try {
+      const response = await fetch('http://localhost:3000/allbookings', );
+      if (!response.ok) throw new Error(`Server error: ${response.status}`);
+      const bookings = await response.json();
+      bookingsTableBody.innerHTML = '';
+
+      const now = new Date();
+      const upcoming = bookings.filter(b => {
+        const start = new Date(b.startTime?.seconds ? b.startTime.seconds * 1000 : b.startTime);
+        return start > now;
+      });
+
+      if (upcoming.length === 0) {
+        bookingsTableBody.innerHTML = '<tr><td colspan="5">No upcoming bookings found</td></tr>';
+        return;
+      }
+
+      upcoming.forEach(booking => {
+        const row = document.createElement('tr');
+        row.dataset.bookingId = booking.id;
+
+        // Add columns: facilityId, startTime, endTime, status
+        ['facilityId', 'startTime', 'endTime', 'status'].forEach(key => {
+          const cell = document.createElement('td');
+          if (key === 'startTime' || key === 'endTime') {
+            cell.textContent = formatFirestoreTimestamp(booking[key]);
+          } else {
+            cell.textContent = booking[key] || (key === 'facilityId' ? 'N/A' : 'pending');
+          }
+          row.appendChild(cell);
+        });
+
+        // Only show action buttons for pending bookings
+        const actionsCell = document.createElement('td');
+        if (booking.status === 'pending') {
           ['approved', 'blocked'].forEach((action, idx) => {
             const btn = document.createElement('button');
             btn.textContent = action.charAt(0).toUpperCase() + action.slice(1);
@@ -38,24 +50,30 @@ const initBookingManager = () => {
             btn.addEventListener('click', () => updateBookingStatus(row.dataset.bookingId, action, row));
             actionsCell.appendChild(btn);
           });
-          row.appendChild(actionsCell);
-          bookingsTableBody.appendChild(row);
-        });
-      } catch (err) {
-        console.error('Failed to load bookings:', err);
-        bookingsTableBody.innerHTML = `<tr><td colspan="5">Error loading bookings: ${err.message}</td></tr>`;
-      } finally {
-        const icon = document.createElement('img');
-        icon.src = 'images/loadBtn.PNG';
-        icon.alt = 'Icon';
-        icon.style.height = '30px';
-        icon.style.verticalAlign = 'middle';
-        loadBookingsBtn.disabled = false;
-        loadBookingsBtn.textContent = 'Load Pending Bookings';
-        loadBookingsBtn.appendChild(icon);
-      }
-    });
+        } else {
+          actionsCell.textContent = '-'; // No actions for non-pending
+        }
+
+        row.appendChild(actionsCell);
+        bookingsTableBody.appendChild(row);
+      });
+
+    } catch (err) {
+      console.error('Failed to load bookings:', err);
+      bookingsTableBody.innerHTML = `<tr><td colspan="5">Error loading bookings: ${err.message}</td></tr>`;
+    } finally {
+      const icon = document.createElement('img');
+      icon.src = 'images/loadBtn.PNG';
+      icon.alt = 'Icon';
+      icon.style.height = '30px';
+      icon.style.verticalAlign = 'middle';
+      loadBookingsBtn.disabled = false;
+      loadBookingsBtn.textContent = 'Load Upcoming Bookings';
+      loadBookingsBtn.appendChild(icon);
+    }
+  });
 };
+
   
   // Helpers
 async function updateBookingStatus(bookingId, status, rowElement) {
