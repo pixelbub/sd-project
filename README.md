@@ -26,7 +26,7 @@ A web app used to manage shared community sports facillities. The app supports t
 - Testing: Jest
 
 ## Roles
-- **Resident**: Book facilities, report issues
+- **Resident**: Book facilities, report issues.
   **Login**: wstill675@gmail.com
   **Password**: WillStill99@?
 
