@@ -423,7 +423,7 @@ main aside {
     } else {
       const role = localStorage.getItem("user_role");
 
-      if (role !== "facility_staff") {
+      if (role !== "facility-staff") {
         alert("Unauthorized: You don't have access to this page.");
         window.location.href = "index.html";
       }
