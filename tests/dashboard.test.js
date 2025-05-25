@@ -25,8 +25,6 @@ Object.defineProperty(window, 'localStorage', {
 // Setup alert mock
 window.alert = jest.fn();
 
-// Require the actual dashboard module
-// We'll do this dynamically in the tests to avoid loading it before we're ready
 let dashboard;
 
 describe('Dashboard Tests', () => {
@@ -118,8 +116,6 @@ describe('Dashboard Tests', () => {
     notifList = document.getElementById('notifList');
     notifCount = document.getElementById('notifCount');
 
-    // Now load the actual dashboard module
-    // We need to use jest.mock before requiring the module
     jest.resetModules();
     dashboard = require('../dashboard');
 
@@ -414,10 +410,6 @@ describe('Dashboard Tests', () => {
     // Set initial state
     bookBtn.disabled = true;
     
-    // Simulate clicking on the first time slot
-    // We need to mock the selectTimeSlot function call
-    // Since we can't access it directly, we'll trigger the click event
-    // that should be attached to the button
     slot1.click();
     
     // Verify the slot is selected
@@ -536,7 +528,6 @@ describe('Dashboard Tests', () => {
     facilitySelect.value = '1';
     groupSize.value = '2';
     
-    // FIXED: Override fetch to simulate booking error with proper response object
     global.fetch = jest.fn().mockImplementation((url) => {
       if (url.includes('bookings')) {
         return Promise.resolve({
@@ -608,7 +599,7 @@ describe('Dashboard Tests', () => {
     // Find the mark as read button in the first notification
     const markBtn = notifList.querySelector('button');
     expect(markBtn).not.toBeNull();
-    // MODIFIED to include trailing space
+
     expect(markBtn.textContent).toBe('Mark as read ');
     
     // Reset fetch
