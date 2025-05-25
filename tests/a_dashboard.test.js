@@ -71,17 +71,6 @@ describe('a_dashboard.js utilities and loaders', () => {
     expect(hoursInMonth(2025, 4)).toBe(720);
   });
 
-  /*test('filterClosuresByMonth filters correctly', () => {
-    const closures = [
-      { start_time: '2025-05-01T00:00:00Z', end_time: '2025-05-02T00:00:00Z', reason: 'A' },
-      { start_time: '2025-04-30T00:00:00Z', end_time: '2025-04-30T23:59:59Z', reason: 'B' },
-      { start_time: '2025-06-01T00:00:00Z', end_time: '2025-06-02T00:00:00Z', reason: 'C' },
-    ];
-    const result = filterClosuresByMonth(closures, '2025-05');
-    expect(result).toHaveLength(1);
-    expect(result[0].reason).toBe('A');
-  });*/
-
   // DOM-centric utilities
   test('getSelectedMonth falls back to current month', () => {
     const input = document.createElement('input');
@@ -164,19 +153,6 @@ describe('a_dashboard.js utilities and loaders', () => {
     expect(rows.length).toBe(1);
     expect(rows[0].textContent).toContain('X');
   });
-
-  // Export helpers
-  /*test('downloadCSV creates correct blob and link', async () => {
-    document.body.innerHTML = `<table id="tbl"><tr><td>Val</td></tr></table>`;
-    const spyCreate = jest.spyOn(URL, 'createObjectURL').mockReturnValue('url');
-    const linkMock = { click: jest.fn() };
-    jest.spyOn(document, 'createElement').mockImplementation(tag => tag === 'a' ? linkMock : document.createElement(tag));
-
-    downloadCSV('tbl', 'file.csv');
-    expect(spyCreate).toHaveBeenCalled();
-    expect(linkMock.download).toBe('file.csv');
-    expect(linkMock.click).toHaveBeenCalled();
-  });*/
 
   test('downloadChartPNG uses chart.toBase64Image and downloads', () => {
     const fakeChart = { toBase64Image: () => 'dataimg' };
