@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-const { initBookingManager, updateBookingStatus, formatFirestoreTimestamp } = require('./a_booking_man');
+const { initBookingManager, updateBookingStatus, formatFirestoreTimestamp } = require('../a_booking_man');
 
 // Mock global fetch
 global.fetch = jest.fn();
