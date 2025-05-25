@@ -29,6 +29,7 @@ function signInWithGoogleLogin() {
         method: 'GET',
         mode: 'cors'
       })
+      const data = await res.json();
       .then(async res => {
         if (res.ok) {
           if (user) {
@@ -38,7 +39,7 @@ function signInWithGoogleLogin() {
 
         
           }
-          const data = await res.json();
+          
           alert(`Welcome back, ${data.first_name}!`);
            if (data.role == "admin"){
             if (data.status == "pending"){
