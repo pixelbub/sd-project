@@ -1,207 +1,166 @@
-/** @jest-environment jsdom */
+/**
+ * @jest-environment jsdom
+ */
 
-// a_dashboard.test.js
-// Comprehensive unit tests for a_dashboard.js using Jest and JSDOM
+const { initBookingManager, updateBookingStatus, formatFirestoreTimestamp } = require('./a_booking_man');
 
-import fetchMock from 'jest-fetch-mock';
-fetchMock.enableMocks();
+// Mock global fetch
+global.fetch = jest.fn();
 
-document.body.innerHTML = '';
+describe('formatFirestoreTimestamp', () => {
+  it('formats string date', () => {
+    const dateStr = '2024-01-01T12:00:00Z';
+    const formatted = formatFirestoreTimestamp(dateStr);
+    expect(formatted).toContain('2024');
+  });
 
-describe('a_dashboard.js utilities and loaders', () => {
-  // Import functions (ensure a_dashboard.js uses module.exports or export syntax)
-  const {
-    scrollToSection,
-    getSelectedMonth,
-    filterClosuresByMonth,
-    mergeAndTotal,
-    hoursInMonth,
-    loadFacilityData,
-    loadEventData,
-    loadBookingData,
-    downloadCSV,
-    downloadChartPNG,
-    downloadPDF,
-  } = require('../a_dashboard');
+  it('formats Firestore timestamp object', () => {
+    const ts = { seconds: 1704100800 }; // Jan 1, 2024
+    const formatted = formatFirestoreTimestamp(ts);
+    expect(formatted).toContain('2024');
+  });
+
+  it('formats Date object', () => {
+    const d = new Date('2024-01-01');
+    const formatted = formatFirestoreTimestamp(d);
+    expect(formatted).toContain('2024');
+  });
+
+  it('returns fallback on invalid input', () => {
+    expect(formatFirestoreTimestamp(undefined)).toBe('Invalid date');
+    expect(formatFirestoreTimestamp({})).toBe('Invalid date');
+  });
+});
+
+describe('initBookingManager', () => {
+  let loadBtn, tableBody;
 
   beforeEach(() => {
-    fetchMock.resetMocks();
-    document.body.innerHTML = '';
-    jest.clearAllMocks();
-    // Clear any global Chart or jsPDF stubs
-    delete global.Chart;
-    delete window.jspdf;
-
-    // Mock getContext for canvas
-    HTMLCanvasElement.prototype.getContext = () => ({
-      fillRect: () => {},
-      // Add minimal mocks or full as needed
-      getImageData: () => ({ data: [] }),
-      putImageData: () => {},
-      createImageData: () => [],
-      setTransform: () => {},
-      drawImage: () => {},
-      save: () => {},
-      fillText: () => {},
-      restore: () => {},
-      beginPath: () => {},
-      moveTo: () => {},
-      lineTo: () => {},
-      closePath: () => {},
-      stroke: () => {},
-      translate: () => {},
-      scale: () => {},
-      rotate: () => {},
-      arc: () => {},
-      fill: () => {},
-      measureText: () => ({ width: 0 }),
-      transform: () => {},
-      rect: () => {},
-      clip: () => {},
-    });
-  });
-
-  // Pure functions
-  test('mergeAndTotal merges overlapping intervals correctly', () => {
-    const intervals = [[0, 10], [5, 15], [20, 25], [24, 30]];
-    expect(mergeAndTotal(intervals)).toBe(25);
-  });
-
-  test('hoursInMonth for April 2025 is 720', () => {
-    expect(hoursInMonth(2025, 4)).toBe(720);
-  });
-
-  /*test('filterClosuresByMonth filters correctly', () => {
-    const closures = [
-      { start_time: '2025-05-01T00:00:00Z', end_time: '2025-05-02T00:00:00Z', reason: 'A' },
-      { start_time: '2025-04-30T00:00:00Z', end_time: '2025-04-30T23:59:59Z', reason: 'B' },
-      { start_time: '2025-06-01T00:00:00Z', end_time: '2025-06-02T00:00:00Z', reason: 'C' },
-    ];
-    const result = filterClosuresByMonth(closures, '2025-05');
-    expect(result).toHaveLength(1);
-    expect(result[0].reason).toBe('A');
-  });*/
-
-  // DOM-centric utilities
-  test('getSelectedMonth falls back to current month', () => {
-    const input = document.createElement('input');
-    input.id = 'globalMonth';
-    input.value = '';
-    document.body.appendChild(input);
-    const today = new Date().toISOString().slice(0, 7);
-    expect(getSelectedMonth()).toBe(today);
-  });
-
-  test('scrollToSection expands details and scrolls', () => {
-    const section = document.createElement('div');
-    section.id = 'sec';
-    const details = document.createElement('details');
-    details.open = false;
-    section.appendChild(details);
-    document.body.appendChild(section);
-    section.scrollIntoView = jest.fn();
-
-    scrollToSection('sec');
-    expect(details.open).toBe(true);
-    expect(section.scrollIntoView).toHaveBeenCalledWith({ behavior: 'smooth' });
-  });
-
-  // Loader functions
-  test('loadFacilityData populates tables and chart', async () => {
+    // Setup DOM
     document.body.innerHTML = `
-      <select id="facilitySelect"><option value="f1">f1</option></select>
-      <input id="globalMonth" value="2025-05" />
-      <table id="facilityDetailsTable"><tbody></tbody></table>
-      <table id="facilityStatsTable"><tbody></tbody></table>
-      <canvas id="facilityPieChart"></canvas>
+      <button id="load-bookings">Load Upcoming Bookings</button>
+      <table id="bookings-table"><tbody></tbody></table>
     `;
-    const mockClosures = [
-      { start_time: '2025-05-01T00:00:00Z', end_time: '2025-05-02T00:00:00Z', reason: 'R1' }
-    ];
-    fetchMock.mockResponseOnce(JSON.stringify(mockClosures));
+    loadBtn = document.getElementById('load-bookings');
+    tableBody = document.querySelector('#bookings-table tbody');
 
-    // Stub Chart.js
-    global.Chart = class { constructor(_, cfg) { this.cfg = cfg; } destroy() {} };
-
-    await loadFacilityData();
-    expect(fetchMock).toHaveBeenCalledWith(expect.stringContaining('/closures?facilityId=f1'));
-    expect(document.querySelectorAll('#facilityDetailsTable tbody tr').length).toBe(1);
-    expect(document.querySelectorAll('#facilityStatsTable tbody tr').length).toBe(1);
+    fetch.mockClear();
+    initBookingManager();
   });
 
-  test('loadEventData populates event table and chart', async () => {
-    document.body.innerHTML = `
-      <canvas id="eventBarChart"></canvas>
-      <table id="eventTable"><tbody></tbody></table>
-    `;
-    const events = [
-      { title: 'E1', start_time: '2025-05-01T00:00:00Z', attendance: 10 },
-      { title: 'E2', start_time: '2025-05-02T00:00:00Z', expected: 5 }
-    ];
-    fetchMock.mockResponseOnce(JSON.stringify(events));
-    global.Chart = class { constructor(_, cfg) { this.cfg = cfg; } destroy() {} };
-
-    await loadEventData();
-    expect(fetchMock).toHaveBeenCalledWith(expect.stringContaining('/admin/events/attendance'));
-    expect(document.querySelectorAll('#eventTable tbody tr').length).toBe(2);
-  });
-
-  test('loadBookingData filters and populates booking table and chart', async () => {
-    document.body.innerHTML = `
-      <input id="globalMonth" value="2025-05" />
-      <canvas id="bookingBarChart"></canvas>
-      <table id="freqTable"><tbody></tbody></table>
-    `;
+  it('loads and displays bookings', async () => {
     const bookings = [
-      { facilityId: 'X', startTime: '2025-05-10T00:00:00Z', endTime: '2025-05-10T01:00:00Z' },
-      { facilityId: 'Y', startTime: '2025-04-01T00:00:00Z', endTime: '2025-04-02T00:00:00Z' }
+      { id: '1', facilityId: 'Court 1', startTime: '2024-01-01T10:00:00Z', endTime: '2024-01-01T11:00:00Z', status: 'pending' },
+      { id: '2', facilityId: 'Court 2', startTime: '2024-01-01T12:00:00Z', endTime: '2024-01-01T13:00:00Z', status: 'approved' },
     ];
-    fetchMock.mockResponseOnce(JSON.stringify(bookings));
-    global.Chart = class { constructor(_, cfg) { this.cfg = cfg; } destroy() {} };
 
-    await loadBookingData();
-    const rows = document.querySelectorAll('#freqTable tbody tr');
-    expect(rows.length).toBe(1);
-    expect(rows[0].textContent).toContain('X');
+    fetch.mockResolvedValueOnce({
+      ok: true,
+      json: async () => bookings,
+    });
+
+    loadBtn.click();
+
+    await new Promise(resolve => setTimeout(resolve, 0)); // Wait for microtasks
+
+    const rows = tableBody.querySelectorAll('tr');
+    expect(rows.length).toBe(1); // Only one pending booking
+    expect(rows[0].textContent).toContain('Court 1');
   });
 
-  // Export helpers
-  /*test('downloadCSV creates correct blob and link', async () => {
-    document.body.innerHTML = `<table id="tbl"><tr><td>Val</td></tr></table>`;
-    const spyCreate = jest.spyOn(URL, 'createObjectURL').mockReturnValue('url');
-    const linkMock = { click: jest.fn() };
-    jest.spyOn(document, 'createElement').mockImplementation(tag => tag === 'a' ? linkMock : document.createElement(tag));
+  it('shows message when no bookings found', async () => {
+    fetch.mockResolvedValueOnce({
+      ok: true,
+      json: async () => [],
+    });
 
-    downloadCSV('tbl', 'file.csv');
-    expect(spyCreate).toHaveBeenCalled();
-    expect(linkMock.download).toBe('file.csv');
-    expect(linkMock.click).toHaveBeenCalled();
-  });*/
+    loadBtn.click();
+    await new Promise(resolve => setTimeout(resolve, 0));
 
-  test('downloadChartPNG uses chart.toBase64Image and downloads', () => {
-    const fakeChart = { toBase64Image: () => 'dataimg' };
-    const link = { click: jest.fn() };
-    jest.spyOn(document, 'createElement').mockReturnValue(link);
-
-    downloadChartPNG(fakeChart, 'chart.png');
-    expect(link.href).toBe('dataimg');
-    expect(link.download).toBe('chart.png');
-    expect(link.click).toHaveBeenCalled();
+    expect(tableBody.textContent).toContain('No upcoming bookings found');
   });
 
-  test('downloadPDF calls jsPDF methods correctly', () => {
-    const addImage = jest.fn();
-    const autoTable = jest.fn();
-    const text = jest.fn();
-    const save = jest.fn();
-    window.jspdf = { jsPDF: jest.fn(() => ({ text, addImage, autoTable, save })) };
-    const chart = { toBase64Image: () => 'img' };
+  it('shows error message on fetch fail', async () => {
+    fetch.mockRejectedValueOnce(new Error('Network error'));
 
-    downloadPDF(chart, 'tbl', 'T');
-    expect(window.jspdf.jsPDF).toHaveBeenCalled();
-    expect(text).toHaveBeenCalledWith('T', 10, 10);
-    expect(addImage).toHaveBeenCalledWith('img', 'PNG', 10, 20, 180, 100);
-    expect(autoTable).toHaveBeenCalledWith({ html: '#tbl', startY: 130 });
-    expect(save).toHaveBeenCalledWith('T.pdf');
+    loadBtn.click();
+    await new Promise(resolve => setTimeout(resolve, 0));
+
+    expect(tableBody.textContent).toContain('Error loading bookings');
+  });
+
+  it('clicking approve or block calls updateBookingStatus', async () => {
+    const bookings = [
+      { id: '1', facilityId: 'Court 1', startTime: '2024-01-01T10:00:00Z', endTime: '2024-01-01T11:00:00Z', status: 'pending' }
+    ];
+
+    fetch.mockResolvedValueOnce({
+      ok: true,
+      json: async () => bookings,
+    });
+
+    loadBtn.click();
+    await new Promise(resolve => setTimeout(resolve, 0));
+
+    const approveBtn = document.querySelector('.approve-btn');
+    const blockBtn = document.querySelector('.block-btn');
+
+    // Mock fetch for PATCH
+    fetch.mockResolvedValueOnce({
+      ok: true,
+      json: async () => ({ message: 'Booking approved' }),
+    });
+
+    // Spy on alert
+    window.alert = jest.fn();
+
+    approveBtn.click();
+    await new Promise(resolve => setTimeout(resolve, 0));
+
+    expect(window.alert).toHaveBeenCalledWith('Booking approved');
+  });
+});
+
+describe('updateBookingStatus', () => {
+  it('sends PATCH request and removes row', async () => {
+    const row = document.createElement('tr');
+    document.body.appendChild(row);
+
+    fetch.mockResolvedValueOnce({
+      ok: true,
+      json: async () => ({ message: 'Updated' }),
+    });
+
+    window.alert = jest.fn();
+
+    await updateBookingStatus('abc123', 'approved', row);
+
+    expect(fetch).toHaveBeenCalledWith(
+      'https://backend-k52m.onrender.com/bookings/abc123/status',
+      expect.objectContaining({
+        method: 'PATCH',
+        body: JSON.stringify({ status: 'approved' }),
+      })
+    );
+
+    expect(window.alert).toHaveBeenCalledWith('Updated');
+    expect(document.body.contains(row)).toBe(false); // Row removed
+  });
+
+  it('shows error on network fail', async () => {
+    fetch.mockRejectedValueOnce(new Error('Server is down'));
+    window.alert = jest.fn();
+
+    await updateBookingStatus('abc123', 'approved', null);
+
+    expect(window.alert).toHaveBeenCalledWith(expect.stringContaining('Error updating booking'));
+  });
+
+  it('shows alert when bookingId is missing', async () => {
+    window.alert = jest.fn();
+
+    await updateBookingStatus(null, 'approved', null);
+
+    expect(window.alert).toHaveBeenCalledWith('Error: No booking ID found');
   });
 });
