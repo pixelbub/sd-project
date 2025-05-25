@@ -32,8 +32,14 @@ document.addEventListener('DOMContentLoaded', () => {
       console.error('Failed to load users:', err);
       alert('Could not load users. See console for details.');
     } finally {
+      const icon = document.createElement('img');
+      icon.src = 'images/loadBtn.PNG';
+      icon.alt = 'Icon';
+      icon.style.height = '30px';
+      icon.style.verticalAlign = 'middle';
       loadButton.disabled = false;
       loadButton.textContent = 'Load Users';
+      loadButton.appendChild(icon);
     }
   });
     // 🔔 Notification system
@@ -71,7 +77,14 @@ async function fetchUnreadNotifications() {
       li.textContent = n.message;
 
       const markBtn = document.createElement('button');
-      markBtn.textContent = 'Mark as read';
+      const icon = document.createElement('img');
+      icon.src = 'images/markReadBtn.PNG';
+      icon.alt = 'Icon';
+      icon.style.height = '30px';
+      markBtn.style.margin="5px"
+      icon.style.verticalAlign = 'middle';
+      markBtn.textContent = 'Mark as read ';
+      markBtn.appendChild(icon);
       markBtn.style.marginLeft = '10px';
       markBtn.addEventListener('click', async () => {
         await fetch(`https://backend-k52m.onrender.com/mark-read/${userUid}/${n.id}`, {

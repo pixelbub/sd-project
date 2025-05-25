@@ -45,8 +45,14 @@ const initBookingManager = () => {
         console.error('Failed to load bookings:', err);
         bookingsTableBody.innerHTML = `<tr><td colspan="5">Error loading bookings: ${err.message}</td></tr>`;
       } finally {
+        const icon = document.createElement('img');
+        icon.src = 'images/loadBtn.PNG';
+        icon.alt = 'Icon';
+        icon.style.height = '30px';
+        icon.style.verticalAlign = 'middle';
         loadBookingsBtn.disabled = false;
         loadBookingsBtn.textContent = 'Load Pending Bookings';
+        loadBookingsBtn.appendChild(icon);
       }
     });
 };

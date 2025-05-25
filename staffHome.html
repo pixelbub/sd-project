@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Meta tag for character encoding -->
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Added for mobile responsiveness -->
   <title>MatchDay</title>
-
-  <!-- Link to external stylesheet -->
-  <!--<link rel="stylesheet" href="dashboard.css" />-->
   <script src="staff.js"></script>
   <style>
     
@@ -82,6 +79,17 @@ nav a span {
   white-space: nowrap;
 }
 
+#notifPopup button {
+      background-color: #6e7aff;;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: background-color 0.2s;
+}
+
 nav a img {
   opacity: 1;
 }
@@ -119,7 +127,7 @@ nav a:hover span {
 
 
 
-    #notifPopup button {
+#notifPopup button {
   background-color: #6e7aff;
   color: white;
   border: none;
@@ -377,16 +385,19 @@ main aside {
     <!-- Main heading for the page -->
      
       <img src="images/matchday_logo.png" alt="Logo" class="logo">
-     <nav>
+    <nav>
+      <a href="fs_report.html">
+        <img src = "images/reportASBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"><span>Reports</span>  
+      </a>
+
+      <a href="staffHome.html">
+        <img src = "images/view_usersBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"><span>View Users</span> 
+      </a> 
+    
+
    
-    <a href="fs_report.html">
-      <img src = "images/reportASBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"><span>Reports</span>  
-    </a>
-   
-    <a href="staffHome.html">
-      <img src = "images/view_usersBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;"><span>View Users</span> 
-    </a> 
-  </nav>
+
+    </nav>
 
      
     <!-- Aside section with links for Profile -->
@@ -425,21 +436,20 @@ main aside {
       <ul id="notifList"></ul>
     </section>
     <footer >
-      <a href="fs_notifications.html">View All Notifications</a>
+      <button  onclick="window.location.href = 'notifications.html'">View All Notifications
+        <img src = "images/notificationsBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px;">
+      </button>
     </footer>
   </aside>
 <main>
-  <!-- About Section with a brief description -->
-  <section id="About">
-    
-  </section>
+
 
   <section id="view-users" style="margin: 2rem; background-color: white; padding: 2rem; border-radius: 20px;">
     <h2 style="margin-bottom: 2rem;">View Users</h2>
     <!-- Button to trigger loading -->
     <button id="load-users" style="color: white; font-family: Arial;">
       Load Users
-      <img src = "images/loadBtn.PNG" alt = "Icon", style="height:36px; vertical-align: middle; margin-right: 5px; color: white;">   
+      <img src = "images/loadBtn.PNG" alt = "Icon", style="height:30px; vertical-align: middle; margin-right: 5px; color: white;">   
     </button>
     <!-- Container for the users table -->
     <section class="table-container">

@@ -73,6 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Delete button
         const deleteBtn = document.createElement('button');
         deleteBtn.textContent = 'Delete';
+        deleteBtn.style.backgroundColor = 'red';
         deleteBtn.style.marginLeft = '8px';
         deleteBtn.addEventListener('click', async () => {
           try {
@@ -97,8 +98,14 @@ document.addEventListener('DOMContentLoaded', () => {
       console.error('Failed to load users:', err);
       alert('Could not load users. See console for details.');
     } finally {
+      const icon = document.createElement('img');
+      icon.src = 'images/loadBtn.PNG';
+      icon.alt = 'Icon';
+      icon.style.height = '30px';
+      icon.style.verticalAlign = 'middle';
       loadUsersBtn.disabled = false;
       loadUsersBtn.textContent = 'Load Users';
+      loadUsersBtn.appendChild(icon);
     }
   });
 

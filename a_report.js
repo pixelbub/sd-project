@@ -42,7 +42,7 @@ export async function loadAllReports(loadReportsBtn, reportsTableBody) {
         <td>
           <input type="text" class="feedbackInput" data-id="${r.id}"
                  placeholder="Feedback…" value="${r.feedback||''}" />
-          <button class="saveBtn" data-id="${r.id}">💾</button>
+          <button class="saveBtn" data-id="${r.id}"> <img src = "images/submit_confirmBtn.PNG" alt = "Icon", style="height:30px; vertical-align: middle; margin-right: 5px;"></button>
         </td>`;
       reportsTableBody.appendChild(tr);
     });
@@ -55,8 +55,14 @@ export async function loadAllReports(loadReportsBtn, reportsTableBody) {
       </td></tr>`;
     console.error(err);
   } finally {
+    const icon = document.createElement('img');
+    icon.src = 'images/loadBtn.PNG';
+    icon.alt = 'Icon';
+    icon.style.height = '30px';
+    icon.style.verticalAlign = 'middle';
     loadReportsBtn.disabled = false;
     loadReportsBtn.textContent = 'Load Reports';
+    loadReportsBtn.appendChild(icon);
   }
 }
 
