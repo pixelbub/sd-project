@@ -151,7 +151,7 @@ jest.mock('https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js', () => ({
       await new Promise(process.nextTick);
       
       // Verify alert messages
-      expect(alert).toHaveBeenCalledWith('Network error: Cannot read properties of undefined (reading 'role')');
+      expect(alert).toHaveBeenCalledWith("Network error: Cannot read properties of undefined (reading 'role')");
       expect(alert).toHaveBeenCalledWith('Your account is still pending approval. .');
       
       // Verify redirect happened to dashboard
