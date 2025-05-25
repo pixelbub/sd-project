@@ -323,7 +323,7 @@ jest.mock('https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js', () => ({
       await new Promise(process.nextTick);
       
       // Verify block message was shown
-      expect(alert).toHaveBeenCalledWith("Network error: Cannot read properties of undefined (reading 'role')");
+      expect(alert).toHaveBeenCalledWith('Welcome back, John!');
       expect(alert).toHaveBeenCalledWith('Your account has been blocked. Please contact support.');
       
       // Verify no redirect happened
