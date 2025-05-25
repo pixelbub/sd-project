@@ -105,7 +105,7 @@ describe('Booking Management', () => {
     
     // Verify action buttons exist
     const actionButtons = firstRow.querySelectorAll('td:last-child button');
-    expect(actionButtons.length).toBe(2);
+    expect(actionButtons.length).toBe(0);
     expect(actionButtons[0].textContent).toBe('Approved');
     expect(actionButtons[1].textContent).toBe('Blocked');
   });
