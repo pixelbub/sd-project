@@ -28,6 +28,9 @@ A web app used to manage shared community sports facillities. The app supports t
 ## Roles
 - Resident: book facilities, report issues
 - Staff: Update maintenance status
+    Login: thecarguido@gmail.com
+    Password: lightningMcQu33n
 - Admin: Manage users and bookings, create events, view facility insights
-
+    Login: tina.nina33341@gmail.com
+    Password: tinanina333
 
