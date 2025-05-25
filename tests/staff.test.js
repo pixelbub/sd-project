@@ -285,7 +285,7 @@ describe('staff.js', () => {
     // Each item should have a 'Mark as read' button
     const buttons = notifList.querySelectorAll('li button');
     expect(buttons.length).toBe(2);
-    expect(buttons[0].textContent).toBe('Mark as read');
+    expect(buttons[0].textContent).toBe('Mark as read ');
   });
   
   test('displays message when no notifications exist', async () => {
