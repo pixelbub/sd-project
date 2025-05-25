@@ -37,7 +37,7 @@ A web app used to manage shared community sports facillities. The app supports t
   **Password**: tinanina333
 
 
-  ## Running the App Locally
+## Running the App Locally
 
 ### Frontend Only
 
@@ -72,30 +72,23 @@ Follow the instructions in the **Frontend Only** section above.
 #### Step 2: Clone and Run the Backend
 
 1. **Clone the backend repository**
-
    ```bash
    git clone https://github.com/TinoGozho/backend.git
    cd backend
    ```
-
 2. **Initialize and run the backend**
-
    ```bash
    npm init -y
    npm install cors  # If you don’t have cors installed
    node index.js
    ```
-
 3. **Update API URLs in the frontend**
 
    In your frontend JavaScript files, replace any instance of:
-
    ```
    https://backendk52m.onrender.com/
    ```
-
    with:
-
    ```
    http://localhost:3000/
    ```
