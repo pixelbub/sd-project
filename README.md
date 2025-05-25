@@ -8,13 +8,13 @@ https://victorious-bush-007efa41e.6.azurestaticapps.net/
 ## Overview
 A web app used to manage shared community sports facillities. The app supports time-slot booking and maintenance reporting which allows residents, staff and admin to interact with facility resources efficiently
 
-## Features (will update soon)
+## Features 
 - Facility booking
 - User role verification
 - Maintenance issue reporting
 - Event scheduling and notifications
 
-## Tech Stack (to be finalised)
+## Tech Stack 
 - Frontend: HTML, CSS
 - Backend: Node.js with Express
 - Authentication: Firebase
@@ -24,5 +24,5 @@ A web app used to manage shared community sports facillities. The app supports t
 ## Roles
 - Resident: book facilities, report issues
 - Staff: Update maintenance status
-- Admin: Manage users and bookings
+- Admin: Manage users and bookings, create events, view facility insights
 
