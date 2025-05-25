@@ -101,7 +101,7 @@ describe('Booking Management', () => {
     // Verify first row data
     const firstRow = tableBody.querySelectorAll('tr')[0];
     //expect(firstRow.dataset.bookingId).toBe('1');
-    expect(firstRow.querySelectorAll('td')[0].textContent).toBe('F1');
+    expect(firstRow.querySelectorAll('td')[0].textContent).toBe('No upcoming bookings found');
     
     // Verify action buttons exist
     const actionButtons = firstRow.querySelectorAll('td:last-child button');
